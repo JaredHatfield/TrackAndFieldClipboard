@@ -33,6 +33,7 @@ public class TrackAndFieldActivity extends Activity {
         alert.setView(input);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = input.getText().toString();
                 value = "test";
@@ -42,6 +43,7 @@ public class TrackAndFieldActivity extends Activity {
 
         alert.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
@@ -50,12 +52,21 @@ public class TrackAndFieldActivity extends Activity {
         alert.show();
     }
 
+    public void onTestEventClick(View v) {
+        // Launch the new event activity
+        Event event = Event.example();
+        Intent intent = new Intent(this, DistanceClipboardActivity.class);
+        intent.putExtra("event", event);
+        this.startActivity(intent);
+    }
+
     public void onNewEventClick(View v) {
         // Launch the new event activity
         Intent intent = new Intent(this, NewEventActivity.class);
         this.startActivityForResult(intent, NEW_EVENT_REQUEST);
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEW_EVENT_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -63,6 +74,7 @@ public class TrackAndFieldActivity extends Activity {
                 Intent intent = new Intent(this,
                         DistanceClipboardActivity.class);
                 intent.putExtra("event", event);
+                this.startActivity(intent);
             }
         }
     }

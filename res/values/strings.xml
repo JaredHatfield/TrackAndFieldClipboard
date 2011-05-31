@@ -12,6 +12,8 @@
     <string name="flights">Number of Flights</string>
     <string name="unit">Units</string>
     <string name="final_participants">Final Participants</string>
+    <string name="flight_position">F/P</string>
+    <string name="scratch">Foul</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>

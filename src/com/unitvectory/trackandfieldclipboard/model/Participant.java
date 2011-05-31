@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Participant implements Serializable {
+public class Participant implements Serializable, Comparable {
 
     /**
      * 
@@ -191,5 +191,43 @@ public class Participant implements Serializable {
      */
     public List<Measurement> getMarks() {
         return marks;
+    }
+
+    /**
+     * Gets the requested measurement for the participant or null if the
+     * measurement has not been taken yet.
+     * 
+     * @param attempt
+     *            The attempt to retrieve.
+     * @return The measurement or null.
+     */
+    public Measurement getMeasurement(int attempt) {
+        for (int i = 0; i < this.marks.size(); i++) {
+            if (this.marks.get(i).getAttempt() == attempt) {
+                return this.marks.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public int compareTo(Object arg0) {
+        Participant p = (Participant) arg0;
+        if (p == null) {
+            return 0;
+        }
+
+        if (this.flight < p.flight) {
+            return -1;
+        } else if (this.flight > p.flight) {
+            return 1;
+        } else if (this.position < p.position) {
+            return -1;
+        } else if (this.position > p.position) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

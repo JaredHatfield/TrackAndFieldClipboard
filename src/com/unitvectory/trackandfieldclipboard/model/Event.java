@@ -2,6 +2,7 @@ package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Event implements Serializable {
@@ -280,4 +281,25 @@ public class Event implements Serializable {
         return EventType.NA;
     }
 
+    /**
+     * Gets a sample event object.
+     * 
+     * @return The sample event object.
+     */
+    @SuppressWarnings("unchecked")
+    public static Event example() {
+        Event event = new Event("Example", EventType.SHOT_PUT, Gender.MALE,
+                "Today", 3, 3, 10, 2, false);
+
+        Participant p = new Participant("Sam Smith", "432", "10", "High", "31",
+                1, 2);
+        p.getMarks().add(new Measurement(1));
+        event.getParticipants().add(p);
+
+        event.getParticipants().add(
+                new Participant("John Doe", "123", "10", "High", "30", 1, 1));
+
+        Collections.sort(event.getParticipants());
+        return event;
+    }
 }
