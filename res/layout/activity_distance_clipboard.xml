@@ -1,76 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
     android:layout_height="fill_parent"
-    android:stretchColumns="1">
-
-    <TableRow>
-        <TextView
-            android:layout_column="1"
-            android:text="Open..."
-            android:padding="3dip" />
-        <TextView
-            android:text="Ctrl-O"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:layout_column="1"
-            android:text="Save..."
-            android:padding="3dip" />
-        <TextView
-            android:text="Ctrl-S"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:layout_column="1"
-            android:text="Save As..."
-            android:padding="3dip" />
-        <TextView
-            android:text="Ctrl-Shift-S"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-    <View
-        android:layout_height="2dip"
-        android:background="#FF909090" />
-
-    <TableRow>
-        <TextView
-            android:text="X"
-            android:padding="3dip" />
-        <TextView
-            android:text="Import..."
-            android:padding="3dip" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="X"
-            android:padding="3dip" />
-        <TextView
-            android:text="Export..."
-            android:padding="3dip" />
-        <TextView
-            android:text="Ctrl-E"
-            android:gravity="right"
-            android:padding="3dip" />
-    </TableRow>
-
-    <View
-        android:layout_height="2dip"
-        android:background="#FF909090" />
-
-    <TableRow>
-        <TextView
-            android:layout_column="1"
-            android:text="Quit"
-            android:padding="3dip" />
-    </TableRow>
-</TableLayout>
+    android:orientation="vertical">
+    <TableLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <TableRow 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content">
+            <TextView 
+                android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:layout_height="wrap_content" 
+                android:text="@string/name" 
+                android:layout_width="fill_parent" 
+                android:layout_weight="1" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:text="Event Name Here" 
+                android:id="@+id/textView_event_name" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_weight="1" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:layout_height="wrap_content" 
+                android:text="@string/date" 
+                android:layout_width="fill_parent" 
+                android:layout_weight="1" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:text="Event Date Here" 
+                android:id="@+id/textView_event_date" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_weight="1" 
+                android:textSize="@dimen/font_size" />
+        </TableRow>
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:id="@+id/textView5" android:layout_height="wrap_content" android:text="@string/event_type" android:layout_width="wrap_content" android:layout_gravity="right" android:textSize="@dimen/font_size"></TextView>
+            <TextView android:text="TextView" android:id="@+id/textView6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/font_size"></TextView>
+            <TextView android:id="@+id/textView7" android:layout_height="wrap_content" android:text="@string/gender" android:layout_width="wrap_content" android:layout_gravity="right" android:textSize="@dimen/font_size"></TextView>
+            <TextView android:text="TextView" android:id="@+id/textView8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@dimen/font_size"></TextView>
+        </TableRow>
+    
+    </TableLayout>
+     
+    
+    <TableLayout 
+        android:id="@+id/tableLayout_participants" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content">
+        
+        
+    </TableLayout>
+    
+    
+</LinearLayout>
