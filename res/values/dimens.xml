@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="font_size">20sp</dimen>
+    <dimen name="form_element_width">300dp</dimen>
+    <dimen name="form_label_top_padding">5dp</dimen>
+    <dimen name="form_label_right_padding">10dp</dimen>
+    <dimen name="form_spacing">15dp</dimen>
+</resources>

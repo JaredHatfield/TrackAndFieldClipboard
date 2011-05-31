@@ -52,6 +52,11 @@ public class Event implements Serializable {
     private int flights;
 
     /**
+     * The flag that indicates that metric should be used.
+     */
+    private boolean metric;
+
+    /**
      * The list of participants.
      */
     private List<Participant> participants;
@@ -75,10 +80,12 @@ public class Event implements Serializable {
      *            The number of participants to move on to the final round.
      * @param flights
      *            The number of flights in the competition.
+     * @param metric
+     *            The flag indicating that the metric system should be used.
      */
     public Event(String eventName, EventType type, Gender gender, String date,
             int qualifyingScores, int finalScores, int finalParticipants,
-            int flights) {
+            int flights, boolean metric) {
         this.eventName = eventName;
         this.type = type;
         this.gender = gender;
@@ -87,6 +94,7 @@ public class Event implements Serializable {
         this.finalScores = finalScores;
         this.finalParticipants = finalParticipants;
         this.flights = flights;
+        this.metric = metric;
         this.participants = new ArrayList<Participant>();
     }
 
@@ -188,6 +196,36 @@ public class Event implements Serializable {
     }
 
     /**
+     * @return the flights
+     */
+    public int getFlights() {
+        return flights;
+    }
+
+    /**
+     * @param flights
+     *            the flights to set
+     */
+    public void setFlights(int flights) {
+        this.flights = flights;
+    }
+
+    /**
+     * @return the metric
+     */
+    public boolean isMetric() {
+        return metric;
+    }
+
+    /**
+     * @param metric
+     *            the metric to set
+     */
+    public void setMetric(boolean metric) {
+        this.metric = metric;
+    }
+
+    /**
      * @param finalParticipants
      *            the finalParticipants to set
      */
@@ -201,4 +239,45 @@ public class Event implements Serializable {
     public List<Participant> getParticipants() {
         return participants;
     }
+
+    /**
+     * Gets the gender from a user provided string.
+     * 
+     * @param gender
+     *            The string representation of the gender.
+     * @return The gender enum.
+     */
+    public static Gender parseGender(String gender) {
+        if (gender.equalsIgnoreCase(Gender.MALE.toString())) {
+            return Gender.MALE;
+        } else if (gender.equalsIgnoreCase(Gender.FEMALE.toString())) {
+            return Gender.FEMALE;
+        }
+
+        return Gender.NA;
+    }
+
+    /**
+     * Gets the event type from a provided string.
+     * 
+     * @param type
+     *            The event type in string form.
+     * @return The event type enum.
+     */
+    public static EventType parseEventType(String type) {
+        if (type.equalsIgnoreCase("discus")) {
+            return EventType.DISCUS;
+        } else if (type.equalsIgnoreCase("shot put")) {
+            return EventType.SHOT_PUT;
+        } else if (type.equalsIgnoreCase("javaline")) {
+            return EventType.JAVALINE;
+        } else if (type.equalsIgnoreCase("long jump")) {
+            return EventType.LONG_JUMP;
+        } else if (type.equalsIgnoreCase("triple jump")) {
+            return EventType.TRIPLE_JUMP;
+        }
+
+        return EventType.NA;
+    }
+
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="wrap_content" 
+    android:id="@+id/tableLayout1" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:text="@string/name" android:layout_width="match_parent" android:layout_gravity="right" android:textSize="@dimen/font_size"></TextView>
+        <EditText android:width="@dimen/form_element_width" android:id="@+id/editText_event_name" android:layout_width="wrap_content" android:layout_height="wrap_content"></EditText>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/event_type" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <Spinner android:width="@dimen/form_element_width" android:id="@+id/spinner_event_type" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/gender" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <Spinner android:width="@dimen/form_element_width" android:id="@+id/spinner_event_gender" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/date" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <EditText android:width="@dimen/form_element_width" android:id="@+id/editText_event_date" android:layout_height="wrap_content" android:layout_width="wrap_content"></EditText>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/qualifying_marks" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <Spinner android:width="@dimen/form_element_width" android:id="@+id/spinner_event_qualifying_marks" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/finals_marks" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <Spinner android:width="@dimen/form_element_width" android:id="@+id/spinner_event_final_marks" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/final_participants" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <EditText android:width="@dimen/form_element_width" android:id="@+id/editText_event_final_participants" android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="number"></EditText>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/flights" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <EditText android:width="@dimen/form_element_width" android:id="@+id/editText_event_flights" android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="number"></EditText>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:paddingTop="@dimen/form_label_top_padding" android:paddingRight="@dimen/form_label_right_padding" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/unit" android:textSize="@dimen/font_size" android:layout_gravity="right"></TextView>
+        <Spinner android:width="@dimen/form_element_width" android:id="@+id/spinner_event_units" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+    </TableRow>
+    <TableRow android:paddingTop="@dimen/form_spacing" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView />
+        <Button android:id="@+id/button_add_event" android:onClick="onAddClick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/add"></Button>
+    </TableRow>
+    
+</TableLayout>
