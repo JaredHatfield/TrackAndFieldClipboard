@@ -293,7 +293,12 @@ public class Event implements Serializable {
 
         Participant p = new Participant("Sam Smith", "432", "10", "High", "31",
                 1, 2);
-        p.getMarks().add(new Measurement(1));
+        p.getMarks().add(new Measurement(1, 20, 1.25));
+        p.getMarks().add(new Measurement(2, 20, 11));
+        p.getMarks().add(new Measurement(3));
+        p.getMarks().add(new Measurement(4, 120, 11.25));
+        p.getMarks().add(new Measurement(5, 30, 0.25));
+        p.getMarks().add(new Measurement(6));
         event.getParticipants().add(p);
 
         event.getParticipants().add(

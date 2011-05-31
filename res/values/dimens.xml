@@ -1,10 +1,12 @@
 <resources>
-    <dimen name="font_size">24sp</dimen>
+    <dimen name="font_size">16sp</dimen>
     <dimen name="form_element_width">300dp</dimen>
     <dimen name="form_label_top_padding">5dp</dimen>
     <dimen name="form_label_right_padding">10dp</dimen>
     <dimen name="form_spacing">15dp</dimen>
     <dimen name="label_right_padding">5dp</dimen>
     <dimen name="table_participant_padding">10dp</dimen>
-    <dimen name="table_participant_row_padding">5dp</dimen>
+    <dimen name="table_participant_row_padding">15dp</dimen>
+    <dimen name="label_width">160dp</dimen>
+    <dimen name="button_width">200dp</dimen>
 </resources>

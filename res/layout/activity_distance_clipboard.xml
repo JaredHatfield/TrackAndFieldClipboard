@@ -2,10 +2,12 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" android:orientation="vertical">
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
     <TableLayout 
         android:layout_width="fill_parent" 
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/table_participant_padding">
         <TableRow 
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content">
@@ -14,8 +16,7 @@
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
                 android:text="@string/name" 
-                android:layout_width="fill_parent" 
-                android:layout_weight="1" 
+                android:layout_width="@dimen/label_width" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" />
             <TextView 
@@ -23,15 +24,14 @@
                 android:id="@+id/textView_event_name" 
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:layout_weight="2" 
+                android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
             <TextView 
                 android:textStyle="bold" 
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
                 android:text="@string/date" 
-                android:layout_width="fill_parent" 
-                android:layout_weight="1" 
+                android:layout_width="@dimen/label_width" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" />
             <TextView 
@@ -39,48 +39,48 @@
                 android:id="@+id/textView_event_date" 
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:layout_weight="2" 
+                android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
         </TableRow>
-        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TableRow 
+        	android:layout_width="fill_parent" 
+        	android:layout_height="wrap_content">
             <TextView 
                 android:textStyle="bold" 
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
-                android:layout_width="fill_parent" 
-                android:layout_weight="1" 
+                android:layout_width="@dimen/label_width" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
-                android:text="@string/event_type"/>
+                android:text="@string/event_type" />
             <TextView 
                 android:text="Event Type Here" 
                 android:id="@+id/textView_event_type" 
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:layout_weight="2" 
+                android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
             <TextView 
                 android:textStyle="bold" 
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
-                android:layout_width="fill_parent" 
-                android:layout_weight="1" 
+                android:layout_width="@dimen/label_width" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
-                android:text="@string/gender"/>
+                android:text="@string/gender" />
             <TextView 
                 android:text="Gender Here" 
                 android:id="@+id/textView_event_gender" 
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:layout_weight="2" 
+                android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
         </TableRow>
-    
     </TableLayout>
     <ScrollView
     	android:layout_height="fill_parent"
     	android:layout_width="match_parent"
+    	android:layout_weight="1"
     	android:padding="@dimen/table_participant_padding">
 	    <TableLayout 
 	        android:id="@+id/tableLayout_participants" 
@@ -89,5 +89,81 @@
 	        android:padding="@dimen/table_participant_padding">
 	    </TableLayout>
     </ScrollView>
-    
+    <TableLayout
+    	android:layout_height="wrap_content"
+    	android:layout_width="fill_parent"
+    	android:padding="@dimen/table_participant_padding">
+        <TableRow 
+        	android:layout_width="wrap_content" 
+        	android:layout_height="wrap_content">
+            <TextView 
+            	android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" 
+                android:layout_width="@dimen/label_width" 
+                android:layout_height="wrap_content" 
+                android:text="@string/name"/>
+            <TextView 
+            	android:id="@+id/textView_current_name" 
+            	android:textSize="@dimen/font_size" 
+            	android:layout_weight="1"
+            	android:layout_width="wrap_content" 
+            	android:layout_height="wrap_content" />
+            <Button 
+            	android:id="@+id/button_mark" 
+            	android:layout_width="@dimen/button_width" 
+            	android:layout_height="wrap_content" 
+            	android:text="@string/mark"
+                android:enabled="false" />
+        </TableRow>
+        <TableRow 
+        	android:layout_width="wrap_content" 
+        	android:layout_height="wrap_content">
+            <TextView 
+            	android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" 
+                android:layout_width="@dimen/label_width" 
+                android:layout_height="wrap_content" 
+                android:text="@string/attempt" />
+            <TextView 
+            	android:id="@+id/textView_current_attempt" 
+            	android:textSize="@dimen/font_size" 
+            	android:layout_weight="1"
+            	android:layout_width="wrap_content" 
+            	android:layout_height="wrap_content" />
+            <Button 
+            	android:id="@+id/button_scratch" 
+            	android:layout_width="@dimen/button_width" 
+            	android:layout_height="wrap_content" 
+            	android:text="@string/scratch"
+            	android:enabled="false" />
+        </TableRow>
+        <TableRow
+        	android:layout_width="wrap_content" 
+        	android:layout_height="wrap_content">
+            <TextView 
+            	android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" 
+                android:layout_width="@dimen/label_width" 
+                android:layout_height="wrap_content" 
+                android:text="@string/mark" />
+            <TextView 
+            	android:id="@+id/textView_current_mark" 
+            	android:textSize="@dimen/font_size" 
+            	android:layout_weight="1"
+            	android:layout_width="wrap_content" 
+            	android:layout_height="wrap_content" />
+           	<Button 
+            	android:id="@+id/button_next" 
+            	android:layout_width="@dimen/button_width" 
+            	android:layout_height="wrap_content" 
+            	android:enabled="false" 
+            	android:text="@string/next"/>
+        </TableRow>
+   	</TableLayout>
 </LinearLayout>
