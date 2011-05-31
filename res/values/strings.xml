@@ -14,6 +14,12 @@
     <string name="final_participants">Final Participants</string>
     <string name="flight_position">F/P</string>
     <string name="scratch">Foul</string>
+    <string name="record_measurement">Record Measurement</string>
+    <string name="meters">Meters</string>
+    <string name="feet">Feet</string>
+    <string name="inches">Inches</string>
+    <string name="cancel">Cancel</string>
+    <string name="scratch_confirmation">Change score to foul?</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>

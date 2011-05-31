@@ -211,6 +211,16 @@ public class Participant implements Serializable, Comparable {
         return null;
     }
 
+    /**
+     * Adds a new measurement to a participant.
+     * 
+     * @param measurement
+     *            The measurement to add.
+     */
+    public void addMeasurement(Measurement measurement) {
+        this.marks.add(measurement);
+    }
+
     @Override
     public int compareTo(Object arg0) {
         Participant p = (Participant) arg0;

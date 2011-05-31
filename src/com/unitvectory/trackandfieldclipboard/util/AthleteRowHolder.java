@@ -125,6 +125,65 @@ public class AthleteRowHolder {
         }
     }
 
+    public void mark(int attempt) {
+        // Marks as a foul
+        Measurement m = this.participant.getMeasurement(attempt);
+        if (m == null) {
+            this.participant.addMeasurement(new Measurement(attempt));
+            m = this.participant.getMeasurement(attempt);
+        } else {
+            m.updateScratch();
+        }
+
+        // Update the GUI
+        TextView view = this.marks.get(attempt);
+        String str = translateMeasurement(m);
+        if (str == null) {
+            view.setText(R.string.scratch);
+        } else {
+            view.setText(str);
+        }
+    }
+
+    public void mark(int attempt, double meters) {
+        Measurement m = this.participant.getMeasurement(attempt);
+        if (m == null) {
+            this.participant.addMeasurement(new Measurement(attempt, meters));
+            m = this.participant.getMeasurement(attempt);
+        } else {
+            m.updateMark(meters);
+        }
+
+        // Update the GUI
+        TextView view = this.marks.get(attempt);
+        String str = translateMeasurement(m);
+        if (str == null) {
+            view.setText(R.string.scratch);
+        } else {
+            view.setText(str);
+        }
+    }
+
+    public void mark(int attempt, int feet, double inches) {
+        Measurement m = this.participant.getMeasurement(attempt);
+        if (m == null) {
+            this.participant.addMeasurement(new Measurement(attempt, feet,
+                    inches));
+            m = this.participant.getMeasurement(attempt);
+        } else {
+            m.updateMark(feet, inches);
+        }
+
+        // Update the GUI
+        TextView view = this.marks.get(attempt);
+        String str = translateMeasurement(m);
+        if (str == null) {
+            view.setText(R.string.scratch);
+        } else {
+            view.setText(str);
+        }
+    }
+
     public String getMeasurement(int attempt) {
         if (this.participant == null) {
             return null;

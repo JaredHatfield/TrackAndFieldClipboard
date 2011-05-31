@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,13 +15,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.Event;
+import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
 
@@ -69,6 +75,11 @@ public class DistanceClipboardActivity extends Activity implements
      * The button to move to the next measurement.
      */
     private Button buttonNext;
+
+    /**
+     * The view that was last clicked that needs to have a highlight removed.
+     */
+    private View lastClicked;
 
     /** Called when the activity is first created. */
     @Override
@@ -257,25 +268,215 @@ public class DistanceClipboardActivity extends Activity implements
 
     }
 
-    @Override
-    public void onClick(View arg0) {
+    public void onMarkClick(View arg0) {
         AthleteRowHolder holder = (AthleteRowHolder) arg0
                 .getTag(R.id.id_holder_object);
         Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
-        Participant athlete = holder.getParticipant();
-        if (athlete == null) {
+        if (holder.getParticipant() == null) {
             // Something bad happened
         } else if (attempt > 0) {
-            this.currentName.setText(holder.getParticipant().getName());
-            this.currentAttempt.setText("#" + attempt.intValue());
-            String mark = holder.getMeasurement(attempt.intValue());
-            if (mark == null) {
-                this.currentMark.setText(R.string.scratch);
+            if (this.event.isMetric()) {
+                this.displayMetricInput(holder, attempt);
             } else {
-                this.currentMark.setText(mark);
+                this.displayUsInput(holder, attempt);
             }
         } else {
             // Invalid selection
         }
+
+    }
+
+    public void onScratchClick(View arg0) {
+        AthleteRowHolder holder = (AthleteRowHolder) arg0
+                .getTag(R.id.id_holder_object);
+        Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
+        if (holder.getParticipant() == null) {
+            // Something bad happened
+        } else if (attempt > 0) {
+            // Display confirmation box if the value is currently set
+            if (holder.getParticipant().getMeasurement(attempt.intValue()) == null) {
+                holder.mark(attempt.intValue());
+            } else {
+                this.displayScratchConfirmation(holder, attempt);
+            }
+        } else {
+            // Invalid selection
+        }
+    }
+
+    public void onNextClick(View arg0) {
+        Context context = getApplicationContext();
+        CharSequence text = "Next Clicked";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    @Override
+    public void onClick(View arg0) {
+        if (this.lastClicked != null) {
+            this.lastClicked.setBackgroundResource(android.R.color.transparent);
+        }
+
+        arg0.setBackgroundResource(R.color.selected);
+        this.lastClicked = arg0;
+
+        AthleteRowHolder holder = (AthleteRowHolder) arg0
+                .getTag(R.id.id_holder_object);
+        Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
+        if (holder.getParticipant() == null) {
+            // Something bad happened
+            this.selectAthleteNone();
+        } else if (attempt > 0) {
+            this.selectAthleteBox(holder, attempt.intValue());
+        } else {
+            // Invalid selection
+            this.selectAthleteNone();
+        }
+    }
+
+    private void selectAthleteNone() {
+        this.currentName.setText("");
+        this.currentMark.setText("");
+        this.currentAttempt.setText("");
+        this.buttonMark.setEnabled(false);
+        this.buttonScratch.setEnabled(false);
+    }
+
+    private void selectAthleteBox(AthleteRowHolder holder, int attempt) {
+        Participant athlete = holder.getParticipant();
+        this.currentName.setText(athlete.getName());
+        this.currentAttempt.setText("#" + attempt);
+        String mark = holder.getMeasurement(attempt);
+        if (mark == null) {
+            this.currentMark.setText(R.string.scratch);
+        } else {
+            this.currentMark.setText(mark);
+        }
+
+        this.buttonMark.setTag(R.id.id_holder_object, holder);
+        this.buttonMark.setTag(R.id.id_holder_index, attempt);
+        this.buttonMark.setEnabled(true);
+        this.buttonScratch.setTag(R.id.id_holder_object, holder);
+        this.buttonScratch.setTag(R.id.id_holder_index, attempt);
+        this.buttonScratch.setEnabled(true);
+    }
+
+    private void displayScratchConfirmation(final AthleteRowHolder holder,
+            final int attempt) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.scratch_confirmation)
+                .setCancelable(true)
+                .setPositiveButton(R.string.scratch,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Do it!
+                                holder.mark(attempt);
+                            }
+                        })
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void displayMetricInput(final AthleteRowHolder holder,
+            final int attempt) {
+        Participant athlete = holder.getParticipant();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.record_measurement);
+        alert.setMessage(athlete.getName() + " "
+                + this.getString(R.string.attempt) + " #" + attempt);
+        View v = this.getLayoutInflater().inflate(R.layout.dialog_metric, null);
+        final EditText input = (EditText) v
+                .findViewById(R.id.editText_distance_meters);
+        Measurement m = athlete.getMeasurement(attempt);
+        if (m != null && !m.isScratch()) {
+            input.setText(m.getMeters() + "");
+        }
+
+        alert.setView(v);
+
+        alert.setPositiveButton(R.string.mark,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String value = input.getText().toString();
+                        if (value.length() == 0) {
+                            value = "0";
+                        }
+
+                        holder.mark(attempt, Double.parseDouble(value));
+                    }
+                });
+
+        alert.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+
+        alert.show();
+    }
+
+    private void displayUsInput(final AthleteRowHolder holder, final int attempt) {
+        Participant athlete = holder.getParticipant();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.record_measurement);
+        alert.setMessage(athlete.getName() + " "
+                + this.getString(R.string.attempt) + " #" + attempt);
+        View v = this.getLayoutInflater().inflate(R.layout.dialog_us, null);
+        final EditText inputFeet = (EditText) v
+                .findViewById(R.id.editText_distance_feet);
+        final EditText inputInches = (EditText) v
+                .findViewById(R.id.editText_distance_inches);
+        Measurement m = athlete.getMeasurement(attempt);
+        if (m != null && !m.isScratch()) {
+            inputFeet.setText(m.getFeet() + "");
+            inputInches.setText(m.getInches() + "");
+        }
+
+        alert.setView(v);
+
+        alert.setPositiveButton(R.string.mark,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String feet = inputFeet.getText().toString();
+                        if (feet.length() == 0) {
+                            feet = "0";
+                        }
+
+                        String inches = inputInches.getText().toString();
+                        if (inches.length() == 0) {
+                            inches = "0";
+                        }
+
+                        holder.mark(attempt, Integer.parseInt(feet),
+                                Double.parseDouble(inches));
+                    }
+                });
+
+        alert.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+
+        alert.show();
     }
 }

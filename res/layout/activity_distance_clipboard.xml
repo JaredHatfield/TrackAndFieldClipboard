@@ -115,7 +115,8 @@
             	android:layout_width="@dimen/button_width" 
             	android:layout_height="wrap_content" 
             	android:text="@string/mark"
-                android:enabled="false" />
+                android:enabled="false"
+                android:onClick="onMarkClick" />
         </TableRow>
         <TableRow 
         	android:layout_width="wrap_content" 
@@ -139,7 +140,8 @@
             	android:layout_width="@dimen/button_width" 
             	android:layout_height="wrap_content" 
             	android:text="@string/scratch"
-            	android:enabled="false" />
+            	android:enabled="false"
+            	android:onClick="onScratchClick" />
         </TableRow>
         <TableRow
         	android:layout_width="wrap_content" 
@@ -163,6 +165,7 @@
             	android:layout_width="@dimen/button_width" 
             	android:layout_height="wrap_content" 
             	android:enabled="false" 
+            	android:onClick="onNextClick"
             	android:text="@string/next"/>
         </TableRow>
    	</TableLayout>
