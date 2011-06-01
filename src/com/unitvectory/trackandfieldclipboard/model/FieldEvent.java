@@ -5,7 +5,9 @@
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -311,6 +313,19 @@ public class FieldEvent implements Serializable {
      */
     public List<Participant> getParticipants() {
         return participants;
+    }
+
+    /**
+     * Creates a new file name.
+     * 
+     * @return The string to use as a file name.
+     */
+    public String newFileName() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH-mm-ss");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime()) + " " + this.gender + " "
+                + this.type;
     }
 
     /**

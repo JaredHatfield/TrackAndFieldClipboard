@@ -4,14 +4,7 @@
  */
 package com.unitvectory.trackandfieldclipboard.ui;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +26,16 @@ public class TrackAndFieldActivity extends Activity {
     static final int NEW_EVENT_REQUEST = 639;
 
     /**
+     * The file list fragment.
+     */
+    private FileListFragment fileListFragment;
+
+    /**
+     * The dirty flag.
+     */
+    private int dirtyFlag;
+
+    /**
      * Called when the activity is first created.
      * 
      * @param savedInstanceState
@@ -42,25 +45,45 @@ public class TrackAndFieldActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_and_field);
-        // this.writeExample("test2");
+        this.fileListFragment = (FileListFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_file_list);
+        this.dirtyFlag = 0;
     }
 
-    public void onTestEventClick(View v) {
-        // TODO: Delete test code
-        // Launch the new event activity
-        FieldEvent event = FieldEvent.example();
-        Intent intent = new Intent(this, DistanceClipboardActivity.class);
-        intent.putExtra("event", event);
-        this.startActivity(intent);
+    /**
+     * Restore the activity and reload the list of files if necessary.
+     */
+    @Override
+    public void onResume() {
+        super.onPause();
+        if (this.dirtyFlag > 0) {
+            this.fileListFragment.displayFiles();
+            this.dirtyFlag--;
+        }
     }
 
+    /**
+     * Handle the new FieldEvent event.
+     * 
+     * @param v
+     *            The calling view.
+     */
     public void onNewEventClick(View v) {
-        // TODO: Delete test code
         // Launch the new event activity
         Intent intent = new Intent(this, NewEventActivity.class);
         this.startActivityForResult(intent, NEW_EVENT_REQUEST);
     }
 
+    /**
+     * Process the results from a new event.
+     * 
+     * @param requestCode
+     *            The request code.
+     * @param resultCode
+     *            The result code.
+     * @param data
+     *            The results.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO: Delete test code
@@ -71,25 +94,10 @@ public class TrackAndFieldActivity extends Activity {
                 Intent intent = new Intent(this,
                         DistanceClipboardActivity.class);
                 intent.putExtra("event", event);
+                intent.putExtra("filename", event.newFileName());
                 this.startActivity(intent);
+                this.dirtyFlag += 2;
             }
-        }
-    }
-
-    public void writeExample(String name) {
-        try {
-            Serializer serializer = new Persister();
-            FileOutputStream output = this.openFileOutput(name,
-                    Context.MODE_PRIVATE);
-            serializer.write(FieldEvent.example(), output);
-            output.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 }

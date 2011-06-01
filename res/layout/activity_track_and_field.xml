@@ -10,12 +10,6 @@
     android:layout_height="fill_parent"
     >
     <Button 
-        android:text="Example Event Display" 
-        android:id="@+id/button_test_event" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:onClick="onTestEventClick" />
-    <Button 
         android:text="@string/new_event" 
         android:id="@+id/button_new_event" 
         android:layout_width="wrap_content" 

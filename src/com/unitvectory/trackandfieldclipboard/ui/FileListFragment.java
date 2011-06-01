@@ -55,7 +55,7 @@ public class FileListFragment extends ListFragment {
     /**
      * Refreshes the list of the files that is displayed.
      */
-    private void displayFiles() {
+    public void displayFiles() {
         this.directoryEntries.clear();
 
         File[] files = getActivity().getFilesDir().listFiles();

@@ -108,11 +108,19 @@ public class NewEventActivity extends Activity {
      */
     public void onAddClick(View v) {
         String name = this.fieldName.getText().toString();
+        if (name.equals("")) {
+            name = "No name.";
+        }
+
         EventType type = FieldEvent.parseEventType((String) this.fieldType
                 .getSelectedItem());
         Gender gender = FieldEvent.parseGender((String) this.fieldGender
                 .getSelectedItem());
         String date = this.fieldDate.getText().toString();
+        if (date.equals("")) {
+            date = "No date.";
+        }
+
         int qualifying = Integer.parseInt((String) this.fieldQualifying
                 .getSelectedItem());
         int finals = Integer.parseInt((String) this.fieldFinals
