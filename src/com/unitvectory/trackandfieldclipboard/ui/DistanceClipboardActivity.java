@@ -1,3 +1,7 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.util.HashMap;
@@ -28,6 +32,12 @@ import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
 
+/**
+ * The clipboard activity used to record measurements for a specific event.
+ * 
+ * @author Jared Hatfield
+ * 
+ */
 public class DistanceClipboardActivity extends Activity implements
         OnClickListener {
 
@@ -81,14 +91,20 @@ public class DistanceClipboardActivity extends Activity implements
      */
     private View lastClicked;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     * 
+     * @param savedInstanceState
+     *            The application's saved settings.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distance_clipboard);
 
         if (this.event == null) {
-            this.event = (FieldEvent) this.getIntent().getSerializableExtra("event");
+            this.event = (FieldEvent) this.getIntent().getSerializableExtra(
+                    "event");
         }
 
         // Something went terribly wrong and we can't continue.
@@ -134,18 +150,34 @@ public class DistanceClipboardActivity extends Activity implements
         this.drawTable();
     }
 
+    /**
+     * Saves the state of the instance before the activity is destroyed.
+     * 
+     * @param savedInstanceState
+     *            The bundle to use when saving the state.
+     */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         // Save the information about the currently selected box
     }
 
+    /**
+     * Restores the instance after the activity is rebuilt.
+     * 
+     * @param savedInstanceState
+     *            The bundle to read the saved state from.
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         // Restore the currently selected box
     }
 
+    /**
+     * Draws the data table from scratch using the current state of the event
+     * object.
+     */
     private void drawTable() {
         this.participants.removeAllViews();
         this.rows = new HashMap<Integer, AthleteRowHolder>();
@@ -268,10 +300,16 @@ public class DistanceClipboardActivity extends Activity implements
 
     }
 
-    public void onMarkClick(View arg0) {
-        AthleteRowHolder holder = (AthleteRowHolder) arg0
+    /**
+     * Event handler for the mark button.
+     * 
+     * @param view
+     *            The calling view.
+     */
+    public void onMarkClick(View view) {
+        AthleteRowHolder holder = (AthleteRowHolder) view
                 .getTag(R.id.id_holder_object);
-        Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
+        Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
         if (holder.getParticipant() == null) {
             // Something bad happened
         } else if (attempt > 0) {
@@ -286,10 +324,16 @@ public class DistanceClipboardActivity extends Activity implements
 
     }
 
-    public void onScratchClick(View arg0) {
-        AthleteRowHolder holder = (AthleteRowHolder) arg0
+    /**
+     * The event handler for the scratch button.
+     * 
+     * @param view
+     *            The calling view.
+     */
+    public void onScratchClick(View view) {
+        AthleteRowHolder holder = (AthleteRowHolder) view
                 .getTag(R.id.id_holder_object);
-        Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
+        Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
         if (holder.getParticipant() == null) {
             // Something bad happened
         } else if (attempt > 0) {
@@ -304,7 +348,14 @@ public class DistanceClipboardActivity extends Activity implements
         }
     }
 
-    public void onNextClick(View arg0) {
+    /**
+     * The event handler for the next button.
+     * 
+     * @param view
+     *            The calling view.
+     */
+    public void onNextClick(View view) {
+        // TODO: Implement next button.
         Context context = getApplicationContext();
         CharSequence text = "Next Clicked";
         int duration = Toast.LENGTH_SHORT;
@@ -313,18 +364,26 @@ public class DistanceClipboardActivity extends Activity implements
         toast.show();
     }
 
+    /**
+     * The on click handler used to handle the clicks on distance scores for
+     * participants that functions to select an change and individual
+     * measurement.
+     * 
+     * @param view
+     *            The calling view.
+     */
     @Override
-    public void onClick(View arg0) {
+    public void onClick(View view) {
         if (this.lastClicked != null) {
             this.lastClicked.setBackgroundResource(android.R.color.transparent);
         }
 
-        arg0.setBackgroundResource(R.color.selected);
-        this.lastClicked = arg0;
+        view.setBackgroundResource(R.color.selected);
+        this.lastClicked = view;
 
-        AthleteRowHolder holder = (AthleteRowHolder) arg0
+        AthleteRowHolder holder = (AthleteRowHolder) view
                 .getTag(R.id.id_holder_object);
-        Integer attempt = (Integer) arg0.getTag(R.id.id_holder_index);
+        Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
         if (holder.getParticipant() == null) {
             // Something bad happened
             this.selectAthleteNone();
@@ -336,14 +395,26 @@ public class DistanceClipboardActivity extends Activity implements
         }
     }
 
+    /**
+     * Updates the GUI so that no athlete score is selected.
+     */
     private void selectAthleteNone() {
         this.currentName.setText("");
         this.currentMark.setText("");
         this.currentAttempt.setText("");
         this.buttonMark.setEnabled(false);
         this.buttonScratch.setEnabled(false);
+        this.buttonNext.setEnabled(false);
     }
 
+    /**
+     * Updates the gui so that a specific athlete score is selected.
+     * 
+     * @param holder
+     *            The athlete holder.
+     * @param attempt
+     *            The attempt index.
+     */
     private void selectAthleteBox(AthleteRowHolder holder, int attempt) {
         Participant athlete = holder.getParticipant();
         this.currentName.setText(athlete.getName());
@@ -363,6 +434,15 @@ public class DistanceClipboardActivity extends Activity implements
         this.buttonScratch.setEnabled(true);
     }
 
+    /**
+     * Displays the confirmation dialog to confirm the user wants to mark the
+     * measurement as a scratch.
+     * 
+     * @param holder
+     *            The athlete holder.
+     * @param attempt
+     *            The attempt index.
+     */
     private void displayScratchConfirmation(final AthleteRowHolder holder,
             final int attempt) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -388,6 +468,14 @@ public class DistanceClipboardActivity extends Activity implements
         alert.show();
     }
 
+    /**
+     * Displays the dialog to input a metric measurement.
+     * 
+     * @param holder
+     *            The athlete holder.
+     * @param attempt
+     *            The attempt index.
+     */
     private void displayMetricInput(final AthleteRowHolder holder,
             final int attempt) {
         Participant athlete = holder.getParticipant();
@@ -430,6 +518,14 @@ public class DistanceClipboardActivity extends Activity implements
         alert.show();
     }
 
+    /**
+     * Displays the dialog to input a US measurement.
+     * 
+     * @param holder
+     *            The athlete holder.
+     * @param attempt
+     *            The attempt index.
+     */
     private void displayUsInput(final AthleteRowHolder holder, final int attempt) {
         Participant athlete = holder.getParticipant();
 

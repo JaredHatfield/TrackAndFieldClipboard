@@ -1,3 +1,7 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import android.app.Activity;
@@ -9,31 +13,69 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.unitvectory.trackandfieldclipboard.R;
-import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.EventType;
+import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.Gender;
 
+/**
+ * The activity used to create a new event.
+ * 
+ * @author Jared Hatfield
+ * 
+ */
 public class NewEventActivity extends Activity {
 
+    /**
+     * The event name.
+     */
     private EditText fieldName;
 
+    /**
+     * The event type.
+     */
     private Spinner fieldType;
 
+    /**
+     * The event gender.
+     */
     private Spinner fieldGender;
 
+    /**
+     * The event date.
+     */
     private EditText fieldDate;
 
+    /**
+     * The number of qualifying marks.
+     */
     private Spinner fieldQualifying;
 
+    /**
+     * The number of final marks.
+     */
     private Spinner fieldFinals;
 
+    /**
+     * The number of participants that move on to the final round.
+     */
     private EditText fieldFinalParticipants;
 
+    /**
+     * The number of flights.
+     */
     private EditText fieldFlights;
 
+    /**
+     * The type of units to use.
+     */
     private Spinner fieldUnits;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     * 
+     * @param savedInstanceState
+     *            The saved settings.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +100,12 @@ public class NewEventActivity extends Activity {
         this.setResult(RESULT_CANCELED);
     }
 
+    /**
+     * Handles the add event click actions.
+     * 
+     * @param v
+     *            The calling view.
+     */
     public void onAddClick(View v) {
         String name = this.fieldName.getText().toString();
         EventType type = FieldEvent.parseEventType((String) this.fieldType
@@ -79,14 +127,24 @@ public class NewEventActivity extends Activity {
         }
 
         // Return the Event to the activity that called this intent.
-        FieldEvent event = new FieldEvent(name, type, gender, date, qualifying, finals,
-                finalParticipants, flights, metric);
+        FieldEvent event = new FieldEvent(name, type, gender, date, qualifying,
+                finals, finalParticipants, flights, metric);
         Intent in = new Intent();
         in.putExtra("event", event);
         this.setResult(RESULT_OK, in);
         this.finish();
     }
 
+    /**
+     * Gets an integer values for a text field.
+     * 
+     * This is designed to be used on an EditText field that has the input type
+     * set to be a number to avoid possible errors.
+     * 
+     * @param field
+     *            The edit text.
+     * @return The integer values.
+     */
     private int getIntFromEditText(EditText field) {
         String val = field.getText().toString();
         if (val.length() == 0) {
@@ -100,6 +158,15 @@ public class NewEventActivity extends Activity {
         }
     }
 
+    /**
+     * Loads the options for the specified spinner given the specified array.
+     * 
+     * @param spinnerId
+     *            The spinner resource.
+     * @param listId
+     *            The string array resource.
+     * @return The spinner object.
+     */
     private Spinner wireUpSpinner(int spinnerId, int listId) {
         Spinner spinner = (Spinner) this.findViewById(spinnerId);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(

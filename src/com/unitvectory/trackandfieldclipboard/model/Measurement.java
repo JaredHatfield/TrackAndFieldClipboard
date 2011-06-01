@@ -1,11 +1,22 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
 
+/**
+ * A distance measurement that can represent a scratch, a metric measurement, or
+ * a feet and inches measurement.
+ * 
+ * @author Jared Hatfield
+ * 
+ */
 public class Measurement implements Serializable {
 
     /**
-     * 
+     * The serial version uid.
      */
     private static final long serialVersionUID = 1L;
 
@@ -183,5 +194,4 @@ public class Measurement implements Serializable {
     public boolean isScratch() {
         return scratch;
     }
-
 }

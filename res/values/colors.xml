@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<!-- 
+    Track and Field Clipboard
+    Copyright 2011 Jared Hatfield.  All rights reserved.
+ -->
+ <resources>
     <color name="highlight">#FFFCCF</color>
     <color name="selected">#F0E68C</color>
     <color name="header">#708090</color>

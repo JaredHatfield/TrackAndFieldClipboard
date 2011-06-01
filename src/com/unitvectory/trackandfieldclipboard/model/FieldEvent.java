@@ -1,3 +1,7 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
@@ -6,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * The field event that contains all of the information related to the
+ * competition.
  * 
  * @author Jared Hatfield
  * 
@@ -13,7 +19,7 @@ import java.util.List;
 public class FieldEvent implements Serializable {
 
     /**
-     * 
+     * The serial version uid.
      */
     private static final long serialVersionUID = 1L;
 
@@ -89,9 +95,9 @@ public class FieldEvent implements Serializable {
      * @param metric
      *            The flag indicating that the metric system should be used.
      */
-    public FieldEvent(String eventName, EventType type, Gender gender, String date,
-            int qualifyingScores, int finalScores, int finalParticipants,
-            int flights, boolean metric) {
+    public FieldEvent(String eventName, EventType type, Gender gender,
+            String date, int qualifyingScores, int finalScores,
+            int finalParticipants, int flights, boolean metric) {
         this.eventName = eventName;
         this.type = type;
         this.gender = gender;
@@ -293,8 +299,8 @@ public class FieldEvent implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public static FieldEvent example() {
-        FieldEvent event = new FieldEvent("Example", EventType.SHOT_PUT, Gender.MALE,
-                "Today", 3, 3, 10, 2, false);
+        FieldEvent event = new FieldEvent("Example", EventType.SHOT_PUT,
+                Gender.MALE, "Today", 3, 3, 10, 2, false);
 
         Participant p = new Participant("Sam Smith", "432", "10", "High", "31",
                 1, 2);

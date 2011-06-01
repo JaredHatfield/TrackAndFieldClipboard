@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<!-- 
+    Track and Field Clipboard
+    Copyright 2011 Jared Hatfield.  All rights reserved.
+ -->
+ <resources>
     <string name="hello">Hello World, TrackAndField!</string>
     <string name="app_name">TrackAndFieldClipboard</string>
     <string name="new_event">New Event</string>

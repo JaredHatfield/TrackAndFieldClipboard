@@ -1,3 +1,7 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.util;
 
 import java.text.DecimalFormat;
@@ -11,6 +15,12 @@ import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
 
+/**
+ * The holder for the participant.
+ * 
+ * @author Jared Hatfield
+ * 
+ */
 public class AthleteRowHolder {
 
     /**
@@ -125,6 +135,12 @@ public class AthleteRowHolder {
         }
     }
 
+    /**
+     * Marks a measurement as a scratch.
+     * 
+     * @param attempt
+     *            The attempt index.
+     */
     public void mark(int attempt) {
         // Marks as a foul
         Measurement m = this.participant.getMeasurement(attempt);
@@ -145,6 +161,14 @@ public class AthleteRowHolder {
         }
     }
 
+    /**
+     * Marks a measurement using metric units.
+     * 
+     * @param attempt
+     *            The attempt index.
+     * @param meters
+     *            The measurement.
+     */
     public void mark(int attempt, double meters) {
         Measurement m = this.participant.getMeasurement(attempt);
         if (m == null) {
@@ -164,6 +188,16 @@ public class AthleteRowHolder {
         }
     }
 
+    /**
+     * Marks a measurement using feet and inches.
+     * 
+     * @param attempt
+     *            The attempt index.
+     * @param feet
+     *            The feet component.
+     * @param inches
+     *            The inches component.
+     */
     public void mark(int attempt, int feet, double inches) {
         Measurement m = this.participant.getMeasurement(attempt);
         if (m == null) {
@@ -184,6 +218,16 @@ public class AthleteRowHolder {
         }
     }
 
+    /**
+     * Gets a string representation of a measurement.
+     * 
+     * If the measurement was a foul null is returned and the calling resource
+     * is responsible for loading the scratch string resource itself.
+     * 
+     * @param attempt
+     *            The attempt index.
+     * @return The string representation of a measurement.
+     */
     public String getMeasurement(int attempt) {
         if (this.participant == null) {
             return null;
@@ -193,6 +237,13 @@ public class AthleteRowHolder {
         }
     }
 
+    /**
+     * Translates a measurement into a string representation.
+     * 
+     * @param measure
+     *            The measurement.
+     * @return The string representation.
+     */
     private String translateMeasurement(Measurement measure) {
         if (measure == null) {
             return "-";

@@ -1,13 +1,24 @@
+/*
+ * Track and Field Clipboard
+ * Copyright 2011 Jared Hatfield.  All rights reserved.
+ */
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A participant or athlete that is competing in an event which will have
+ * measurements recorded for their marks.
+ * 
+ * @author Jared Hatfield
+ * 
+ */
 public class Participant implements Serializable, Comparable {
 
     /**
-     * 
+     * The serial version uid.
      */
     private static final long serialVersionUID = 1L;
 
@@ -221,9 +232,17 @@ public class Participant implements Serializable, Comparable {
         this.marks.add(measurement);
     }
 
+    /**
+     * Compares this object with the specified object for order
+     * 
+     * @param o
+     *            the Object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object is
+     *         less than, equal to, or greater than the specified object.
+     */
     @Override
-    public int compareTo(Object arg0) {
-        Participant p = (Participant) arg0;
+    public int compareTo(Object o) {
+        Participant p = (Participant) o;
         if (p == null) {
             return 0;
         }
