@@ -4,7 +4,14 @@
  */
 package com.unitvectory.trackandfieldclipboard.ui;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +42,7 @@ public class TrackAndFieldActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_and_field);
+        // this.writeExample("test2");
     }
 
     public void onTestEventClick(View v) {
@@ -65,6 +73,23 @@ public class TrackAndFieldActivity extends Activity {
                 intent.putExtra("event", event);
                 this.startActivity(intent);
             }
+        }
+    }
+
+    public void writeExample(String name) {
+        try {
+            Serializer serializer = new Persister();
+            FileOutputStream output = this.openFileOutput(name,
+                    Context.MODE_PRIVATE);
+            serializer.write(FieldEvent.example(), output);
+            output.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

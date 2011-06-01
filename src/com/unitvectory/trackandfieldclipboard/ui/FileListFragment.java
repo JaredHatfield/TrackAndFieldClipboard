@@ -5,25 +5,18 @@
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import android.app.ListFragment;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
-import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
+import com.unitvectory.trackandfieldclipboard.util.OpenClipboardTask;
 
 /**
  * The fragment that lists all of the files.
@@ -91,22 +84,10 @@ public class FileListFragment extends ListFragment {
      */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        try {
-            // TODO: This should be performed on a background thread.
-            String filename = this.directoryEntries.get(position);
-            FileInputStream input = this.getActivity().openFileInput(filename);
-            Serializer serializer = new Persister();
-            FieldEvent event = serializer.read(FieldEvent.class, input);
-            Intent intent = new Intent(getActivity(),
-                    DistanceClipboardActivity.class);
-            intent.putExtra("event", event);
-            this.startActivity(intent);
-        } catch (Exception e) {
-            Context context = getActivity().getApplicationContext();
-            Toast toast = Toast.makeText(context, R.string.failed_open,
-                    Toast.LENGTH_LONG);
-            toast.show();
-        }
+        String filename = this.directoryEntries.get(position);
+        OpenClipboardTask openClipboardTask = new OpenClipboardTask(
+                this.getActivity());
+        openClipboardTask.execute(filename);
     }
 
     /**

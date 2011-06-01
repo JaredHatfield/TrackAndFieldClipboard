@@ -4,9 +4,13 @@
  */
 package com.unitvectory.trackandfieldclipboard.ui;
 
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -55,6 +59,11 @@ public class DistanceClipboardActivity extends Activity implements
      * The event being manipulated.
      */
     private FieldEvent event;
+
+    /**
+     * The filename that is used for saving.
+     */
+    private String filename;
 
     /**
      * The current name.
@@ -107,8 +116,17 @@ public class DistanceClipboardActivity extends Activity implements
                     "event");
         }
 
+        if (this.filename == null) {
+            this.filename = this.getIntent().getStringExtra("filename");
+        }
+
         // Something went terribly wrong and we can't continue.
         if (this.event == null) {
+            this.finish();
+            return;
+        }
+
+        if (this.filename == null) {
             this.finish();
             return;
         }
@@ -148,6 +166,22 @@ public class DistanceClipboardActivity extends Activity implements
 
         // Render the table
         this.drawTable();
+    }
+
+    /**
+     * Saved the state of the exercise before the activity is closed.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            FileOutputStream output = this.openFileOutput(this.filename,
+                    Context.MODE_PRIVATE);
+            Serializer serializer = new Persister();
+            serializer.write(this.event, output);
+            output.close();
+        } catch (Exception e) {
+        }
     }
 
     /**
