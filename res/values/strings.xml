@@ -24,6 +24,11 @@
     <string name="inches">Inches</string>
     <string name="cancel">Cancel</string>
     <string name="scratch_confirmation">Change score to foul?</string>
+    <string name="add">Add</string>
+    <string name="attempt">Attempt</string>
+    <string name="mark">Mark</string>
+    <string name="next">Next</string>
+    <string name="failed_open">Failed to open file.</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>
@@ -47,8 +52,5 @@
         <item>US</item>
         <item>Metric</item>
     </string-array>
-        <string name="add">Add</string>
-        <string name="attempt">Attempt</string>
-        <string name="mark">Mark</string>
-        <string name="next">Next</string>
+
 </resources>

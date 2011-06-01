@@ -6,6 +6,9 @@ package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
 /**
  * A distance measurement that can represent a scratch, a metric measurement, or
  * a feet and inches measurement.
@@ -13,6 +16,7 @@ import java.io.Serializable;
  * @author Jared Hatfield
  * 
  */
+@Root
 public class Measurement implements Serializable {
 
     /**
@@ -23,31 +27,37 @@ public class Measurement implements Serializable {
     /**
      * The measurement component in feet.
      */
+    @Element(name = "feet")
     private int feet;
 
     /**
      * The measurement component in inches.
      */
+    @Element(name = "inches")
     private double inches;
 
     /**
      * The total measurement in meters.
      */
+    @Element(name = "meters")
     private double meters;
 
     /**
      * A flag indicating the measurement is in metric.
      */
+    @Element(name = "metric")
     private boolean metric;
 
     /**
      * The attempt by the athlete.
      */
+    @Element(name = "attempt")
     private int attempt;
 
     /**
      * The attempt was a scratch.
      */
+    @Element(name = "scratch")
     private boolean scratch;
 
     /**
@@ -110,6 +120,29 @@ public class Measurement implements Serializable {
         // Save the mark
         this.feet = feet;
         this.inches = inches;
+    }
+
+    /**
+     * 
+     * @param feet
+     * @param inches
+     * @param meters
+     * @param metric
+     * @param attempt
+     * @param scratch
+     */
+    public Measurement(@Element(name = "feet") int feet,
+            @Element(name = "inches") double inches,
+            @Element(name = "meters") double meters,
+            @Element(name = "metric") boolean metric,
+            @Element(name = "attempt") int attempt,
+            @Element(name = "scratch") boolean scratch) {
+        this.feet = feet;
+        this.inches = inches;
+        this.meters = meters;
+        this.metric = metric;
+        this.attempt = attempt;
+        this.scratch = scratch;
     }
 
     /**

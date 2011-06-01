@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
 /**
  * The field event that contains all of the information related to the
  * competition.
@@ -16,6 +20,7 @@ import java.util.List;
  * @author Jared Hatfield
  * 
  */
+@Root
 public class FieldEvent implements Serializable {
 
     /**
@@ -26,51 +31,61 @@ public class FieldEvent implements Serializable {
     /**
      * The event name.
      */
+    @Element(name = "eventName")
     private String eventName;
 
     /**
      * The type of the event.
      */
+    @Element(name = "type")
     private EventType type;
 
     /**
      * The gender.
      */
+    @Element(name = "gender")
     private Gender gender;
 
     /**
      * The date.
      */
+    @Element(name = "date")
     private String date;
 
     /**
      * The number of scores to count in the qualifying round.
      */
+    @Element(name = "qualifyingScores")
     private int qualifyingScores;
 
     /**
      * The number of scores to count in the finals.
      */
+    @Element(name = "finalScores")
     private int finalScores;
 
     /**
      * The number of participants that advance to finals.
      */
+    @Element(name = "finalParticipants")
     private int finalParticipants;
 
     /**
      * The number of flights.
      */
+    @Element(name = "flights")
     private int flights;
 
     /**
      * The flag that indicates that metric should be used.
      */
+    @Element(name = "metric")
     private boolean metric;
 
     /**
      * The list of participants.
      */
+    @ElementList(name = "participants")
     private List<Participant> participants;
 
     /**
@@ -108,6 +123,52 @@ public class FieldEvent implements Serializable {
         this.flights = flights;
         this.metric = metric;
         this.participants = new ArrayList<Participant>();
+    }
+
+    /**
+     * Initializes a new instance of the Event class.
+     * 
+     * @param eventName
+     *            The name of the event.
+     * @param type
+     *            The type of the event.
+     * @param gender
+     *            The gender of the event.
+     * @param date
+     *            The date of the event.
+     * @param qualifyingScores
+     *            The number of scores to count in the qualifying round.
+     * @param finalScores
+     *            The number of scores to count in the final round.
+     * @param finalParticipants
+     *            The number of participants to move on to the final round.
+     * @param flights
+     *            The number of flights in the competition.
+     * @param metric
+     *            The flag indicating that the metric system should be used.
+     * @param participants
+     *            The list of participants.
+     */
+    public FieldEvent(@Element(name = "eventName") String eventName,
+            @Element(name = "type") EventType type,
+            @Element(name = "gender") Gender gender,
+            @Element(name = "date") String date,
+            @Element(name = "qualifyingScores") int qualifyingScores,
+            @Element(name = "finalScores") int finalScores,
+            @Element(name = "finalParticipants") int finalParticipants,
+            @Element(name = "flights") int flights,
+            @Element(name = "metric") boolean metric,
+            @ElementList(name = "participants") List<Participant> participants) {
+        this.eventName = eventName;
+        this.type = type;
+        this.gender = gender;
+        this.date = date;
+        this.qualifyingScores = qualifyingScores;
+        this.finalScores = finalScores;
+        this.finalParticipants = finalParticipants;
+        this.flights = flights;
+        this.metric = metric;
+        this.participants = participants;
     }
 
     /**
@@ -297,7 +358,6 @@ public class FieldEvent implements Serializable {
      * 
      * @return The sample event object.
      */
-    @SuppressWarnings("unchecked")
     public static FieldEvent example() {
         FieldEvent event = new FieldEvent("Example", EventType.SHOT_PUT,
                 Gender.MALE, "Today", 3, 3, 10, 2, false);
