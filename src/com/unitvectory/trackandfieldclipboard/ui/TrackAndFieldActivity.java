@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.unitvectory.trackandfieldclipboard.R;
-import com.unitvectory.trackandfieldclipboard.model.Event;
+import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 
 public class TrackAndFieldActivity extends Activity {
 
@@ -54,7 +54,7 @@ public class TrackAndFieldActivity extends Activity {
 
     public void onTestEventClick(View v) {
         // Launch the new event activity
-        Event event = Event.example();
+        FieldEvent event = FieldEvent.example();
         Intent intent = new Intent(this, DistanceClipboardActivity.class);
         intent.putExtra("event", event);
         this.startActivity(intent);
@@ -70,7 +70,7 @@ public class TrackAndFieldActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEW_EVENT_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Event event = (Event) data.getExtras().getSerializable("event");
+                FieldEvent event = (FieldEvent) data.getExtras().getSerializable("event");
                 Intent intent = new Intent(this,
                         DistanceClipboardActivity.class);
                 intent.putExtra("event", event);

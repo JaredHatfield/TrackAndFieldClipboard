@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.unitvectory.trackandfieldclipboard.R;
-import com.unitvectory.trackandfieldclipboard.model.Event;
+import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.EventType;
 import com.unitvectory.trackandfieldclipboard.model.Gender;
 
@@ -60,9 +60,9 @@ public class NewEventActivity extends Activity {
 
     public void onAddClick(View v) {
         String name = this.fieldName.getText().toString();
-        EventType type = Event.parseEventType((String) this.fieldType
+        EventType type = FieldEvent.parseEventType((String) this.fieldType
                 .getSelectedItem());
-        Gender gender = Event.parseGender((String) this.fieldGender
+        Gender gender = FieldEvent.parseGender((String) this.fieldGender
                 .getSelectedItem());
         String date = this.fieldDate.getText().toString();
         int qualifying = Integer.parseInt((String) this.fieldQualifying
@@ -79,7 +79,7 @@ public class NewEventActivity extends Activity {
         }
 
         // Return the Event to the activity that called this intent.
-        Event event = new Event(name, type, gender, date, qualifying, finals,
+        FieldEvent event = new FieldEvent(name, type, gender, date, qualifying, finals,
                 finalParticipants, flights, metric);
         Intent in = new Intent();
         in.putExtra("event", event);

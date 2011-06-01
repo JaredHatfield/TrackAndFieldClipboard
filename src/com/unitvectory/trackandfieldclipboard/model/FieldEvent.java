@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Event implements Serializable {
+/**
+ * 
+ * @author Jared Hatfield
+ * 
+ */
+public class FieldEvent implements Serializable {
 
     /**
      * 
@@ -84,7 +89,7 @@ public class Event implements Serializable {
      * @param metric
      *            The flag indicating that the metric system should be used.
      */
-    public Event(String eventName, EventType type, Gender gender, String date,
+    public FieldEvent(String eventName, EventType type, Gender gender, String date,
             int qualifyingScores, int finalScores, int finalParticipants,
             int flights, boolean metric) {
         this.eventName = eventName;
@@ -287,8 +292,8 @@ public class Event implements Serializable {
      * @return The sample event object.
      */
     @SuppressWarnings("unchecked")
-    public static Event example() {
-        Event event = new Event("Example", EventType.SHOT_PUT, Gender.MALE,
+    public static FieldEvent example() {
+        FieldEvent event = new FieldEvent("Example", EventType.SHOT_PUT, Gender.MALE,
                 "Today", 3, 3, 10, 2, false);
 
         Participant p = new Participant("Sam Smith", "432", "10", "High", "31",

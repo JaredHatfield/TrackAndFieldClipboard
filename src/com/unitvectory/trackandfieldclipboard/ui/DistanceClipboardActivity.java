@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
-import com.unitvectory.trackandfieldclipboard.model.Event;
+import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
@@ -44,7 +44,7 @@ public class DistanceClipboardActivity extends Activity implements
     /**
      * The event being manipulated.
      */
-    private Event event;
+    private FieldEvent event;
 
     /**
      * The current name.
@@ -88,7 +88,7 @@ public class DistanceClipboardActivity extends Activity implements
         setContentView(R.layout.activity_distance_clipboard);
 
         if (this.event == null) {
-            this.event = (Event) this.getIntent().getSerializableExtra("event");
+            this.event = (FieldEvent) this.getIntent().getSerializableExtra("event");
         }
 
         // Something went terribly wrong and we can't continue.
