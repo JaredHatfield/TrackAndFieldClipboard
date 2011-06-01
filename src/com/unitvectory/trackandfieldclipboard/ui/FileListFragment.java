@@ -8,7 +8,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -102,10 +104,29 @@ public class FileListFragment extends ListFragment {
      * @return True on success;
      */
     protected boolean onLongListItemClick(View v, int position, long id) {
-        // TODO: Add a confirmation dialog
-        String filename = this.directoryEntries.get(position);
-        this.getActivity().deleteFile(filename);
-        this.displayFiles();
+        final String filename = this.directoryEntries.get(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.delete_file)
+                .setCancelable(true)
+                .setPositiveButton(R.string.delete,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Delete the file
+                                getActivity().deleteFile(filename);
+                                displayFiles();
+                            }
+                        })
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
         return true;
     }
 }
