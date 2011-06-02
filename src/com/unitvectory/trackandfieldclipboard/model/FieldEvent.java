@@ -277,6 +277,29 @@ public class FieldEvent implements Serializable {
     }
 
     /**
+     * Calculates the array of athletes that qualifed for finals.
+     * 
+     * @return The array of participants.
+     */
+    public List<Participant> calculateFinals() {
+        List<Participant> athletes = new ArrayList<Participant>();
+
+        for (int i = 0; i < this.participants.size(); i++) {
+            athletes.add(this.participants.get(i));
+        }
+
+        QualifyingComparator comparator = new QualifyingComparator(
+                this.qualifyingScores);
+        Collections.sort(athletes, comparator);
+        Collections.reverse(athletes);
+        while (athletes.size() > this.finalParticipants) {
+            athletes.remove(athletes.size() - 1);
+        }
+
+        return athletes;
+    }
+
+    /**
      * Computes the participants place.
      * 
      * @param participant

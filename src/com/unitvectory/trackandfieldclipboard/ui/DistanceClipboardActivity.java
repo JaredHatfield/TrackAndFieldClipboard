@@ -5,6 +5,7 @@
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,8 +26,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
@@ -71,6 +76,11 @@ public class DistanceClipboardActivity extends Activity implements
      * The filename that is used for saving.
      */
     private String filename;
+
+    /**
+     * The spinner used to select the flight.
+     */
+    private Spinner spinnerFlight;
 
     /**
      * The current name.
@@ -128,7 +138,7 @@ public class DistanceClipboardActivity extends Activity implements
             return;
         }
 
-        // Find all of the text views for the header
+        // Find all of the views for the header
         TextView textName = (TextView) this
                 .findViewById(R.id.textView_event_name);
         TextView textDate = (TextView) this
@@ -137,6 +147,32 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.textView_event_type);
         TextView textGender = (TextView) this
                 .findViewById(R.id.textView_event_gender);
+        this.spinnerFlight = (Spinner) this.findViewById(R.id.spinner_flight);
+        List<String> flightChoices = new ArrayList<String>();
+        flightChoices.add(this.getString(R.string.spinner_flight_all));
+        for (int i = 0; i < this.event.getFlights(); i++) {
+            flightChoices.add((i + 1) + "");
+        }
+
+        flightChoices.add(this.getString(R.string.spinner_flight_finals));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, flightChoices);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFlight.setAdapter(adapter);
+        spinnerFlight
+                .setOnItemSelectedListener(new ListView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> a, View v, int i,
+                            long l) {
+                        drawTable();
+                        selectAthleteNone();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg) {
+                        // Nothing here
+                    }
+                });
 
         // Find all of the text view for the footer
         this.currentName = (TextView) this
@@ -278,9 +314,33 @@ public class DistanceClipboardActivity extends Activity implements
         this.participants.addView(header, new TableLayout.LayoutParams(
                 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
+        // Determine what participants need to be displayed.
+        String valAll = this.getString(R.string.spinner_flight_all);
+        String valFinal = this.getString(R.string.spinner_flight_finals);
+        String spinnerVal = this.spinnerFlight.getSelectedItem().toString();
+        List<Participant> athletes = new ArrayList<Participant>();
+        if (spinnerVal.equals(valAll)) {
+            // Display everyone
+            athletes = this.event.getParticipants();
+            Collections.sort(athletes);
+        } else if (spinnerVal.equals(valFinal)) {
+            // Display the participants in the finals sorted by measurements
+            athletes = this.event.calculateFinals();
+        } else {
+            // Display only those participants in the selected flight
+            int flightInt = Integer.parseInt(spinnerVal);
+            for (int i = 0; i < this.event.getParticipants().size(); i++) {
+                Participant p = this.event.getParticipants().get(i);
+                if (p.getFlight() == flightInt) {
+                    athletes.add(p);
+                }
+
+                Collections.sort(athletes);
+            }
+        }
+
         // Add all of the participants
-        List<Participant> athletes = this.event.getParticipants();
-        Collections.sort(athletes);
+
         for (int i = 0; i < athletes.size(); i++) {
             Participant athlete = athletes.get(i);
 

@@ -6,6 +6,7 @@ package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -59,13 +60,13 @@ public class FileListFragment extends ListFragment {
      */
     public void displayFiles() {
         this.directoryEntries.clear();
-
         File[] files = getActivity().getFilesDir().listFiles();
-
         for (File file : files) {
             this.directoryEntries.add(file.getName());
         }
 
+        Collections.sort(this.directoryEntries);
+        Collections.reverse(this.directoryEntries);
         ArrayAdapter<String> directoryList = new ArrayAdapter<String>(
                 getActivity(), R.layout.file_row, this.directoryEntries);
 
