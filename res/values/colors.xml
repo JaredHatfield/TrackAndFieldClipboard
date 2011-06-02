@@ -7,6 +7,8 @@
     <color name="highlight">#FFFCCF</color>
     <color name="selected">#F0E68C</color>
     <color name="header">#708090</color>
+    <color name="header_qualifying">#8B8BE7</color>
+    <color name="header_finals">#7D88A8</color>
     <color name="names">#E4E4E2</color>
     <color name="tip">#999999</color>
     <color name="best_mark">#BBFFFF</color>

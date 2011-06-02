@@ -42,6 +42,7 @@ import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
+import com.unitvectory.trackandfieldclipboard.util.ParticipantDisplay;
 
 /**
  * The clipboard activity used to record measurements for a specific event.
@@ -284,7 +285,7 @@ public class DistanceClipboardActivity extends Activity implements
             textHeaderQualify.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderQualify.setGravity(Gravity.CENTER);
             textHeaderQualify.setTextSize(fontSize);
-            textHeaderQualify.setBackgroundResource(R.color.header);
+            textHeaderQualify.setBackgroundResource(R.color.header_qualifying);
             header.addView(textHeaderQualify);
         }
 
@@ -297,7 +298,7 @@ public class DistanceClipboardActivity extends Activity implements
             textHeaderFinal.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderFinal.setGravity(Gravity.CENTER);
             textHeaderFinal.setTextSize(fontSize);
-            textHeaderFinal.setBackgroundResource(R.color.header);
+            textHeaderFinal.setBackgroundResource(R.color.header_finals);
             header.addView(textHeaderFinal);
         }
 
@@ -315,6 +316,7 @@ public class DistanceClipboardActivity extends Activity implements
                 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
         // Determine what participants need to be displayed.
+        ParticipantDisplay participantDisplay = ParticipantDisplay.FLIGHT;
         String valAll = this.getString(R.string.spinner_flight_all);
         String valFinal = this.getString(R.string.spinner_flight_finals);
         String spinnerVal = this.spinnerFlight.getSelectedItem().toString();
@@ -323,9 +325,11 @@ public class DistanceClipboardActivity extends Activity implements
             // Display everyone
             athletes = this.event.getParticipants();
             Collections.sort(athletes);
+            participantDisplay = ParticipantDisplay.ALL;
         } else if (spinnerVal.equals(valFinal)) {
             // Display the participants in the finals sorted by measurements
             athletes = this.event.calculateFinals();
+            participantDisplay = ParticipantDisplay.FINALS;
         } else {
             // Display only those participants in the selected flight
             int flightInt = Integer.parseInt(spinnerVal);
@@ -376,7 +380,11 @@ public class DistanceClipboardActivity extends Activity implements
                         LayoutParams.FILL_PARENT, cellHeight, 1));
                 textQualify.setGravity(Gravity.CENTER);
                 textQualify.setTextSize(fontSize);
-                textQualify.setOnClickListener(this);
+                if (participantDisplay.equals(ParticipantDisplay.ALL)
+                        || participantDisplay.equals(ParticipantDisplay.FLIGHT)) {
+                    textQualify.setOnClickListener(this);
+                }
+
                 tr.addView(textQualify);
                 holder.addMark(num, textQualify);
             }
@@ -388,7 +396,11 @@ public class DistanceClipboardActivity extends Activity implements
                         LayoutParams.FILL_PARENT, cellHeight, 1));
                 textFinal.setGravity(Gravity.CENTER);
                 textFinal.setTextSize(fontSize);
-                textFinal.setOnClickListener(this);
+                if (participantDisplay.equals(ParticipantDisplay.ALL)
+                        || participantDisplay.equals(ParticipantDisplay.FINALS)) {
+                    textFinal.setOnClickListener(this);
+                }
+
                 tr.addView(textFinal);
                 holder.addMark(num, textFinal);
             }
