@@ -31,7 +31,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
@@ -84,11 +83,6 @@ public class DistanceClipboardActivity extends Activity implements
     private TextView currentAttempt;
 
     /**
-     * The current mark.
-     */
-    private TextView currentMark;
-
-    /**
      * The button to mark a distance.
      */
     private Button buttonMark;
@@ -97,11 +91,6 @@ public class DistanceClipboardActivity extends Activity implements
      * The button to mark a scratch.
      */
     private Button buttonScratch;
-
-    /**
-     * The button to move to the next measurement.
-     */
-    private Button buttonNext;
 
     /**
      * The view that was last clicked that needs to have a highlight removed.
@@ -154,13 +143,10 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.textView_current_name);
         this.currentAttempt = (TextView) this
                 .findViewById(R.id.textView_current_attempt);
-        this.currentMark = (TextView) this
-                .findViewById(R.id.textView_current_mark);
 
         // Find all of the footer view
         this.buttonMark = (Button) this.findViewById(R.id.button_mark);
         this.buttonScratch = (Button) this.findViewById(R.id.button_scratch);
-        this.buttonNext = (Button) this.findViewById(R.id.button_next);
 
         // Display the header text
         textName.setText(this.event.getEventName());
@@ -430,22 +416,6 @@ public class DistanceClipboardActivity extends Activity implements
     }
 
     /**
-     * The event handler for the next button.
-     * 
-     * @param view
-     *            The calling view.
-     */
-    public void onNextClick(View view) {
-        // TODO: Implement next button.
-        Context context = getApplicationContext();
-        CharSequence text = "Next Clicked";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
-    /**
      * Adds a new participant.
      * 
      * @param view
@@ -537,11 +507,9 @@ public class DistanceClipboardActivity extends Activity implements
      */
     private void selectAthleteNone() {
         this.currentName.setText("");
-        this.currentMark.setText("");
         this.currentAttempt.setText("");
         this.buttonMark.setEnabled(false);
         this.buttonScratch.setEnabled(false);
-        this.buttonNext.setEnabled(false);
     }
 
     /**
@@ -554,15 +522,15 @@ public class DistanceClipboardActivity extends Activity implements
      */
     private void selectAthleteBox(AthleteRowHolder holder, int attempt) {
         Participant athlete = holder.getParticipant();
-        this.currentName.setText(athlete.getName());
-        this.currentAttempt.setText("#" + attempt);
-        String mark = holder.getMeasurement(attempt);
-        if (mark == null) {
-            this.currentMark.setText(R.string.scratch);
-        } else {
-            this.currentMark.setText(mark);
+        String athleteName = athlete.getName();
+        if (athleteName == null) {
+            athleteName = this.getString(R.string.athlete);
+        } else if (athleteName.length() == 0) {
+            athleteName = this.getString(R.string.athlete);
         }
 
+        this.currentName.setText(athleteName);
+        this.currentAttempt.setText("#" + attempt);
         this.buttonMark.setTag(R.id.id_holder_object, holder);
         this.buttonMark.setTag(R.id.id_holder_index, attempt);
         this.buttonMark.setEnabled(true);

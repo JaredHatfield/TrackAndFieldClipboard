@@ -154,30 +154,5 @@
             	android:enabled="false"
             	android:onClick="onScratchClick" />
         </TableRow>
-        <TableRow
-        	android:layout_width="wrap_content" 
-        	android:layout_height="wrap_content">
-            <TextView 
-            	android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:layout_width="@dimen/label_width" 
-                android:layout_height="wrap_content" 
-                android:text="@string/mark" />
-            <TextView 
-            	android:id="@+id/textView_current_mark" 
-            	android:textSize="@dimen/font_size" 
-            	android:layout_weight="1"
-            	android:layout_width="wrap_content" 
-            	android:layout_height="wrap_content" />
-           	<Button 
-            	android:id="@+id/button_next" 
-            	android:layout_width="@dimen/button_width" 
-            	android:layout_height="wrap_content" 
-            	android:enabled="false" 
-            	android:onClick="onNextClick"
-            	android:text="@string/next"/>
-        </TableRow>
    	</TableLayout>
 </LinearLayout>
