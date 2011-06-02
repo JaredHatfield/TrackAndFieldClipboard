@@ -30,50 +30,74 @@ public class Participant implements Serializable, Comparable<Participant> {
     /**
      * The participants name.
      */
-    @Element(name = "name")
-    private String name;
+    @Element(name = "name", required = false)
+    protected String name;
 
     /**
      * The participants numbers.
      */
-    @Element(name = "number")
-    private String number;
+    @Element(name = "number", required = false)
+    protected String number;
 
     /**
      * The participants year.
      */
-    @Element(name = "year")
-    private String year;
+    @Element(name = "year", required = false)
+    protected String year;
 
     /**
      * The participants school.
      */
-    @Element(name = "school")
-    private String school;
+    @Element(name = "school", required = false)
+    protected String school;
 
     /**
      * The participants seed.
      */
-    @Element(name = "seed")
-    private String seed;
+    @Element(name = "seed", required = false)
+    protected String seed;
 
     /**
      * The participants flight.
      */
     @Element(name = "flight")
-    private int flight;
+    protected int flight;
 
     /**
      * The participants position in their flight.
      */
     @Element(name = "position")
-    private int position;
+    protected int position;
 
     /**
      * The measurements for the athlete.
      */
     @ElementList(name = "marks")
-    private List<Measurement> marks;
+    protected List<Measurement> marks;
+
+    /**
+     * Initializes a new instance of the Participant class.
+     */
+    protected Participant() {
+        this.marks = new ArrayList<Measurement>();
+    }
+
+    /**
+     * Initializes a new instance of the Participant class.
+     * 
+     * @param name
+     *            The participant's name.
+     * @param flight
+     *            The participant's flight.
+     * @param position
+     *            The participant's position.
+     */
+    public Participant(String name, int flight, int position) {
+        this.name = name;
+        this.flight = flight;
+        this.position = position;
+        this.marks = new ArrayList<Measurement>();
+    }
 
     /**
      * Initializes a new instance of the Participant class.
@@ -103,44 +127,6 @@ public class Participant implements Serializable, Comparable<Participant> {
         this.flight = flight;
         this.position = position;
         this.marks = new ArrayList<Measurement>();
-    }
-
-    /**
-     * Initializes a new instance of the Participant class.
-     * 
-     * @param name
-     *            The participant's name.
-     * @param number
-     *            The participant's number.
-     * @param year
-     *            The participant's year.
-     * @param school
-     *            The participant's school
-     * @param seed
-     *            The participant's seed.
-     * @param flight
-     *            The participant's flight.
-     * @param position
-     *            The participant's position.
-     * @param marks
-     *            The participant's marks.
-     */
-    public Participant(@Element(name = "name") String name,
-            @Element(name = "number") String number,
-            @Element(name = "year") String year,
-            @Element(name = "school") String school,
-            @Element(name = "seed") String seed,
-            @Element(name = "flight") int flight,
-            @Element(name = "position") int position,
-            @ElementList(name = "marks") List<Measurement> marks) {
-        this.name = name;
-        this.number = number;
-        this.year = year;
-        this.school = school;
-        this.seed = seed;
-        this.flight = flight;
-        this.position = position;
-        this.marks = marks;
     }
 
     /**

@@ -45,6 +45,12 @@
                 android:layout_height="wrap_content" 
                 android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
+            <Button 
+            	android:layout_width="wrap_content" 
+            	android:layout_height="wrap_content" 
+            	android:id="@+id/button_add_participant" 
+            	android:text="@string/add_participant" 
+            	android:onClick="onAddParticipantClick" />
         </TableRow>
         <TableRow 
         	android:layout_width="fill_parent" 
@@ -79,6 +85,7 @@
                 android:layout_height="wrap_content" 
                 android:layout_weight="1" 
                 android:textSize="@dimen/font_size" />
+            <TextView />
         </TableRow>
     </TableLayout>
     <ScrollView

@@ -31,6 +31,9 @@
     <string name="failed_open">Failed to open file.</string>
     <string name="delete">Delete</string>
     <string name="delete_file">Delete File</string>
+    <string name="add_participant">Add Participant</string>
+    <string name="flight">Flight</string>
+    <string name="position">Position</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>

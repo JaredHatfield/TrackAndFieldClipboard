@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Track and Field Clipboard
+    Copyright 2011 Jared Hatfield.  All rights reserved.
+ -->
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content">
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_alignParentLeft="true" 
+	    	android:id="@+id/textView_label_meters" 
+	    	android:textSize="@dimen/font_size"
+	    	android:paddingRight="@dimen/form_label_right_padding" 
+	    	android:text="@string/name" />
+	    <EditText 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/editText_participant_name"
+	    	android:layout_height="wrap_content" 
+	    	android:inputType="text"/>
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_alignParentLeft="true" 
+	    	android:id="@+id/textView_label_meters" 
+	    	android:textSize="@dimen/font_size"
+	    	android:paddingRight="@dimen/form_label_right_padding" 
+	    	android:text="@string/flight" />
+	    <EditText 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/editText_participant_flight"
+	    	android:layout_height="wrap_content" 
+	    	android:inputType="number"/>
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_alignParentLeft="true" 
+	    	android:id="@+id/textView_label_meters" 
+	    	android:textSize="@dimen/font_size"
+	    	android:paddingRight="@dimen/form_label_right_padding" 
+	    	android:text="@string/position" />
+	    <EditText 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/editText_participant_position"
+	    	android:layout_height="wrap_content" 
+	    	android:inputType="number"/>
+	</LinearLayout>
+</LinearLayout>

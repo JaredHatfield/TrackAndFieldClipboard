@@ -28,37 +28,43 @@ public class Measurement implements Serializable {
      * The measurement component in feet.
      */
     @Element(name = "feet")
-    private int feet;
+    protected int feet;
 
     /**
      * The measurement component in inches.
      */
     @Element(name = "inches")
-    private double inches;
+    protected double inches;
 
     /**
      * The total measurement in meters.
      */
     @Element(name = "meters")
-    private double meters;
+    protected double meters;
 
     /**
      * A flag indicating the measurement is in metric.
      */
     @Element(name = "metric")
-    private boolean metric;
+    protected boolean metric;
 
     /**
      * The attempt by the athlete.
      */
     @Element(name = "attempt")
-    private int attempt;
+    protected int attempt;
 
     /**
      * The attempt was a scratch.
      */
     @Element(name = "scratch")
-    private boolean scratch;
+    protected boolean scratch;
+
+    /**
+     * Initializes a new instance of the Measurement class.
+     */
+    protected Measurement() {
+    }
 
     /**
      * Initializes a new instance of the Measurement class representing a
@@ -120,29 +126,6 @@ public class Measurement implements Serializable {
         // Save the mark
         this.feet = feet;
         this.inches = inches;
-    }
-
-    /**
-     * 
-     * @param feet
-     * @param inches
-     * @param meters
-     * @param metric
-     * @param attempt
-     * @param scratch
-     */
-    public Measurement(@Element(name = "feet") int feet,
-            @Element(name = "inches") double inches,
-            @Element(name = "meters") double meters,
-            @Element(name = "metric") boolean metric,
-            @Element(name = "attempt") int attempt,
-            @Element(name = "scratch") boolean scratch) {
-        this.feet = feet;
-        this.inches = inches;
-        this.meters = meters;
-        this.metric = metric;
-        this.attempt = attempt;
-        this.scratch = scratch;
     }
 
     /**

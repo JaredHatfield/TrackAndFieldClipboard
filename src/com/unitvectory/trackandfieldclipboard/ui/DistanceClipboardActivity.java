@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +45,11 @@ import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
  */
 public class DistanceClipboardActivity extends Activity implements
         OnClickListener {
+
+    /**
+     * The tag used for logging.
+     */
+    private static final String TAG = "TrackAndFieldClipboard";
 
     /**
      * The participants table.
@@ -181,6 +187,7 @@ public class DistanceClipboardActivity extends Activity implements
             serializer.write(this.event, output);
             output.close();
         } catch (Exception e) {
+            Log.e(DistanceClipboardActivity.TAG, e.getMessage());
         }
     }
 
@@ -396,6 +403,53 @@ public class DistanceClipboardActivity extends Activity implements
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    public void onAddParticipantClick(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.add_participant);
+        View v = this.getLayoutInflater().inflate(R.layout.dialog_add_user,
+                null);
+        final EditText inputName = (EditText) v
+                .findViewById(R.id.editText_participant_name);
+        final EditText inputFlight = (EditText) v
+                .findViewById(R.id.editText_participant_flight);
+        final EditText inputPosition = (EditText) v
+                .findViewById(R.id.editText_participant_position);
+
+        alert.setView(v);
+        alert.setPositiveButton(R.string.add,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String name = inputName.getText().toString();
+                        String flight = inputFlight.getText().toString();
+                        if (flight.length() == 0) {
+                            flight = "1";
+                        }
+
+                        String position = inputPosition.getText().toString();
+                        if (position.length() == 0) {
+                            position = "1";
+                        }
+
+                        // Add the participant;
+                        event.getParticipants().add(
+                                new Participant(name, Integer.parseInt(flight),
+                                        Integer.parseInt(position)));
+                        drawTable();
+                    }
+                });
+
+        alert.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+
+        alert.show();
     }
 
     /**

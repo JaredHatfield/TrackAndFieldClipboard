@@ -12,6 +12,7 @@ import org.simpleframework.xml.core.Persister;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
@@ -25,6 +26,11 @@ import com.unitvectory.trackandfieldclipboard.ui.DistanceClipboardActivity;
  * 
  */
 public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
+
+    /**
+     * The tag used for logging.
+     */
+    private static final String TAG = "TrackAndFieldClipboard";
 
     /**
      * The context that will be used.
@@ -62,6 +68,7 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
             FieldEvent event = serializer.read(FieldEvent.class, input);
             return event;
         } catch (Exception e) {
+            Log.e(OpenClipboardTask.TAG, e.getMessage());
             return null;
         }
     }
