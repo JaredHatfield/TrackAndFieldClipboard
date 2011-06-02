@@ -6,6 +6,7 @@ package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.FileOutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -273,6 +274,16 @@ public class DistanceClipboardActivity extends Activity implements
             header.addView(textHeaderFinal);
         }
 
+        TextView textHeaderPlace = new TextView(this);
+        textHeaderPlace.setText(this.getString(R.string.place));
+        textHeaderPlace.setLayoutParams(new LayoutParams(
+                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
+        textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderPlace.setGravity(Gravity.CENTER_HORIZONTAL);
+        textHeaderPlace.setTextSize(res.getDimension(R.dimen.font_size));
+        textHeaderPlace.setBackgroundResource(R.color.header);
+        header.addView(textHeaderPlace);
+
         this.participants.addView(header, new TableLayout.LayoutParams(
                 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
@@ -304,6 +315,7 @@ public class DistanceClipboardActivity extends Activity implements
 
             AthleteRowHolder holder = new AthleteRowHolder(textName,
                     textFlightPosition);
+            this.rows.put(i, holder);
 
             for (int j = 0; j < this.event.getQualifyingScores(); j++) {
                 int num = j + 1;
@@ -335,10 +347,35 @@ public class DistanceClipboardActivity extends Activity implements
 
             holder.displayAthlete(athlete);
 
+            TextView textFlightPlace = new TextView(this);
+            textFlightPlace.setLayoutParams(new LayoutParams(
+                    LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1));
+            textFlightPlace.setGravity(Gravity.CENTER_HORIZONTAL);
+            textFlightPlace.setTextSize(res.getDimension(R.dimen.font_size));
+            textFlightPlace.setBackgroundResource(R.color.names);
+            tr.addView(textFlightPlace);
+
+            holder.setTextPlace(textFlightPlace);
+
             this.participants.addView(tr, new TableLayout.LayoutParams(
                     LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
         }
 
+        this.updateAthletePlace();
+    }
+
+    /**
+     * Updates the places for all of the athletes.
+     */
+    public void updateAthletePlace() {
+        Iterator<Map.Entry<Integer, AthleteRowHolder>> it = this.rows
+                .entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, AthleteRowHolder> pairs = it.next();
+            AthleteRowHolder holder = pairs.getValue();
+            int place = this.event.participantPlace(holder.getParticipant());
+            holder.updatePlace(place);
+        }
     }
 
     /**
@@ -547,6 +584,7 @@ public class DistanceClipboardActivity extends Activity implements
                                 holder.mark(attempt);
                                 lastClicked
                                         .setBackgroundResource(R.color.selected);
+                                updateAthletePlace();
                             }
                         })
                 .setNegativeButton(R.string.cancel,
@@ -598,6 +636,7 @@ public class DistanceClipboardActivity extends Activity implements
 
                         holder.mark(attempt, Double.parseDouble(value));
                         lastClicked.setBackgroundResource(R.color.selected);
+                        updateAthletePlace();
                     }
                 });
 
@@ -657,6 +696,7 @@ public class DistanceClipboardActivity extends Activity implements
                         holder.mark(attempt, Integer.parseInt(feet),
                                 Double.parseDouble(inches));
                         lastClicked.setBackgroundResource(R.color.selected);
+                        updateAthletePlace();
                     }
                 });
 

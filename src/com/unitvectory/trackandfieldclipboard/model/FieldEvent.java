@@ -277,6 +277,38 @@ public class FieldEvent implements Serializable {
     }
 
     /**
+     * Computes the participants place.
+     * 
+     * @param participant
+     *            The participant.
+     * @return The place.
+     */
+    public int participantPlace(Participant participant) {
+        int best = participant.bestMark();
+
+        // If you have no marks, you are definitely in last place.
+        if (best == 0) {
+            return this.participants.size();
+        }
+
+        Measurement myMeasurement = participant.getMeasurement(best);
+        int place = 1;
+        for (int i = 0; i < this.participants.size(); i++) {
+            int other = this.participants.get(i).bestMark();
+            if (other != 0) {
+                Measurement oppMeasurement = this.participants.get(i)
+                        .getMeasurement(other);
+                if (oppMeasurement.compareTo(myMeasurement) > 0) {
+                    place++;
+                }
+            }
+        }
+
+        return place;
+
+    }
+
+    /**
      * Creates a new file name.
      * 
      * @return The string to use as a file name.

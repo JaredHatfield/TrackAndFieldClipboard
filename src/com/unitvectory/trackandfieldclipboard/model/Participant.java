@@ -270,6 +270,7 @@ public class Participant implements Serializable, Comparable<Participant> {
             return 0;
         }
 
+        // TODO: This should probably be cached to improve speed.
         return Collections.max(this.marks).attempt;
     }
 

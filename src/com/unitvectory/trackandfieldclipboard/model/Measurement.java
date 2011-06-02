@@ -232,10 +232,6 @@ public class Measurement implements Serializable, Comparable<Measurement> {
             return 1;
         } else if (v1 < v2) {
             return -1;
-        } else if (this.attempt > m.attempt) {
-            return 1;
-        } else if (this.attempt < m.attempt) {
-            return -1;
         } else {
             return 0;
         }

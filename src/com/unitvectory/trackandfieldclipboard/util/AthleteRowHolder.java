@@ -44,6 +44,11 @@ public class AthleteRowHolder {
     private Map<Integer, TextView> marks;
 
     /**
+     * The text view for the athlete's place.
+     */
+    private TextView textPlace;
+
+    /**
      * Initializes a new instance of the AthleteRowHolder class.
      * 
      * @param textName
@@ -92,6 +97,21 @@ public class AthleteRowHolder {
      */
     public Participant getParticipant() {
         return participant;
+    }
+
+    /**
+     * @return the textPlace
+     */
+    public TextView getTextPlace() {
+        return textPlace;
+    }
+
+    /**
+     * @param textPlace
+     *            the textPlace to set
+     */
+    public void setTextPlace(TextView textPlace) {
+        this.textPlace = textPlace;
     }
 
     /**
@@ -206,6 +226,16 @@ public class AthleteRowHolder {
 
         // Update the GUI
         this.displayAthlete(this.participant);
+    }
+
+    /**
+     * Updates the place for the row.
+     * 
+     * @param place
+     */
+    public void updatePlace(int place) {
+        String str = place + "";
+        this.textPlace.setText(str);
     }
 
     /**
