@@ -5,6 +5,7 @@
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.FileOutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -156,7 +157,7 @@ public class DistanceClipboardActivity extends Activity implements
         this.currentMark = (TextView) this
                 .findViewById(R.id.textView_current_mark);
 
-        // Find all of the buttons
+        // Find all of the footer view
         this.buttonMark = (Button) this.findViewById(R.id.button_mark);
         this.buttonScratch = (Button) this.findViewById(R.id.button_scratch);
         this.buttonNext = (Button) this.findViewById(R.id.button_next);
@@ -293,6 +294,7 @@ public class DistanceClipboardActivity extends Activity implements
 
         // Add all of the participants
         List<Participant> athletes = this.event.getParticipants();
+        Collections.sort(athletes);
         for (int i = 0; i < athletes.size(); i++) {
             Participant athlete = athletes.get(i);
 
@@ -305,6 +307,7 @@ public class DistanceClipboardActivity extends Activity implements
                     cellHeight, 2));
             textName.setGravity(Gravity.CENTER_VERTICAL);
             textName.setTextSize(fontSize);
+            textName.setOnClickListener(this);
             textName.setBackgroundResource(R.color.names);
             tr.addView(textName);
 
@@ -442,6 +445,12 @@ public class DistanceClipboardActivity extends Activity implements
         toast.show();
     }
 
+    /**
+     * Adds a new participant.
+     * 
+     * @param view
+     *            The calling view.
+     */
     public void onAddParticipantClick(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.add_participant);
@@ -499,15 +508,6 @@ public class DistanceClipboardActivity extends Activity implements
      */
     @Override
     public void onClick(View view) {
-        if (this.lastClicked != null) {
-            AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
-                    .getTag(R.id.id_holder_object);
-            oldHolder.displayAthlete(oldHolder.getParticipant());
-        }
-
-        view.setBackgroundResource(R.color.selected);
-        this.lastClicked = view;
-
         AthleteRowHolder holder = (AthleteRowHolder) view
                 .getTag(R.id.id_holder_object);
         Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
@@ -515,10 +515,20 @@ public class DistanceClipboardActivity extends Activity implements
             // Something bad happened
             this.selectAthleteNone();
         } else if (attempt > 0) {
+            // Change the mark that is selected
+            if (this.lastClicked != null) {
+                AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
+                        .getTag(R.id.id_holder_object);
+                oldHolder.displayAthlete(oldHolder.getParticipant());
+            }
+
+            view.setBackgroundResource(R.color.selected);
+            this.lastClicked = view;
+
             this.selectAthleteBox(holder, attempt.intValue());
         } else {
-            // Invalid selection
-            this.selectAthleteNone();
+            // Launch the dialog to edit a participant.
+            this.displayEditParticipant(holder);
         }
     }
 
@@ -710,6 +720,77 @@ public class DistanceClipboardActivity extends Activity implements
                                 Double.parseDouble(inches));
                         lastClicked.setBackgroundResource(R.color.selected);
                         updateAthletePlace();
+                    }
+                });
+
+        alert.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+
+        alert.show();
+    }
+
+    /**
+     * Display the interface to edit the participant.
+     * 
+     * @param holder
+     *            The holder of the participant being edited.
+     */
+    private void displayEditParticipant(final AthleteRowHolder holder) {
+        final Participant athlete = holder.getParticipant();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.edit_participant);
+        View v = this.getLayoutInflater().inflate(R.layout.dialog_add_user,
+                null);
+        final EditText inputName = (EditText) v
+                .findViewById(R.id.editText_participant_name);
+        inputName.setText(athlete.getName());
+        final EditText inputFlight = (EditText) v
+                .findViewById(R.id.editText_participant_flight);
+        inputFlight.setText(athlete.getFlight() + "");
+        final EditText inputPosition = (EditText) v
+                .findViewById(R.id.editText_participant_position);
+        inputPosition.setText(athlete.getPosition() + "");
+
+        alert.setView(v);
+        alert.setPositiveButton(R.string.save,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String name = inputName.getText().toString();
+                        String flight = inputFlight.getText().toString();
+                        if (flight.length() == 0) {
+                            flight = "1";
+                        }
+
+                        int flightInt = Integer.parseInt(flight);
+
+                        String position = inputPosition.getText().toString();
+                        if (position.length() == 0) {
+                            position = "1";
+                        }
+
+                        int positionInt = Integer.parseInt(position);
+
+                        // Update the participant
+                        boolean partialUpdate = (flightInt == athlete
+                                .getFlight() && positionInt == athlete
+                                .getPosition());
+                        athlete.setName(name);
+                        athlete.setFlight(Integer.parseInt(flight));
+                        athlete.setPosition(Integer.parseInt(position));
+                        if (partialUpdate) {
+                            // We can just update the local row.
+                            holder.displayAthlete(holder.getParticipant());
+                        } else {
+                            // We need to redraw the entire table.
+                            drawTable();
+                        }
                     }
                 });
 

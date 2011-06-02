@@ -58,6 +58,8 @@ public class AthleteRowHolder {
      */
     public AthleteRowHolder(TextView textName, TextView textFlightPosition) {
         this.textName = textName;
+        this.textName.setTag(R.id.id_holder_object, this);
+        this.textName.setTag(R.id.id_holder_index, -1);
         this.textFlightPosition = textFlightPosition;
         this.marks = new HashMap<Integer, TextView>();
     }
