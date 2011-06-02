@@ -89,8 +89,10 @@ public class NewEventActivity extends Activity {
         this.fieldDate = (EditText) this.findViewById(R.id.editText_event_date);
         this.fieldQualifying = this.wireUpSpinner(
                 R.id.spinner_event_qualifying_marks, R.array.marks);
+        this.fieldQualifying.setSelection(3);
         this.fieldFinals = this.wireUpSpinner(R.id.spinner_event_final_marks,
                 R.array.marks);
+        this.fieldFinals.setSelection(3);
         this.fieldFinalParticipants = (EditText) this
                 .findViewById(R.id.editText_event_final_participants);
         this.fieldFlights = (EditText) this

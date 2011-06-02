@@ -34,12 +34,18 @@
     <string name="add_participant">Add Participant</string>
     <string name="flight">Flight</string>
     <string name="position">Position</string>
+    <string name="default_final_participants">10</string>
+    <string name="default_number_of_flights">1</string>
+    <string name="hint_qualifying_marks">The number of marks athletes get in qualifying flights.</string>
+    <string name="hint_final_marks">The number of marks athletes get in the finals.</string>
+    <string name="hint_final_participants">The number of athletes that move onto the finals.</string>
+    <string name="hint_number_of_flights">The number of flights before the finals.</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>
-        <item>Shot Put</item>
         <item>Javaline</item>
         <item>Long Jump</item>
+        <item>Shot Put</item>
         <item>Triple Jump</item>
     </string-array>
     <string-array name="genders">
@@ -48,6 +54,9 @@
         <item>Female</item>
     </string-array>
     <string-array name="marks">
+    	<item>0</item>
+    	<item>1</item>
+    	<item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>

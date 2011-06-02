@@ -5,13 +5,14 @@
  -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
+    android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal">
 	<TableLayout  
 	    android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_horizontal">
+	    android:layout_gravity="center_horizontal"
+	    android:padding="@dimen/table_padding">
 	    <TableRow 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -27,7 +28,8 @@
 	        	android:width="@dimen/form_element_width" 
 	        	android:id="@+id/editText_event_name" 
 	        	android:layout_width="wrap_content" 
-	        	android:layout_height="wrap_content" />
+	        	android:layout_height="wrap_content" 
+	        	android:singleLine="true" />
 	    </TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
@@ -81,7 +83,8 @@
 	        	android:width="@dimen/form_element_width" 
 	        	android:id="@+id/editText_event_date" 
 	        	android:layout_height="wrap_content" 
-	        	android:layout_width="wrap_content" />
+	        	android:layout_width="wrap_content" 
+	        	android:singleLine="true" />
 	    </TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
@@ -102,6 +105,19 @@
 	        	android:layout_height="wrap_content" />
 	    </TableRow>
 	    <TableRow 
+	    	android:id="@+id/tableRow1" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_qualifying_marks" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
+	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -120,6 +136,18 @@
 	        	android:layout_height="wrap_content" />
 	    </TableRow>
 	    <TableRow 
+	    	android:id="@+id/tableRow1" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" android:text="@string/hint_final_marks"/>
+    	</TableRow>
+	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -136,8 +164,21 @@
 	        	android:id="@+id/editText_event_final_participants" 
 	        	android:layout_width="wrap_content" 
 	        	android:layout_height="wrap_content" 
-	        	android:inputType="number" />
+	        	android:inputType="number" 
+	        	android:text="@string/default_final_participants" />
 	    </TableRow>
+	    <TableRow 
+	    	android:id="@+id/tableRow1" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" android:text="@string/hint_final_participants"/>
+    	</TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
@@ -155,8 +196,21 @@
 	        	android:id="@+id/editText_event_flights" 
 	        	android:layout_width="wrap_content" 
 	        	android:layout_height="wrap_content" 
-	        	android:inputType="number" />
+	        	android:inputType="number" 
+	        	android:text="@string/default_number_of_flights" />
 	    </TableRow>
+	    <TableRow 
+	    	android:id="@+id/tableRow1" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" android:text="@string/hint_number_of_flights"/>
+    	</TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 

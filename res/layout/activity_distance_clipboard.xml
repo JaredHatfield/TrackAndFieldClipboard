@@ -11,7 +11,7 @@
     <TableLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:padding="@dimen/table_participant_padding">
+        android:padding="@dimen/table_padding">
         <TableRow 
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content">
@@ -92,18 +92,18 @@
     	android:layout_height="fill_parent"
     	android:layout_width="match_parent"
     	android:layout_weight="1"
-    	android:padding="@dimen/table_participant_padding">
+    	android:padding="@dimen/table_padding">
 	    <TableLayout 
 	        android:id="@+id/tableLayout_participants" 
 	        android:layout_width="match_parent" 
 	        android:layout_height="wrap_content"
-	        android:padding="@dimen/table_participant_padding">
+	        android:padding="@dimen/table_padding">
 	    </TableLayout>
     </ScrollView>
     <TableLayout
     	android:layout_height="wrap_content"
     	android:layout_width="fill_parent"
-    	android:padding="@dimen/table_participant_padding">
+    	android:padding="@dimen/table_padding">
         <TableRow 
         	android:layout_width="wrap_content" 
         	android:layout_height="wrap_content">
