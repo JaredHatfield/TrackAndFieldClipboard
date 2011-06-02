@@ -136,7 +136,12 @@ public class AthleteRowHolder {
      */
     public void displayAthlete(Participant participant) {
         this.participant = participant;
-        this.textName.setText(participant.getName());
+        if (participant.getName() != null && participant.getName().length() > 0) {
+            this.textName.setText(participant.getName());
+        } else {
+            this.textName.setText(R.string.athlete);
+        }
+
         this.textFlightPosition.setText(participant.getFlight() + "/"
                 + participant.getPosition());
 

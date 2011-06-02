@@ -35,6 +35,7 @@
     <string name="flight">Flight</string>
     <string name="position">Position</string>
     <string name="place">Place</string>
+    <string name="athlete">Athlete</string>
     <string name="default_final_participants">10</string>
     <string name="default_number_of_flights">1</string>
     <string name="hint_qualifying_marks">The number of marks athletes get in qualifying flights.</string>
