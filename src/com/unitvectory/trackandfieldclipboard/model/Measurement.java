@@ -131,6 +131,10 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         // Save the mark
         this.feet = feet;
         this.inches = inches;
+        while (this.inches >= 12) {
+            this.feet++;
+            this.inches -= 12;
+        }
     }
 
     /**
@@ -158,6 +162,10 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         this.meters = 0;
         this.feet = feet;
         this.inches = inches;
+        while (this.inches >= 12) {
+            this.feet++;
+            this.inches -= 12;
+        }
     }
 
     /**
