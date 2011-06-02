@@ -17,12 +17,17 @@ import org.simpleframework.xml.Root;
  * 
  */
 @Root
-public class Measurement implements Serializable {
+public class Measurement implements Serializable, Comparable<Measurement> {
 
     /**
      * The serial version uid.
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * The conversion factor of feet to meters.
+     */
+    private static final double CONVERSION = 0.3048;
 
     /**
      * The measurement component in feet.
@@ -209,5 +214,49 @@ public class Measurement implements Serializable {
      */
     public boolean isScratch() {
         return scratch;
+    }
+
+    /**
+     * Compares this object with the specified object for order
+     * 
+     * @param m
+     *            The Measurement to be compared.
+     * @return a negative integer, zero, or a positive integer as this object is
+     *         less than, equal to, or greater than the specified object.
+     */
+    @Override
+    public int compareTo(Measurement m) {
+        double v1 = this.actualDistance();
+        double v2 = m.actualDistance();
+        if (v1 > v2) {
+            return 1;
+        } else if (v1 < v2) {
+            return -1;
+        } else if (this.attempt > m.attempt) {
+            return 1;
+        } else if (this.attempt < m.attempt) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the comparable distance in meters regardless how the number is
+     * stored.
+     * 
+     * @return The distance in meters.
+     */
+    private double actualDistance() {
+        if (this.scratch) {
+            // If the distance is a scratch, then return 0.
+            return 0;
+        } else if (this.metric) {
+            // We are doing all of the comparisons in meters.
+            return this.meters;
+        } else {
+            double us = this.feet + (this.inches / 12.0);
+            return us * Measurement.CONVERSION;
+        }
     }
 }

@@ -381,6 +381,7 @@ public class DistanceClipboardActivity extends Activity implements
             // Display confirmation box if the value is currently set
             if (holder.getParticipant().getMeasurement(attempt.intValue()) == null) {
                 holder.mark(attempt.intValue());
+                lastClicked.setBackgroundResource(R.color.selected);
             } else {
                 this.displayScratchConfirmation(holder, attempt);
             }
@@ -463,7 +464,9 @@ public class DistanceClipboardActivity extends Activity implements
     @Override
     public void onClick(View view) {
         if (this.lastClicked != null) {
-            this.lastClicked.setBackgroundResource(android.R.color.transparent);
+            AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
+                    .getTag(R.id.id_holder_object);
+            oldHolder.displayAthlete(oldHolder.getParticipant());
         }
 
         view.setBackgroundResource(R.color.selected);
@@ -542,6 +545,8 @@ public class DistanceClipboardActivity extends Activity implements
                             public void onClick(DialogInterface dialog, int id) {
                                 // Do it!
                                 holder.mark(attempt);
+                                lastClicked
+                                        .setBackgroundResource(R.color.selected);
                             }
                         })
                 .setNegativeButton(R.string.cancel,
@@ -592,6 +597,7 @@ public class DistanceClipboardActivity extends Activity implements
                         }
 
                         holder.mark(attempt, Double.parseDouble(value));
+                        lastClicked.setBackgroundResource(R.color.selected);
                     }
                 });
 
@@ -650,6 +656,7 @@ public class DistanceClipboardActivity extends Activity implements
 
                         holder.mark(attempt, Integer.parseInt(feet),
                                 Double.parseDouble(inches));
+                        lastClicked.setBackgroundResource(R.color.selected);
                     }
                 });
 

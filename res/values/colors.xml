@@ -9,4 +9,5 @@
     <color name="header">#708090</color>
     <color name="names">#E4E4E2</color>
     <color name="tip">#999999</color>
+    <color name="best_mark">#BBFFFF</color>
 </resources>

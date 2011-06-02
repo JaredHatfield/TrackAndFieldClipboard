@@ -6,6 +6,7 @@ package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.simpleframework.xml.Element;
@@ -257,6 +258,19 @@ public class Participant implements Serializable, Comparable<Participant> {
         }
 
         return null;
+    }
+
+    /**
+     * Gets the index of the best mark for the participant.
+     * 
+     * @return
+     */
+    public int bestMark() {
+        if (this.marks.size() == 0) {
+            return 0;
+        }
+
+        return Collections.max(this.marks).attempt;
     }
 
     /**

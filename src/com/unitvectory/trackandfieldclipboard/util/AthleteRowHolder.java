@@ -120,17 +120,25 @@ public class AthleteRowHolder {
         this.textFlightPosition.setText(participant.getFlight() + "/"
                 + participant.getPosition());
 
+        int best = this.participant.bestMark();
         Iterator<Map.Entry<Integer, TextView>> it = this.marks.entrySet()
                 .iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, TextView> pairs = it.next();
-            String m = translateMeasurement(participant.getMeasurement(pairs
-                    .getKey().intValue()));
+            int attemptIndex = pairs.getKey().intValue();
+            String m = translateMeasurement(participant
+                    .getMeasurement(attemptIndex));
             TextView view = pairs.getValue();
             if (m == null) {
                 view.setText(R.string.scratch);
             } else {
                 view.setText(m);
+            }
+
+            if (best == attemptIndex) {
+                view.setBackgroundResource(R.color.best_mark);
+            } else {
+                view.setBackgroundResource(android.R.color.transparent);
             }
         }
     }
@@ -152,13 +160,7 @@ public class AthleteRowHolder {
         }
 
         // Update the GUI
-        TextView view = this.marks.get(attempt);
-        String str = translateMeasurement(m);
-        if (str == null) {
-            view.setText(R.string.scratch);
-        } else {
-            view.setText(str);
-        }
+        this.displayAthlete(this.participant);
     }
 
     /**
@@ -179,13 +181,7 @@ public class AthleteRowHolder {
         }
 
         // Update the GUI
-        TextView view = this.marks.get(attempt);
-        String str = translateMeasurement(m);
-        if (str == null) {
-            view.setText(R.string.scratch);
-        } else {
-            view.setText(str);
-        }
+        this.displayAthlete(this.participant);
     }
 
     /**
@@ -209,13 +205,7 @@ public class AthleteRowHolder {
         }
 
         // Update the GUI
-        TextView view = this.marks.get(attempt);
-        String str = translateMeasurement(m);
-        if (str == null) {
-            view.setText(R.string.scratch);
-        } else {
-            view.setText(str);
-        }
+        this.displayAthlete(this.participant);
     }
 
     /**
