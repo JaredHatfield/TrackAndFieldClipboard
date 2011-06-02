@@ -9,12 +9,23 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <Button 
-        android:text="@string/new_event" 
-        android:id="@+id/button_new_event" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:onClick="onNewEventClick" />
+     <LinearLayout 
+     	android:layout_width="match_parent" 
+     	android:layout_height="wrap_content">
+        <Button 
+        	android:text="@string/new_event" 
+        	android:onClick="onNewEventClick" 
+        	android:layout_width="wrap_content" 
+        	android:layout_height="wrap_content" 
+        	android:id="@+id/button_new_event" />
+        <Button 
+        	android:id="@+id/button_hytek_import" 
+        	android:onClick="onImportDataClick" 
+        	android:layout_width="wrap_content" 
+        	android:layout_height="wrap_content"
+        	android:visibility="gone" 
+        	android:text="@string/hytek_import" />
+     </LinearLayout>
     <fragment
         class="com.unitvectory.trackandfieldclipboard.ui.FileListFragment"
         android:id="@+id/fragment_file_list" 

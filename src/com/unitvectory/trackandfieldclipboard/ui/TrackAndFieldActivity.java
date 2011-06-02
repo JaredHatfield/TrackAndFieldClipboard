@@ -75,6 +75,18 @@ public class TrackAndFieldActivity extends Activity {
     }
 
     /**
+     * Handle the import data event.
+     * 
+     * @param v
+     *            The calling view.
+     */
+    public void onImportDataClick(View v) {
+        // Launch the import data activity
+        Intent intent = new Intent(this, HyTekImportActivity.class);
+        this.startActivityForResult(intent, NEW_EVENT_REQUEST);
+    }
+
+    /**
      * Process the results from a new event.
      * 
      * @param requestCode

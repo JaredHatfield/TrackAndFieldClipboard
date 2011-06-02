@@ -46,6 +46,9 @@
     <string name="hint_final_marks">The number of marks athletes get in the finals.</string>
     <string name="hint_final_participants">The number of athletes that move onto the finals.</string>
     <string name="hint_number_of_flights">The number of flights before the finals.</string>
+    <string name="hytek_import">Import HY-TEK Data</string>
+    <string name="import_data">Import Data</string>
+    <string name="hint_import">Copy and paste the meet entry information from HY-TEK into the following text field.</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>
@@ -72,5 +75,4 @@
         <item>US</item>
         <item>Metric</item>
     </string-array>
-
 </resources>
