@@ -20,7 +20,7 @@
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
                 android:text="@string/name" 
-                android:layout_width="@dimen/label_width" 
+                android:layout_width="wrap_content" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" />
             <TextView 
@@ -34,26 +34,7 @@
                 android:textStyle="bold" 
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
-                android:text="@string/date" 
-                android:layout_width="@dimen/label_width" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" />
-            <TextView 
-                android:text="Event Date Here" 
-                android:id="@+id/textView_event_date" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
-                android:textSize="@dimen/font_size" />
-        </TableRow>
-        <TableRow 
-        	android:layout_width="fill_parent" 
-        	android:layout_height="wrap_content">
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:layout_width="@dimen/label_width" 
+                android:layout_width="wrap_content" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
                 android:text="@string/event_type" />
@@ -68,13 +49,62 @@
                 android:textStyle="bold" 
                 android:paddingRight="@dimen/label_right_padding" 
                 android:layout_height="wrap_content" 
-                android:layout_width="@dimen/label_width" 
+                android:layout_width="wrap_content" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" 
+                android:text="@string/flights" />
+            <TextView 
+                android:text="#Flights" 
+                android:id="@+id/textView_event_flights" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_weight="1" 
+                android:textSize="@dimen/font_size" />
+        </TableRow>
+        <TableRow 
+        	android:layout_width="fill_parent" 
+        	android:layout_height="wrap_content">
+        	<TextView 
+                android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:layout_height="wrap_content" 
+                android:text="@string/date" 
+                android:layout_width="wrap_content" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:text="Event Date Here" 
+                android:id="@+id/textView_event_date" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_weight="1" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:layout_height="wrap_content" 
+                android:layout_width="wrap_content" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
                 android:text="@string/gender" />
             <TextView 
                 android:text="Gender Here" 
                 android:id="@+id/textView_event_gender" 
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_weight="1" 
+                android:textSize="@dimen/font_size" />
+            <TextView 
+                android:textStyle="bold" 
+                android:paddingRight="@dimen/label_right_padding" 
+                android:layout_height="wrap_content" 
+                android:layout_width="wrap_content" 
+                android:gravity="right" 
+                android:textSize="@dimen/font_size" 
+                android:text="@string/final_participants" />
+            <TextView 
+                android:text="#Participants" 
+                android:id="@+id/textView_event_final_participants" 
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
                 android:layout_weight="1" 
@@ -105,7 +135,7 @@
                 android:paddingRight="@dimen/label_right_padding" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
-                android:layout_width="@dimen/label_width" 
+                android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
                 android:text="@string/name"/>
             <TextView 
@@ -130,7 +160,7 @@
                 android:paddingRight="@dimen/label_right_padding" 
                 android:gravity="right" 
                 android:textSize="@dimen/font_size" 
-                android:layout_width="@dimen/label_width" 
+                android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
                 android:text="@string/attempt" />
             <TextView 

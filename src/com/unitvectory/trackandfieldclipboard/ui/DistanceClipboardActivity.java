@@ -154,6 +154,18 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.textView_event_type);
         TextView textGender = (TextView) this
                 .findViewById(R.id.textView_event_gender);
+        TextView textParticipants = (TextView) this
+                .findViewById(R.id.textView_event_final_participants);
+        TextView textFlights = (TextView) this
+                .findViewById(R.id.textView_event_flights);
+
+        // Display the header text
+        textName.setText(this.event.getEventName());
+        textDate.setText(this.event.getDate());
+        textType.setText(this.event.getType().toString().replace("_", " "));
+        textGender.setText(this.event.getGender().toString());
+        textParticipants.setText(this.event.getFinalParticipants() + "");
+        textFlights.setText(this.event.getFlights() + "");
 
         // Set up the navigation sipnner
         this.spinnerFlightSelection = 0;
@@ -194,12 +206,6 @@ public class DistanceClipboardActivity extends Activity implements
         // Find all of the footer view
         this.buttonMark = (Button) this.findViewById(R.id.button_mark);
         this.buttonScratch = (Button) this.findViewById(R.id.button_scratch);
-
-        // Display the header text
-        textName.setText(this.event.getEventName());
-        textDate.setText(this.event.getDate());
-        textType.setText(this.event.getType().toString().replace("_", " "));
-        textGender.setText(this.event.getGender().toString());
 
         // Locate the participants table
         this.participants = (TableLayout) this
