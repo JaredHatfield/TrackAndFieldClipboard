@@ -314,16 +314,12 @@ public class FieldEvent implements Serializable {
             return this.participants.size();
         }
 
-        Measurement myMeasurement = participant.getMeasurement(best);
+        ResultsComparator comparator = new ResultsComparator();
         int place = 1;
         for (int i = 0; i < this.participants.size(); i++) {
-            int other = this.participants.get(i).bestMark();
-            if (other != 0) {
-                Measurement oppMeasurement = this.participants.get(i)
-                        .getMeasurement(other);
-                if (oppMeasurement.compareTo(myMeasurement) > 0) {
-                    place++;
-                }
+            Participant other = this.participants.get(i);
+            if (comparator.compare(other, participant) > 0) {
+                place++;
             }
         }
 

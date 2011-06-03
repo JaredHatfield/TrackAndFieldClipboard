@@ -37,11 +37,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.Measurement;
 import com.unitvectory.trackandfieldclipboard.model.Participant;
+import com.unitvectory.trackandfieldclipboard.model.ResultsComparator;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
 import com.unitvectory.trackandfieldclipboard.util.ParticipantDisplay;
 
@@ -115,6 +117,11 @@ public class DistanceClipboardActivity extends Activity implements
     private int spinnerFlightSelection;
 
     /**
+     * The type of display.
+     */
+    private ParticipantDisplay participantDisplay;
+
+    /**
      * Called when the activity is first created.
      * 
      * @param savedInstanceState
@@ -169,13 +176,16 @@ public class DistanceClipboardActivity extends Activity implements
 
         // Set up the navigation sipnner
         this.spinnerFlightSelection = 0;
+        this.participantDisplay = ParticipantDisplay.ALL;
         flightChoices = new ArrayList<String>();
         flightChoices.add(this.getString(R.string.spinner_flight_all));
         for (int i = 0; i < this.event.getFlights(); i++) {
-            flightChoices.add((i + 1) + "");
+            flightChoices.add(this.getString(R.string.flight) + " " + (i + 1)
+                    + "");
         }
 
         flightChoices.add(this.getString(R.string.spinner_flight_finals));
+        flightChoices.add(this.getString(R.string.spinner_results));
         ArrayAdapter<String> mSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, flightChoices);
         mSpinnerAdapter
@@ -376,23 +386,30 @@ public class DistanceClipboardActivity extends Activity implements
                 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
         // Determine what participants need to be displayed.
-        ParticipantDisplay participantDisplay = ParticipantDisplay.FLIGHT;
-        String valAll = this.getString(R.string.spinner_flight_all);
-        String valFinal = this.getString(R.string.spinner_flight_finals);
+        this.participantDisplay = ParticipantDisplay.FLIGHT;
         List<Participant> athletes = new ArrayList<Participant>();
         String spinnerVal = this.flightChoices.get(this.spinnerFlightSelection);
-        if (spinnerVal.equals(valAll)) {
+        if (spinnerVal.equals(this.getString(R.string.spinner_flight_all))) {
             // Display everyone
             athletes = this.event.getParticipants();
             Collections.sort(athletes);
-            participantDisplay = ParticipantDisplay.ALL;
-        } else if (spinnerVal.equals(valFinal)) {
+            this.participantDisplay = ParticipantDisplay.ALL;
+        } else if (spinnerVal.equals(this
+                .getString(R.string.spinner_flight_finals))) {
             // Display the participants in the finals sorted by measurements
             athletes = this.event.calculateFinals();
-            participantDisplay = ParticipantDisplay.FINALS;
+            this.participantDisplay = ParticipantDisplay.FINALS;
+        } else if (spinnerVal.equals(this.getString(R.string.spinner_results))) {
+            // Display the results
+            athletes = this.event.getParticipants();
+            Collections.sort(athletes, new ResultsComparator());
+            Collections.reverse(athletes);
+            this.participantDisplay = ParticipantDisplay.RESULTS;
         } else {
             // Display only those participants in the selected flight
-            int flightInt = Integer.parseInt(spinnerVal);
+            String selectedFlight = spinnerVal.substring(this.getString(
+                    R.string.flight).length() + 1);
+            int flightInt = Integer.parseInt(selectedFlight);
             for (int i = 0; i < this.event.getParticipants().size(); i++) {
                 Participant p = this.event.getParticipants().get(i);
                 if (p.getFlight() == flightInt) {
@@ -441,10 +458,7 @@ public class DistanceClipboardActivity extends Activity implements
                         LayoutParams.FILL_PARENT, cellHeight, 1));
                 textQualify.setGravity(Gravity.CENTER);
                 textQualify.setTextSize(fontSize);
-                if (participantDisplay.equals(ParticipantDisplay.ALL)
-                        || participantDisplay.equals(ParticipantDisplay.FLIGHT)) {
-                    textQualify.setOnClickListener(this);
-                }
+                textQualify.setOnClickListener(this);
 
                 tr.addView(textQualify);
                 holder.addMark(num, textQualify);
@@ -457,10 +471,7 @@ public class DistanceClipboardActivity extends Activity implements
                         LayoutParams.FILL_PARENT, cellHeight, 1));
                 textFinal.setGravity(Gravity.CENTER);
                 textFinal.setTextSize(fontSize);
-                if (participantDisplay.equals(ParticipantDisplay.ALL)
-                        || participantDisplay.equals(ParticipantDisplay.FINALS)) {
-                    textFinal.setOnClickListener(this);
-                }
+                textFinal.setOnClickListener(this);
 
                 tr.addView(textFinal);
                 holder.addMark(num, textFinal);
@@ -619,19 +630,49 @@ public class DistanceClipboardActivity extends Activity implements
             this.selectAthleteNone();
         } else if (attempt > 0) {
             // Change the mark that is selected
-            if (this.lastClicked != null) {
-                AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
-                        .getTag(R.id.id_holder_object);
-                oldHolder.displayAthlete(oldHolder.getParticipant());
+            if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
+                // Display a message saying the mark can not be edited
+                Toast toast = Toast.makeText(this,
+                        R.string.warning_no_edit_results, Toast.LENGTH_SHORT);
+                toast.show();
+            } else if (this.participantDisplay
+                    .equals(ParticipantDisplay.FLIGHT)
+                    && attempt > this.event.getQualifyingScores()) {
+                // Display a message saying the mark can not be edited
+                Toast toast = Toast.makeText(this,
+                        R.string.warning_no_edit_finals, Toast.LENGTH_SHORT);
+                toast.show();
+            } else if (this.participantDisplay
+                    .equals(ParticipantDisplay.FINALS)
+                    && attempt <= this.event.getQualifyingScores()) {
+                // Display a message saying the mark can not be edited
+                Toast toast = Toast.makeText(this,
+                        R.string.warning_no_edit_flight, Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                // The mark can be edited.
+                if (this.lastClicked != null) {
+                    AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
+                            .getTag(R.id.id_holder_object);
+                    oldHolder.displayAthlete(oldHolder.getParticipant());
+                }
+
+                view.setBackgroundResource(R.color.selected);
+                this.lastClicked = view;
+
+                this.selectAthleteBox(holder, attempt.intValue());
             }
-
-            view.setBackgroundResource(R.color.selected);
-            this.lastClicked = view;
-
-            this.selectAthleteBox(holder, attempt.intValue());
         } else {
             // Launch the dialog to edit a participant.
-            this.displayEditParticipant(holder);
+            if (this.participantDisplay.equals(ParticipantDisplay.ALL)) {
+                this.displayEditParticipant(holder);
+            } else {
+                // Display a message saying the participant can not be edited
+                Toast toast = Toast
+                        .makeText(this, R.string.warning_no_edit_particiant,
+                                Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 

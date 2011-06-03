@@ -263,7 +263,7 @@ public class Participant implements Serializable, Comparable<Participant> {
     /**
      * Gets the index of the best mark for the participant.
      * 
-     * @return
+     * @return The attempt index or 0 if no mark is found.
      */
     public int bestMark() {
         if (this.marks.size() == 0) {

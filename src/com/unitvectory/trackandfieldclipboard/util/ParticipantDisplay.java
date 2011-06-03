@@ -25,5 +25,10 @@ public enum ParticipantDisplay {
     /**
      * The finals.
      */
-    FINALS
+    FINALS,
+
+    /**
+     * The results.
+     */
+    RESULTS
 }
