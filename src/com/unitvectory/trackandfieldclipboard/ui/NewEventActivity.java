@@ -7,6 +7,7 @@ package com.unitvectory.trackandfieldclipboard.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -81,6 +82,7 @@ public class NewEventActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
 
+        this.getActionBar().setTitle(R.string.new_event);
         this.fieldName = (EditText) this.findViewById(R.id.editText_event_name);
         this.fieldType = this.wireUpSpinner(R.id.spinner_event_type,
                 R.array.event_types);
@@ -100,6 +102,26 @@ public class NewEventActivity extends Activity {
         this.fieldUnits = this.wireUpSpinner(R.id.spinner_event_units,
                 R.array.units);
         this.setResult(RESULT_CANCELED);
+    }
+
+    /**
+     * Handle the clicks from the action bar.
+     * 
+     * @param item
+     *            The menu item clicked.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            // App icon in Action Bar clicked; go home
+            Intent intent = new Intent(this, TrackAndFieldActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

@@ -4,8 +4,7 @@
     Copyright 2011 Jared Hatfield.  All rights reserved.
  -->
  <resources>
-    <string name="hello">Hello World, TrackAndField!</string>
-    <string name="app_name">TrackAndFieldClipboard</string>
+    <string name="app_name">Track and Field Clipboard</string>
     <string name="new_event">New Event</string>
     <string name="name">Name</string>
     <string name="event_type">Event Type</string>
@@ -38,7 +37,7 @@
     <string name="position">Position</string>
     <string name="place">Place</string>
     <string name="athlete">Athlete</string>
-    <string name="spinner_flight_all">All</string>
+    <string name="spinner_flight_all">All Participants</string>
     <string name="spinner_flight_finals">Finals</string>
     <string name="default_final_participants">10</string>
     <string name="default_number_of_flights">1</string>

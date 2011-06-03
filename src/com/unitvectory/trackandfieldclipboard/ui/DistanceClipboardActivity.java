@@ -15,23 +15,24 @@ import java.util.Map;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
@@ -79,11 +80,6 @@ public class DistanceClipboardActivity extends Activity implements
     private String filename;
 
     /**
-     * The spinner used to select the flight.
-     */
-    private Spinner spinnerFlight;
-
-    /**
      * The current name.
      */
     private TextView currentName;
@@ -107,6 +103,11 @@ public class DistanceClipboardActivity extends Activity implements
      * The view that was last clicked that needs to have a highlight removed.
      */
     private View lastClicked;
+
+    /**
+     * The current selection of the flight spinner.
+     */
+    private String spinnerFlightSelection;
 
     /**
      * Called when the activity is first created.
@@ -148,32 +149,37 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.textView_event_type);
         TextView textGender = (TextView) this
                 .findViewById(R.id.textView_event_gender);
-        this.spinnerFlight = (Spinner) this.findViewById(R.id.spinner_flight);
-        List<String> flightChoices = new ArrayList<String>();
+
+        // Set up the navigation sipnner
+        this.spinnerFlightSelection = this
+                .getString(R.string.spinner_flight_all);
+        final List<String> flightChoices = new ArrayList<String>();
         flightChoices.add(this.getString(R.string.spinner_flight_all));
         for (int i = 0; i < this.event.getFlights(); i++) {
             flightChoices.add((i + 1) + "");
         }
 
         flightChoices.add(this.getString(R.string.spinner_flight_finals));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> mSpinnerAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, flightChoices);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFlight.setAdapter(adapter);
-        spinnerFlight
-                .setOnItemSelectedListener(new ListView.OnItemSelectedListener() {
+        mSpinnerAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setListNavigationCallbacks(mSpinnerAdapter,
+                new ActionBar.OnNavigationListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> a, View v, int i,
-                            long l) {
+                    public boolean onNavigationItemSelected(int arg0, long arg1) {
+                        spinnerFlightSelection = flightChoices.get(arg0);
                         drawTable();
                         selectAthleteNone();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg) {
-                        // Nothing here
+                        return true;
                     }
                 });
+
+        // Hide the title
+        actionBar.setDisplayShowTitleEnabled(false);
 
         // Find all of the text view for the footer
         this.currentName = (TextView) this
@@ -238,6 +244,41 @@ public class DistanceClipboardActivity extends Activity implements
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         // Restore the currently selected box
+    }
+
+    /**
+     * Creates the action bar.
+     * 
+     * @param menu
+     *            The menu to manipulate.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_distance_clipboard, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * Handle the clicks from the action bar.
+     * 
+     * @param item
+     *            The menu item clicked.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            // App icon in Action Bar clicked; go home
+            Intent intent = new Intent(this, TrackAndFieldActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        case R.id.menu_add_participant:
+            this.addParticipantClick();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
@@ -319,20 +360,19 @@ public class DistanceClipboardActivity extends Activity implements
         ParticipantDisplay participantDisplay = ParticipantDisplay.FLIGHT;
         String valAll = this.getString(R.string.spinner_flight_all);
         String valFinal = this.getString(R.string.spinner_flight_finals);
-        String spinnerVal = this.spinnerFlight.getSelectedItem().toString();
         List<Participant> athletes = new ArrayList<Participant>();
-        if (spinnerVal.equals(valAll)) {
+        if (spinnerFlightSelection.equals(valAll)) {
             // Display everyone
             athletes = this.event.getParticipants();
             Collections.sort(athletes);
             participantDisplay = ParticipantDisplay.ALL;
-        } else if (spinnerVal.equals(valFinal)) {
+        } else if (spinnerFlightSelection.equals(valFinal)) {
             // Display the participants in the finals sorted by measurements
             athletes = this.event.calculateFinals();
             participantDisplay = ParticipantDisplay.FINALS;
         } else {
             // Display only those participants in the selected flight
-            int flightInt = Integer.parseInt(spinnerVal);
+            int flightInt = Integer.parseInt(spinnerFlightSelection);
             for (int i = 0; i < this.event.getParticipants().size(); i++) {
                 Participant p = this.event.getParticipants().get(i);
                 if (p.getFlight() == flightInt) {
@@ -490,10 +530,8 @@ public class DistanceClipboardActivity extends Activity implements
     /**
      * Adds a new participant.
      * 
-     * @param view
-     *            The calling view.
      */
-    public void onAddParticipantClick(View view) {
+    public void addParticipantClick() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.add_participant);
         View v = this.getLayoutInflater().inflate(R.layout.dialog_add_user,

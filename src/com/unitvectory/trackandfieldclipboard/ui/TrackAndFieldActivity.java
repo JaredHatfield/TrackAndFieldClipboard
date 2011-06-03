@@ -7,6 +7,8 @@ package com.unitvectory.trackandfieldclipboard.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.unitvectory.trackandfieldclipboard.R;
@@ -63,15 +65,34 @@ public class TrackAndFieldActivity extends Activity {
     }
 
     /**
-     * Handle the new FieldEvent event.
+     * Creates the action bar.
      * 
-     * @param v
-     *            The calling view.
+     * @param menu
+     *            The menu to manipulate.
      */
-    public void onNewEventClick(View v) {
-        // Launch the new event activity
-        Intent intent = new Intent(this, NewEventActivity.class);
-        this.startActivityForResult(intent, NEW_EVENT_REQUEST);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_track_and_field, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * Handle the clicks from the action bar.
+     * 
+     * @param item
+     *            The menu item clicked.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_new_event:
+            // Launch the new event activity
+            Intent intent = new Intent(this, NewEventActivity.class);
+            this.startActivityForResult(intent, NEW_EVENT_REQUEST);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
