@@ -105,9 +105,14 @@ public class DistanceClipboardActivity extends Activity implements
     private View lastClicked;
 
     /**
+     * The list of flight choices.
+     */
+    private List<String> flightChoices;
+
+    /**
      * The current selection of the flight spinner.
      */
-    private String spinnerFlightSelection;
+    private int spinnerFlightSelection;
 
     /**
      * Called when the activity is first created.
@@ -151,9 +156,8 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.textView_event_gender);
 
         // Set up the navigation sipnner
-        this.spinnerFlightSelection = this
-                .getString(R.string.spinner_flight_all);
-        final List<String> flightChoices = new ArrayList<String>();
+        this.spinnerFlightSelection = 0;
+        flightChoices = new ArrayList<String>();
         flightChoices.add(this.getString(R.string.spinner_flight_all));
         for (int i = 0; i < this.event.getFlights(); i++) {
             flightChoices.add((i + 1) + "");
@@ -171,7 +175,7 @@ public class DistanceClipboardActivity extends Activity implements
                 new ActionBar.OnNavigationListener() {
                     @Override
                     public boolean onNavigationItemSelected(int arg0, long arg1) {
-                        spinnerFlightSelection = flightChoices.get(arg0);
+                        spinnerFlightSelection = arg0;
                         drawTable();
                         selectAthleteNone();
                         return true;
@@ -231,7 +235,10 @@ public class DistanceClipboardActivity extends Activity implements
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        // Save the information about the currently selected box
+
+        // Save the information about the current state
+        savedInstanceState.putInt("flightSelection",
+                this.spinnerFlightSelection);
     }
 
     /**
@@ -243,7 +250,10 @@ public class DistanceClipboardActivity extends Activity implements
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Restore the currently selected box
+
+        // Restore the current state
+        this.getActionBar().setSelectedNavigationItem(
+                savedInstanceState.getInt("flightSelection"));
     }
 
     /**
@@ -361,18 +371,19 @@ public class DistanceClipboardActivity extends Activity implements
         String valAll = this.getString(R.string.spinner_flight_all);
         String valFinal = this.getString(R.string.spinner_flight_finals);
         List<Participant> athletes = new ArrayList<Participant>();
-        if (spinnerFlightSelection.equals(valAll)) {
+        String spinnerVal = this.flightChoices.get(this.spinnerFlightSelection);
+        if (spinnerVal.equals(valAll)) {
             // Display everyone
             athletes = this.event.getParticipants();
             Collections.sort(athletes);
             participantDisplay = ParticipantDisplay.ALL;
-        } else if (spinnerFlightSelection.equals(valFinal)) {
+        } else if (spinnerVal.equals(valFinal)) {
             // Display the participants in the finals sorted by measurements
             athletes = this.event.calculateFinals();
             participantDisplay = ParticipantDisplay.FINALS;
         } else {
             // Display only those participants in the selected flight
-            int flightInt = Integer.parseInt(spinnerFlightSelection);
+            int flightInt = Integer.parseInt(spinnerVal);
             for (int i = 0; i < this.event.getParticipants().size(); i++) {
                 Participant p = this.event.getParticipants().get(i);
                 if (p.getFlight() == flightInt) {
