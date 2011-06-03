@@ -100,7 +100,7 @@ public class QualifyingComparator implements Comparator<Participant> {
         List<Measurement> list = new ArrayList<Measurement>();
         for (int i = 1; i <= this.qualifying; i++) {
             Measurement m = p.getMeasurement(i);
-            if (m != null) {
+            if (m != null && !m.isScratch()) {
                 list.add(m);
             }
         }

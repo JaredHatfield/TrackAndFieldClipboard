@@ -296,6 +296,7 @@ public class FieldEvent implements Serializable {
             athletes.remove(athletes.size() - 1);
         }
 
+        Collections.reverse(athletes);
         return athletes;
     }
 
