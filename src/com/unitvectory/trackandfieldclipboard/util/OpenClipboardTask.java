@@ -10,6 +10,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -38,6 +39,11 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
     private Activity activity;
 
     /**
+     * The progress dialog.
+     */
+    private ProgressDialog dialog;
+
+    /**
      * The name of the file.
      */
     private String filename;
@@ -48,8 +54,9 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
      * @param activity
      *            The activity.
      */
-    public OpenClipboardTask(Activity activity) {
+    public OpenClipboardTask(Activity activity, ProgressDialog dialog) {
         this.activity = activity;
+        this.dialog = dialog;
     }
 
     /**
@@ -63,9 +70,13 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
     protected FieldEvent doInBackground(String... args) {
         try {
             this.filename = args[0];
-            FileInputStream input = activity.openFileInput(this.filename);
-            Serializer serializer = new Persister();
-            FieldEvent event = serializer.read(FieldEvent.class, input);
+            FieldEvent event = null;
+            synchronized (FieldEvent.sDataLock) {
+                FileInputStream input = activity.openFileInput(this.filename);
+                Serializer serializer = new Persister();
+                event = serializer.read(FieldEvent.class, input);
+            }
+
             return event;
         } catch (Exception e) {
             Log.e(OpenClipboardTask.TAG, e.getMessage());
@@ -85,6 +96,10 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
             Toast toast = Toast.makeText(activity, R.string.failed_open,
                     Toast.LENGTH_LONG);
             toast.show();
+            try {
+                this.dialog.dismiss();
+            } catch (Exception e) {
+            }
         } else {
             Intent intent = new Intent(activity,
                     DistanceClipboardActivity.class);

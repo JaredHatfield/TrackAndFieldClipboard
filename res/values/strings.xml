@@ -54,6 +54,7 @@
     <string name="warning_no_edit_results">Marks can not be edited in the results view.</string>
     <string name="warning_no_edit_flight">Qualifying marks can not be changed in finals view.</string>
     <string name="warning_no_edit_finals">Final marks can not be changed in the flight view.</string>
+    <string name="loading">Loading. Please wait...</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>

@@ -12,9 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,6 +43,7 @@ import com.unitvectory.trackandfieldclipboard.model.Participant;
 import com.unitvectory.trackandfieldclipboard.model.ResultsComparator;
 import com.unitvectory.trackandfieldclipboard.util.AthleteRowHolder;
 import com.unitvectory.trackandfieldclipboard.util.ParticipantDisplay;
+import com.unitvectory.trackandfieldclipboard.util.SaveClipboardTask;
 
 /**
  * The clipboard activity used to record measurements for a specific event.
@@ -234,9 +232,8 @@ public class DistanceClipboardActivity extends Activity implements
         try {
             FileOutputStream output = this.openFileOutput(this.filename,
                     Context.MODE_PRIVATE);
-            Serializer serializer = new Persister();
-            serializer.write(this.event, output);
-            output.close();
+            SaveClipboardTask saveClipboardTask = new SaveClipboardTask(output);
+            saveClipboardTask.execute(this.event);
         } catch (Exception e) {
             Log.e(DistanceClipboardActivity.TAG, e.getMessage());
         }

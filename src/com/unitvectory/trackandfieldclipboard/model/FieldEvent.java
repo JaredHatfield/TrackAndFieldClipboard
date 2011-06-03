@@ -31,6 +31,11 @@ public class FieldEvent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * The lock used for IO.
+     */
+    public static final Object[] sDataLock = new Object[0];
+
+    /**
      * The event name.
      */
     @Element(name = "eventName", required = false)

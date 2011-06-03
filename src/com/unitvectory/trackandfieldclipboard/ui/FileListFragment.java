@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,11 @@ public class FileListFragment extends ListFragment {
     private List<String> directoryEntries = new ArrayList<String>();
 
     /**
+     * The loading dialog.
+     */
+    private ProgressDialog loadingDialog;
+
+    /**
      * Called when the activity is first created.
      * 
      * @param savedState
@@ -43,6 +49,11 @@ public class FileListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
+
+        this.loadingDialog = ProgressDialog.show(this.getActivity(), "",
+                this.getString(R.string.loading), true);
+        this.loadingDialog.dismiss();
+
         ListView lv = getListView();
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -53,6 +64,17 @@ public class FileListFragment extends ListFragment {
         });
 
         this.displayFiles();
+    }
+
+    /**
+     * The fragment was resumed.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (this.loadingDialog != null && this.loadingDialog.isShowing()) {
+            this.loadingDialog.dismiss();
+        }
     }
 
     /**
@@ -89,8 +111,9 @@ public class FileListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         String filename = this.directoryEntries.get(position);
         OpenClipboardTask openClipboardTask = new OpenClipboardTask(
-                this.getActivity());
+                this.getActivity(), this.loadingDialog);
         openClipboardTask.execute(filename);
+        this.loadingDialog.show();
     }
 
     /**
