@@ -307,6 +307,8 @@ public class DistanceClipboardActivity extends Activity implements
         Resources res = getResources();
         float fontSize = res.getDimension(R.dimen.font_size);
         int cellHeight = res.getDimensionPixelSize(R.dimen.table_cell_height);
+        int cellLeftPading = res
+                .getDimensionPixelSize(R.dimen.table_cell_left_padding);
 
         // Add the header row
         TableRow header = new TableRow(this);
@@ -317,6 +319,7 @@ public class DistanceClipboardActivity extends Activity implements
         textHeaderName.setText(this.getString(R.string.name));
         textHeaderName.setLayoutParams(new LayoutParams(
                 LayoutParams.FILL_PARENT, cellHeight, 2));
+        textHeaderName.setPadding(cellLeftPading, 0, 0, 0);
         textHeaderName.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderName.setGravity(Gravity.CENTER_VERTICAL);
         textHeaderName.setTextSize(fontSize);
@@ -412,6 +415,7 @@ public class DistanceClipboardActivity extends Activity implements
             TextView textName = new TextView(this);
             textName.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
                     cellHeight, 2));
+            textName.setPadding(cellLeftPading, 0, 0, 0);
             textName.setGravity(Gravity.CENTER_VERTICAL);
             textName.setTextSize(fontSize);
             textName.setOnClickListener(this);

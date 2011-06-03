@@ -14,6 +14,7 @@
     <dimen name="label_right_padding">5dp</dimen>
     <dimen name="table_padding">15dp</dimen>
     <dimen name="table_cell_height">60dp</dimen>
+    <dimen name="table_cell_left_padding">10sp</dimen>
     <dimen name="button_width">200dp</dimen>
     <dimen name="distance_input_width">90dp</dimen>
     <dimen name="list_padding">20dp</dimen>
