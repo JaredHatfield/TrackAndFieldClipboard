@@ -24,6 +24,7 @@
 	    	android:layout_width="fill_parent" 
 	    	android:id="@+id/editText_participant_name"
 	    	android:layout_height="wrap_content" 
+	    	android:hint="@string/athlete_name"
 	    	android:inputType="textCapWords" />
 	</LinearLayout>
 	<LinearLayout

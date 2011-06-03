@@ -8,6 +8,8 @@
     <string name="new_event">New Event</string>
     <string name="name">Name</string>
     <string name="event_type">Event Type</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_date">Event Date</string>
     <string name="gender">Gender</string>
     <string name="date">Date</string>
     <string name="qualifying_marks">Qualifying Marks</string>
@@ -37,6 +39,7 @@
     <string name="position">Position</string>
     <string name="place">Place</string>
     <string name="athlete">Athlete</string>
+    <string name="athlete_name">Athlete Name</string>
     <string name="spinner_flight_all">All Participants</string>
     <string name="spinner_flight_finals">Finals</string>
     <string name="hint_qualifying_marks">The number of marks athletes get in qualifying flights.</string>

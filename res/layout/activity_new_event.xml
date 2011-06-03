@@ -29,7 +29,8 @@
 	        	android:id="@+id/editText_event_name" 
 	        	android:layout_width="wrap_content" 
 	        	android:layout_height="wrap_content" 
-	        	android:singleLine="true" 
+	        	android:singleLine="true"
+	        	android:hint="@string/event_name"
 	        	android:inputType="textCapWords" />
 	    </TableRow>
 	    <TableRow 
@@ -85,6 +86,7 @@
 	        	android:id="@+id/editText_event_date" 
 	        	android:layout_height="wrap_content" 
 	        	android:layout_width="wrap_content" 
+	        	android:hint="@string/event_date"
 	        	android:singleLine="true" />
 	    </TableRow>
 	    <TableRow 
