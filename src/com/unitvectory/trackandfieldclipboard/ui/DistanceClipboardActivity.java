@@ -557,9 +557,11 @@ public class DistanceClipboardActivity extends Activity implements
                 .findViewById(R.id.editText_participant_name);
         final EditText inputFlight = (EditText) v
                 .findViewById(R.id.editText_participant_flight);
+        int flight = this.event.nextParticipantFlight();
+        inputFlight.setText(flight + "");
         final EditText inputPosition = (EditText) v
                 .findViewById(R.id.editText_participant_position);
-
+        inputPosition.setText(this.event.nextParticipantPosition(flight) + "");
         alert.setView(v);
         alert.setPositiveButton(R.string.add,
                 new DialogInterface.OnClickListener() {

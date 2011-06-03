@@ -345,6 +345,42 @@ public class FieldEvent implements Serializable {
     }
 
     /**
+     * Gets the highest flight number that has been used so far.
+     * 
+     * @return The flight number.
+     */
+    public int nextParticipantFlight() {
+        int flight = 1;
+        for (int i = 0; i < this.participants.size(); i++) {
+            Participant p = this.participants.get(i);
+            if (p.getFlight() > flight) {
+                flight = p.getFlight();
+            }
+        }
+
+        return flight;
+    }
+
+    /**
+     * Gets the next participant number for the specified flight.
+     * 
+     * @param flight
+     *            The flight number.
+     * @return The participant index.
+     */
+    public int nextParticipantPosition(int flight) {
+        int position = 1;
+        for (int i = 0; i < this.participants.size(); i++) {
+            Participant p = this.participants.get(i);
+            if (p.getFlight() == flight && p.getPosition() >= position) {
+                position = p.getPosition() + 1;
+            }
+        }
+
+        return position;
+    }
+
+    /**
      * Gets the gender from a user provided string.
      * 
      * @param gender
