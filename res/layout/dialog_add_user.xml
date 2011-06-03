@@ -24,7 +24,7 @@
 	    	android:layout_width="fill_parent" 
 	    	android:id="@+id/editText_participant_name"
 	    	android:layout_height="wrap_content" 
-	    	android:inputType="text"/>
+	    	android:inputType="textCapWords" />
 	</LinearLayout>
 	<LinearLayout
 		android:orientation="horizontal"
