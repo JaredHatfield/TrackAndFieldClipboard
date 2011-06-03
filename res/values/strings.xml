@@ -39,8 +39,6 @@
     <string name="athlete">Athlete</string>
     <string name="spinner_flight_all">All Participants</string>
     <string name="spinner_flight_finals">Finals</string>
-    <string name="default_final_participants">10</string>
-    <string name="default_number_of_flights">1</string>
     <string name="hint_qualifying_marks">The number of marks athletes get in qualifying flights.</string>
     <string name="hint_final_marks">The number of marks athletes get in the finals.</string>
     <string name="hint_final_participants">The number of athletes that move onto the finals.</string>
