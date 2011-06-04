@@ -383,6 +383,75 @@ public class FieldEvent implements Serializable {
     }
 
     /**
+     * Creates a string representation of the results.
+     */
+    @Override
+    public String toString() {
+        // TODO: Display the results
+        Collections.sort(this.participants, new ResultsComparator());
+        Collections.reverse(this.participants);
+
+        StringBuilder sb = new StringBuilder();
+        String eName = this.getEventName();
+        if (eName == null) {
+            eName = "";
+        }
+
+        sb.append(eName);
+        sb.append("\n");
+        sb.append("==========================================================================\n");
+        sb.append("    Name                    Year School                  Finals           \n");
+        sb.append("==========================================================================\n");
+        for (int i = 0; i < this.participants.size(); i++) {
+            Participant p = this.participants.get(i);
+            int best = p.bestMark();
+            String measurement = "";
+            if (best == 0) {
+                measurement = "-";
+            } else {
+                measurement = p.getMeasurement(best).translateMeasurement(
+                        "FOUL");
+            }
+
+            String pName = p.getName();
+            if (p.name == null) {
+                pName = "";
+            }
+
+            String pYear = p.getYear();
+            if (pYear == null) {
+                pYear = "";
+            }
+
+            String pSchool = p.getSchool();
+            if (pSchool == null) {
+                pSchool = "";
+            }
+
+            sb.append(String.format("%3s %-24s%4s %-20s %9s",
+                    this.participantPlace(p), pName, pYear, pSchool,
+                    measurement));
+            sb.append("\n");
+            sb.append("      ");
+            int num = this.qualifyingScores + this.finalScores;
+            for (int j = 1; j <= num; j++) {
+                Measurement m = p.getMeasurement(j);
+                if (m == null) {
+                    sb.append("NONE");
+                } else {
+                    sb.append(m.translateMeasurement("FOUL"));
+                }
+
+                sb.append("  ");
+            }
+
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * Gets the gender from a user provided string.
      * 
      * @param gender

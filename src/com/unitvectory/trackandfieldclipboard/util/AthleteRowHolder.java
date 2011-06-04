@@ -4,7 +4,6 @@
  */
 package com.unitvectory.trackandfieldclipboard.util;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -153,14 +152,10 @@ public class AthleteRowHolder {
         while (it.hasNext()) {
             Map.Entry<Integer, TextView> pairs = it.next();
             int attemptIndex = pairs.getKey().intValue();
-            String m = translateMeasurement(participant
-                    .getMeasurement(attemptIndex));
             TextView view = pairs.getValue();
-            if (m == null) {
-                view.setText(R.string.scratch);
-            } else {
-                view.setText(m);
-            }
+            String m = this.getMeasurement(attemptIndex, view.getContext()
+                    .getString(R.string.scratch));
+            view.setText(m);
 
             if (best == attemptIndex) {
                 view.setBackgroundResource(R.color.best_mark);
@@ -255,36 +250,12 @@ public class AthleteRowHolder {
      *            The attempt index.
      * @return The string representation of a measurement.
      */
-    public String getMeasurement(int attempt) {
-        if (this.participant == null) {
-            return null;
-        } else {
-            return this.translateMeasurement(this.participant
-                    .getMeasurement(attempt));
-        }
-    }
-
-    /**
-     * Translates a measurement into a string representation.
-     * 
-     * @param measure
-     *            The measurement.
-     * @return The string representation.
-     */
-    private String translateMeasurement(Measurement measure) {
-        if (measure == null) {
+    public String getMeasurement(int attempt, String foul) {
+        Measurement m = this.participant.getMeasurement(attempt);
+        if (m == null) {
             return "-";
-        } else if (measure.isScratch()) {
-            return null;
-        } else if (measure.isMetric()) {
-            return measure.getMeters() + "";
         } else {
-            DecimalFormat df = new DecimalFormat("##.##");
-            df.setMinimumIntegerDigits(2);
-            df.setMinimumFractionDigits(2);
-            df.setMaximumFractionDigits(2);
-            df.setMaximumFractionDigits(2);
-            return measure.getFeet() + "-" + df.format(measure.getInches());
+            return m.translateMeasurement(foul);
         }
     }
 }

@@ -5,6 +5,7 @@
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -261,6 +262,28 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         } else {
             double us = this.feet + (this.inches / 12.0);
             return us * Measurement.CONVERSION;
+        }
+    }
+
+    /**
+     * Translates a measurement into a string representation.
+     * 
+     * @param foul
+     *            The string to return when the measurement is a foul.
+     * @return The string representation.
+     */
+    public String translateMeasurement(String foul) {
+        if (this.isScratch()) {
+            return foul;
+        } else if (this.isMetric()) {
+            return this.getMeters() + "";
+        } else {
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setMinimumIntegerDigits(2);
+            df.setMinimumFractionDigits(2);
+            df.setMaximumFractionDigits(2);
+            df.setMaximumFractionDigits(2);
+            return this.getFeet() + "-" + df.format(this.getInches());
         }
     }
 }

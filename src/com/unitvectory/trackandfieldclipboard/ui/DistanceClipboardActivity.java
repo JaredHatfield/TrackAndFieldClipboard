@@ -299,6 +299,15 @@ public class DistanceClipboardActivity extends Activity implements
         case R.id.menu_add_participant:
             this.addParticipantClick();
             return true;
+        case R.id.menu_email_results:
+            final Intent emailIntent = new Intent(
+                    android.content.Intent.ACTION_SEND);
+            emailIntent.setType("plain/text");
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                    this.event.getEventName());
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                    this.event.toString());
+            startActivity(emailIntent);
         default:
             return super.onOptionsItemSelected(item);
         }
