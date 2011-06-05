@@ -326,71 +326,6 @@ public class DistanceClipboardActivity extends Activity implements
         int cellLeftPading = res
                 .getDimensionPixelSize(R.dimen.table_cell_left_padding);
 
-        // Add the header row
-        TableRow header = new TableRow(this);
-        header.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-                LayoutParams.WRAP_CONTENT));
-
-        TextView textHeaderPlace = new TextView(this);
-        textHeaderPlace.setText(this.getString(R.string.place));
-        textHeaderPlace.setLayoutParams(new LayoutParams(
-                LayoutParams.WRAP_CONTENT, cellHeight, 1));
-        textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
-        textHeaderPlace.setGravity(Gravity.CENTER);
-        textHeaderPlace.setTextSize(fontSize);
-        textHeaderPlace.setBackgroundResource(R.color.header);
-        header.addView(textHeaderPlace);
-
-        TextView textHeaderName = new TextView(this);
-        textHeaderName.setText(this.getString(R.string.name));
-        textHeaderName.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight, 2));
-        textHeaderName.setPadding(cellLeftPading, 0, 0, 0);
-        textHeaderName.setTypeface(Typeface.DEFAULT_BOLD);
-        textHeaderName.setGravity(Gravity.CENTER_VERTICAL);
-        textHeaderName.setTextSize(fontSize);
-        textHeaderName.setBackgroundResource(R.color.header);
-        header.addView(textHeaderName);
-
-        TextView textHeaderPosition = new TextView(this);
-        textHeaderPosition.setText(this.getString(R.string.flight_position));
-        textHeaderPosition.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight, 1));
-        textHeaderPosition.setTypeface(Typeface.DEFAULT_BOLD);
-        textHeaderPosition.setGravity(Gravity.CENTER_VERTICAL);
-        textHeaderPosition.setTextSize(fontSize);
-        textHeaderPosition.setBackgroundResource(R.color.header);
-        header.addView(textHeaderPosition);
-
-        for (int i = 0; i < this.event.getQualifyingScores(); i++) {
-            int num = i + 1;
-            TextView textHeaderQualify = new TextView(this);
-            textHeaderQualify.setText("#" + num);
-            textHeaderQualify.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
-            textHeaderQualify.setTypeface(Typeface.DEFAULT_BOLD);
-            textHeaderQualify.setGravity(Gravity.CENTER);
-            textHeaderQualify.setTextSize(fontSize);
-            textHeaderQualify.setBackgroundResource(R.color.header_qualifying);
-            header.addView(textHeaderQualify);
-        }
-
-        for (int i = 0; i < this.event.getFinalScores(); i++) {
-            int num = i + 1 + this.event.getQualifyingScores();
-            TextView textHeaderFinal = new TextView(this);
-            textHeaderFinal.setText("#" + num);
-            textHeaderFinal.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
-            textHeaderFinal.setTypeface(Typeface.DEFAULT_BOLD);
-            textHeaderFinal.setGravity(Gravity.CENTER);
-            textHeaderFinal.setTextSize(fontSize);
-            textHeaderFinal.setBackgroundResource(R.color.header_finals);
-            header.addView(textHeaderFinal);
-        }
-
-        this.participants.addView(header, new TableLayout.LayoutParams(
-                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-
         // Determine what participants need to be displayed.
         this.participantDisplay = ParticipantDisplay.FLIGHT;
         List<Participant> athletes = new ArrayList<Participant>();
@@ -426,8 +361,77 @@ public class DistanceClipboardActivity extends Activity implements
             }
         }
 
-        // Add all of the participants
+        // Add the header row
+        TableRow header = new TableRow(this);
+        header.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                LayoutParams.WRAP_CONTENT));
 
+        TextView textHeaderPlace = new TextView(this);
+        textHeaderPlace.setText(R.string.place);
+        textHeaderPlace.setLayoutParams(new LayoutParams(
+                LayoutParams.WRAP_CONTENT, cellHeight, 1));
+        textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderPlace.setGravity(Gravity.CENTER);
+        textHeaderPlace.setTextSize(fontSize);
+        textHeaderPlace.setBackgroundResource(R.color.header);
+        header.addView(textHeaderPlace);
+
+        TextView textHeaderName = new TextView(this);
+        textHeaderName.setText(R.string.name);
+        textHeaderName.setLayoutParams(new LayoutParams(
+                LayoutParams.FILL_PARENT, cellHeight, 2));
+        textHeaderName.setPadding(cellLeftPading, 0, 0, 0);
+        textHeaderName.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderName.setGravity(Gravity.CENTER_VERTICAL);
+        textHeaderName.setTextSize(fontSize);
+        textHeaderName.setBackgroundResource(R.color.header);
+        header.addView(textHeaderName);
+
+        TextView textHeaderPosition = new TextView(this);
+        if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
+            textHeaderPosition.setText(R.string.best);
+        } else {
+            textHeaderPosition.setText(R.string.flight_position);
+        }
+
+        textHeaderPosition.setLayoutParams(new LayoutParams(
+                LayoutParams.FILL_PARENT, cellHeight, 1));
+        textHeaderPosition.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderPosition.setGravity(Gravity.CENTER);
+        textHeaderPosition.setTextSize(fontSize);
+        textHeaderPosition.setBackgroundResource(R.color.header);
+        header.addView(textHeaderPosition);
+
+        for (int i = 0; i < this.event.getQualifyingScores(); i++) {
+            int num = i + 1;
+            TextView textHeaderQualify = new TextView(this);
+            textHeaderQualify.setText("#" + num);
+            textHeaderQualify.setLayoutParams(new LayoutParams(
+                    LayoutParams.FILL_PARENT, cellHeight, 1));
+            textHeaderQualify.setTypeface(Typeface.DEFAULT_BOLD);
+            textHeaderQualify.setGravity(Gravity.CENTER);
+            textHeaderQualify.setTextSize(fontSize);
+            textHeaderQualify.setBackgroundResource(R.color.header_qualifying);
+            header.addView(textHeaderQualify);
+        }
+
+        for (int i = 0; i < this.event.getFinalScores(); i++) {
+            int num = i + 1 + this.event.getQualifyingScores();
+            TextView textHeaderFinal = new TextView(this);
+            textHeaderFinal.setText("#" + num);
+            textHeaderFinal.setLayoutParams(new LayoutParams(
+                    LayoutParams.FILL_PARENT, cellHeight, 1));
+            textHeaderFinal.setTypeface(Typeface.DEFAULT_BOLD);
+            textHeaderFinal.setGravity(Gravity.CENTER);
+            textHeaderFinal.setTextSize(fontSize);
+            textHeaderFinal.setBackgroundResource(R.color.header_finals);
+            header.addView(textHeaderFinal);
+        }
+
+        this.participants.addView(header, new TableLayout.LayoutParams(
+                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+
+        // Add all of the participants
         for (int i = 0; i < athletes.size(); i++) {
             Participant athlete = athletes.get(i);
 
@@ -456,13 +460,14 @@ public class DistanceClipboardActivity extends Activity implements
             TextView textFlightPosition = new TextView(this);
             textFlightPosition.setLayoutParams(new LayoutParams(
                     LayoutParams.FILL_PARENT, cellHeight, 1));
-            textFlightPosition.setGravity(Gravity.CENTER_VERTICAL);
+            textFlightPosition.setGravity(Gravity.CENTER);
             textFlightPosition.setTextSize(fontSize);
             textFlightPosition.setBackgroundResource(R.color.names);
             tr.addView(textFlightPosition);
 
-            AthleteRowHolder holder = new AthleteRowHolder(textFlightPlace,
-                    textName, textFlightPosition);
+            AthleteRowHolder holder = new AthleteRowHolder(
+                    this.participantDisplay, textFlightPlace, textName,
+                    textFlightPosition);
             this.rows.put(i, holder);
 
             for (int j = 0; j < this.event.getQualifyingScores(); j++) {

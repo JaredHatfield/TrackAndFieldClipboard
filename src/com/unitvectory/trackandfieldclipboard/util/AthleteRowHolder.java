@@ -23,6 +23,11 @@ import com.unitvectory.trackandfieldclipboard.model.Participant;
 public class AthleteRowHolder {
 
     /**
+     * The way the participant is being displayed.
+     */
+    private ParticipantDisplay participantDisplay;
+
+    /**
      * The text view for the athlete's name.
      */
     private TextView textName;
@@ -50,13 +55,18 @@ public class AthleteRowHolder {
     /**
      * Initializes a new instance of the AthleteRowHolder class.
      * 
+     * @param participantDisplay
+     *            The participant display method.
+     * @param textPlace
+     *            The place TextView
      * @param textName
      *            The name TextView.
      * @param textFlightPosition
      *            The flight / position TextView.
      */
-    public AthleteRowHolder(TextView textPlace, TextView textName,
-            TextView textFlightPosition) {
+    public AthleteRowHolder(ParticipantDisplay participantDisplay,
+            TextView textPlace, TextView textName, TextView textFlightPosition) {
+        this.participantDisplay = participantDisplay;
         this.textPlace = textPlace;
         this.textName = textName;
         this.textName.setTag(R.id.id_holder_object, this);
@@ -129,8 +139,19 @@ public class AthleteRowHolder {
             this.textName.setText(R.string.athlete);
         }
 
-        this.textFlightPosition.setText(participant.getFlight() + "/"
-                + participant.getPosition());
+        if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
+            int best = this.participant.bestMark();
+            if (best == 0) {
+                this.textFlightPosition.setText("-");
+            } else {
+                String m = this.getMeasurement(best, this.textFlightPosition
+                        .getContext().getString(R.string.scratch));
+                this.textFlightPosition.setText(m);
+            }
+        } else {
+            this.textFlightPosition.setText(participant.getFlight() + "/"
+                    + participant.getPosition());
+        }
 
         int best = this.participant.bestMark();
         Iterator<Map.Entry<Integer, TextView>> it = this.marks.entrySet()
