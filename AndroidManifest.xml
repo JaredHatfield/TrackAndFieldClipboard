@@ -17,6 +17,8 @@
         android:normalScreens="false" 
         android:largeScreens="false"
         android:xlargeScreens="true" />
+    <!-- We definitely want to run on devices that have touch -->
+    <uses-configuration android:reqTouchScreen="finger"/>
     <!-- Define the application -->
     <application
     	android:icon="@drawable/icon" 
