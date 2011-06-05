@@ -16,7 +16,7 @@
     <string name="team_name">Team Name</string>
     <string name="unaffiliated">Unaffiliated</string>
     <string name="qualifying_marks">Qualifying Marks</string>
-    <string name="finals_marks">Finals Marks</string>
+    <string name="finals_marks">Final Marks</string>
     <string name="flights">Number of Flights</string>
     <string name="unit">Units</string>
     <string name="final_participants">Final Participants</string>
@@ -48,10 +48,16 @@
     <string name="spinner_flight_all">All Participants</string>
     <string name="spinner_flight_finals">Finals</string>
     <string name="spinner_results">Results</string>
+    <string name="hint_event_name">The name of the event.</string>
+    <string name="hint_event_type">The type of event being contested.</string>
+    <string name="hint_gender">The gender of the competitors.</string>
+    <string name="hint_date">When the event is being contested.</string>
     <string name="hint_qualifying_marks">The number of marks athletes get in qualifying flights.</string>
     <string name="hint_final_marks">The number of marks athletes get in the finals.</string>
     <string name="hint_final_participants">The number of athletes that move onto the finals.</string>
     <string name="hint_number_of_flights">The number of flights before the finals.</string>
+    <string name="hint_units">Choose if measurements will be taken in feet and inches or in meters.</string>
+    <string name="hint_add">Once you create an event, these options can not be changed.</string>
     <string name="hytek_import">Import HY-TEK Data</string>
     <string name="import_data">Import Data</string>
     <string name="hint_import">Copy and paste the meet entry information from HY-TEK into the following text field.</string>

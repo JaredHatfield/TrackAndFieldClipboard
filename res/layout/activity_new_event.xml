@@ -35,6 +35,18 @@
 	        	android:inputType="textCapWords" />
 	    </TableRow>
 	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_event_name" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
+	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -53,6 +65,18 @@
 	        	android:layout_height="wrap_content" />
 	    </TableRow>
 	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_event_type" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
+	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -70,6 +94,18 @@
 	        	android:layout_width="wrap_content" 
 	        	android:layout_height="wrap_content" />
 	    </TableRow>
+	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_gender" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
@@ -90,6 +126,18 @@
 	        	android:hint="@string/event_date"
 	        	android:singleLine="true" />
 	    </TableRow>
+	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_date" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
 	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
@@ -228,6 +276,18 @@
 	        	android:layout_height="wrap_content" />
 	    </TableRow>
 	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_units" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
+	    <TableRow 
 	    	android:paddingTop="@dimen/form_spacing" 
 	    	android:layout_width="wrap_content" 
 	    	android:layout_height="wrap_content">
@@ -239,5 +299,17 @@
 	        	android:layout_height="wrap_content" 
 	        	android:text="@string/add" />
 	    </TableRow>
+	    <TableRow 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    	<TextView />
+	    	<TextView 
+	        	android:paddingBottom="@dimen/tip_padding_bottom"
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="fill_parent"
+	        	android:text="@string/hint_add" 
+	        	android:textSize="@dimen/font_tip" 
+	        	android:textColor="@color/tip" />
+    	</TableRow>
 	</TableLayout>
 </ScrollView>
