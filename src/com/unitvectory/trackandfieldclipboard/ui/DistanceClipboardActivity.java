@@ -375,7 +375,7 @@ public class DistanceClipboardActivity extends Activity implements
             header.addView(textHeaderQualify);
         }
 
-        for (int i = 0; i < this.event.getQualifyingScores(); i++) {
+        for (int i = 0; i < this.event.getFinalScores(); i++) {
             int num = i + 1 + this.event.getQualifyingScores();
             TextView textHeaderFinal = new TextView(this);
             textHeaderFinal.setText("#" + num);
@@ -478,7 +478,7 @@ public class DistanceClipboardActivity extends Activity implements
                 holder.addMark(num, textQualify);
             }
 
-            for (int j = 0; j < this.event.getQualifyingScores(); j++) {
+            for (int j = 0; j < this.event.getFinalScores(); j++) {
                 int num = j + 1 + this.event.getQualifyingScores();
                 TextView textFinal = new TextView(this);
                 textFinal.setLayoutParams(new LayoutParams(
