@@ -18,6 +18,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -388,6 +389,22 @@ public class DistanceClipboardActivity extends Activity implements
         textHeaderName.setBackgroundResource(R.color.header);
         header.addView(textHeaderName);
 
+        TextView textHeaderTeam = new TextView(this);
+        textHeaderTeam.setText(R.string.team);
+        textHeaderTeam.setLayoutParams(new LayoutParams(
+                LayoutParams.FILL_PARENT, cellHeight));
+        textHeaderTeam.setPadding(cellLeftPading, 0, 0, 0);
+        textHeaderTeam.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderTeam.setGravity(Gravity.CENTER_VERTICAL);
+        textHeaderTeam.setTextSize(fontSize);
+        textHeaderTeam.setBackgroundResource(R.color.header);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            textHeaderTeam.setVisibility(View.GONE);
+            textHeaderTeam.setWidth(0);
+        }
+
+        header.addView(textHeaderTeam);
+
         TextView textHeaderPosition = new TextView(this);
         if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
             textHeaderPosition.setText(R.string.best);
@@ -459,6 +476,20 @@ public class DistanceClipboardActivity extends Activity implements
             textName.setBackgroundResource(R.color.names);
             tr.addView(textName);
 
+            TextView textTeam = new TextView(this);
+            textTeam.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                    cellHeight));
+            textTeam.setPadding(cellLeftPading, 0, 0, 0);
+            textTeam.setGravity(Gravity.CENTER_VERTICAL);
+            textTeam.setTextSize(fontSize);
+            textTeam.setBackgroundResource(R.color.names);
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                textTeam.setVisibility(View.GONE);
+                textTeam.setWidth(0);
+            }
+
+            tr.addView(textTeam);
+
             TextView textFlightPosition = new TextView(this);
             textFlightPosition.setLayoutParams(new LayoutParams(
                     LayoutParams.FILL_PARENT, cellHeight, 1));
@@ -469,7 +500,7 @@ public class DistanceClipboardActivity extends Activity implements
 
             AthleteRowHolder holder = new AthleteRowHolder(
                     this.participantDisplay, textFlightPlace, textName,
-                    textFlightPosition);
+                    textTeam, textFlightPosition);
             this.rows.put(i, holder);
 
             for (int j = 0; j < this.event.getQualifyingScores(); j++) {
@@ -581,6 +612,8 @@ public class DistanceClipboardActivity extends Activity implements
                 null);
         final EditText inputName = (EditText) v
                 .findViewById(R.id.editText_participant_name);
+        final EditText inputTeam = (EditText) v
+                .findViewById(R.id.editText_participant_team);
         final EditText inputFlight = (EditText) v
                 .findViewById(R.id.editText_participant_flight);
         int flight = this.event.nextParticipantFlight();
@@ -594,6 +627,7 @@ public class DistanceClipboardActivity extends Activity implements
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
+                        String team = inputTeam.getText().toString();
                         String flight = inputFlight.getText().toString();
                         if (flight.length() == 0) {
                             flight = "1";
@@ -606,8 +640,9 @@ public class DistanceClipboardActivity extends Activity implements
 
                         // Add the participant;
                         event.getParticipants().add(
-                                new Participant(name, Integer.parseInt(flight),
-                                        Integer.parseInt(position)));
+                                new Participant(name, team, Integer
+                                        .parseInt(flight), Integer
+                                        .parseInt(position)));
                         drawTable();
                     }
                 });
@@ -952,6 +987,9 @@ public class DistanceClipboardActivity extends Activity implements
         final EditText inputName = (EditText) v
                 .findViewById(R.id.editText_participant_name);
         inputName.setText(athlete.getName());
+        final EditText inputTeam = (EditText) v
+                .findViewById(R.id.editText_participant_team);
+        inputTeam.setText(athlete.getSchool());
         final EditText inputFlight = (EditText) v
                 .findViewById(R.id.editText_participant_flight);
         inputFlight.setText(athlete.getFlight() + "");
@@ -965,6 +1003,7 @@ public class DistanceClipboardActivity extends Activity implements
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
+                        String team = inputTeam.getText().toString();
                         String flight = inputFlight.getText().toString();
                         if (flight.length() == 0) {
                             flight = "1";
@@ -984,6 +1023,7 @@ public class DistanceClipboardActivity extends Activity implements
                                 .getFlight() && positionInt == athlete
                                 .getPosition());
                         athlete.setName(name);
+                        athlete.setSchool(team);
                         athlete.setFlight(Integer.parseInt(flight));
                         athlete.setPosition(Integer.parseInt(position));
                         if (partialUpdate) {

@@ -414,8 +414,8 @@ public class FieldEvent implements Serializable {
             }
 
             String pName = p.getName();
-            if (p.name == null) {
-                pName = "";
+            if (pName == null || pName.length() == 0) {
+                pName = "Athlete";
             }
 
             String pYear = p.getYear();
@@ -424,8 +424,8 @@ public class FieldEvent implements Serializable {
             }
 
             String pSchool = p.getSchool();
-            if (pSchool == null) {
-                pSchool = "";
+            if (pSchool == null || pSchool.length() == 0) {
+                pSchool = "Unaffiliated";
             }
 
             sb.append(String.format("%3s %-24s%4s %-20s %9s",

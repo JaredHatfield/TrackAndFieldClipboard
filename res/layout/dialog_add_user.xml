@@ -6,7 +6,7 @@
 <LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
-	android:layout_width="fill_parent" 
+	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content">
 	<LinearLayout
 		android:orientation="horizontal"
@@ -15,8 +15,7 @@
 		<TextView 
 	    	android:layout_height="wrap_content" 
 	    	android:layout_width="wrap_content" 
-	    	android:layout_alignParentLeft="true" 
-	    	android:id="@+id/textView_label_meters" 
+	    	android:layout_alignParentLeft="true"
 	    	android:textSize="@dimen/font_size"
 	    	android:paddingRight="@dimen/form_label_right_padding" 
 	    	android:text="@string/name" />
@@ -34,16 +33,16 @@
 		<TextView 
 	    	android:layout_height="wrap_content" 
 	    	android:layout_width="wrap_content" 
-	    	android:layout_alignParentLeft="true" 
-	    	android:id="@+id/textView_label_meters" 
+	    	android:layout_alignParentLeft="true"
 	    	android:textSize="@dimen/font_size"
 	    	android:paddingRight="@dimen/form_label_right_padding" 
-	    	android:text="@string/flight" />
+	    	android:text="@string/team" />
 	    <EditText 
 	    	android:layout_width="fill_parent" 
-	    	android:id="@+id/editText_participant_flight"
+	    	android:id="@+id/editText_participant_team"
 	    	android:layout_height="wrap_content" 
-	    	android:inputType="number"/>
+	    	android:hint="@string/team_name"
+	    	android:inputType="textCapWords" />
 	</LinearLayout>
 	<LinearLayout
 		android:orientation="horizontal"
@@ -52,8 +51,21 @@
 		<TextView 
 	    	android:layout_height="wrap_content" 
 	    	android:layout_width="wrap_content" 
-	    	android:layout_alignParentLeft="true" 
-	    	android:id="@+id/textView_label_meters" 
+	    	android:layout_alignParentLeft="true"
+	    	android:textSize="@dimen/font_size"
+	    	android:paddingRight="@dimen/form_label_right_padding" 
+	    	android:text="@string/flight" />
+	    <EditText 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/editText_participant_flight"
+	    	android:layout_height="wrap_content" 
+	    	android:layout_weight="1"
+	    	android:minWidth="@dimen/form_input_min_width"
+	    	android:inputType="number"/>
+		<TextView 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_alignParentLeft="true"
 	    	android:textSize="@dimen/font_size"
 	    	android:paddingRight="@dimen/form_label_right_padding" 
 	    	android:text="@string/position" />
@@ -61,6 +73,8 @@
 	    	android:layout_width="fill_parent" 
 	    	android:id="@+id/editText_participant_position"
 	    	android:layout_height="wrap_content" 
-	    	android:inputType="number"/>
+	    	android:layout_weight="1"
+	    	android:minWidth="@dimen/form_input_min_width"
+	    	android:inputType="number" />
 	</LinearLayout>
 </LinearLayout>

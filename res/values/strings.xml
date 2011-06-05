@@ -12,6 +12,9 @@
     <string name="event_date">Event Date</string>
     <string name="gender">Gender</string>
     <string name="date">Date</string>
+    <string name="team">Team</string>
+    <string name="team_name">Team Name</string>
+    <string name="unaffiliated">Unaffiliated</string>
     <string name="qualifying_marks">Qualifying Marks</string>
     <string name="finals_marks">Finals Marks</string>
     <string name="flights">Number of Flights</string>

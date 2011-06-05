@@ -5,7 +5,7 @@
  -->
 <RelativeLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
+	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content">
     <TextView 
     	android:layout_height="wrap_content" 
@@ -17,11 +17,13 @@
     	android:paddingRight="@dimen/form_label_right_padding"
     	android:gravity="right" />
     <EditText
-    	android:layout_width="@dimen/distance_input_width" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content"
+    	android:layout_weight="1"
+    	android:minWidth="@dimen/form_input_min_width" 
     	android:id="@+id/editText_distance_feet" 
     	android:layout_toRightOf="@+id/textView_label_feet" 
     	android:layout_alignBaseline="@+id/textView_label_feet"
-    	android:layout_height="wrap_content" 
     	android:inputType="number|numberDecimal"/>
 	<TextView 
 		android:layout_height="wrap_content" 
@@ -35,7 +37,9 @@
     	android:gravity="right"/>
     <EditText 
     	android:layout_height="wrap_content" 
-    	android:layout_width="@dimen/distance_input_width" 
+    	android:layout_width="wrap_content"
+    	android:layout_weight="1"
+    	android:minWidth="@dimen/form_input_min_width" 
     	android:id="@+id/editText_distance_inches" 
     	android:layout_toRightOf="@+id/textView_label_inches"
     	android:layout_alignBaseline="@+id/textView_label_inches" 

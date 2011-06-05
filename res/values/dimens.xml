@@ -19,4 +19,5 @@
     <dimen name="distance_input_width">90dp</dimen>
     <dimen name="list_padding">20dp</dimen>
     <dimen name="tip_padding_bottom">5dp</dimen>
+    <dimen name="form_input_min_width">140dp</dimen>
 </resources>

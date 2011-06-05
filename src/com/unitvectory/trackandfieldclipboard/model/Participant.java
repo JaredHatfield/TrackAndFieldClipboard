@@ -88,13 +88,16 @@ public class Participant implements Serializable, Comparable<Participant> {
      * 
      * @param name
      *            The participant's name.
+     * @param school
+     *            The participant's school.
      * @param flight
      *            The participant's flight.
      * @param position
      *            The participant's position.
      */
-    public Participant(String name, int flight, int position) {
+    public Participant(String name, String school, int flight, int position) {
         this.name = name;
+        this.school = school;
         this.flight = flight;
         this.position = position;
         this.marks = new ArrayList<Measurement>();

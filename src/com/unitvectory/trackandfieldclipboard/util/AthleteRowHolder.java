@@ -28,9 +28,19 @@ public class AthleteRowHolder {
     private ParticipantDisplay participantDisplay;
 
     /**
+     * The text view for the athlete's place.
+     */
+    private TextView textPlace;
+
+    /**
      * The text view for the athlete's name.
      */
     private TextView textName;
+
+    /**
+     * The text view for the athlete's team.
+     */
+    private TextView textTeam;
 
     /**
      * The text view for the athlete's flight / position.
@@ -48,11 +58,6 @@ public class AthleteRowHolder {
     private Map<Integer, TextView> marks;
 
     /**
-     * The text view for the athlete's place.
-     */
-    private TextView textPlace;
-
-    /**
      * Initializes a new instance of the AthleteRowHolder class.
      * 
      * @param participantDisplay
@@ -61,14 +66,18 @@ public class AthleteRowHolder {
      *            The place TextView
      * @param textName
      *            The name TextView.
+     * @param textTeam
+     *            The team TextView.
      * @param textFlightPosition
      *            The flight / position TextView.
      */
     public AthleteRowHolder(ParticipantDisplay participantDisplay,
-            TextView textPlace, TextView textName, TextView textFlightPosition) {
+            TextView textPlace, TextView textName, TextView textTeam,
+            TextView textFlightPosition) {
         this.participantDisplay = participantDisplay;
         this.textPlace = textPlace;
         this.textName = textName;
+        this.textTeam = textTeam;
         this.textName.setTag(R.id.id_holder_object, this);
         this.textName.setTag(R.id.id_holder_index, -1);
         this.textFlightPosition = textFlightPosition;
@@ -137,6 +146,13 @@ public class AthleteRowHolder {
             this.textName.setText(participant.getName());
         } else {
             this.textName.setText(R.string.athlete);
+        }
+
+        if (participant.getSchool() != null
+                && participant.getSchool().length() > 0) {
+            this.textTeam.setText(participant.getSchool());
+        } else {
+            this.textTeam.setText(R.string.unaffiliated);
         }
 
         if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
