@@ -339,11 +339,29 @@ public class FieldEvent implements Serializable {
      * @return The string to use as a file name.
      */
     public String newFileName() {
+        StringBuilder sb = new StringBuilder();
+
+        if (this.eventName != null && this.eventName.length() > 0) {
+            sb.append(this.eventName.replaceAll("\\W+", ""));
+            sb.append(" ");
+        }
+
+        if (!this.gender.equals(Gender.NA)) {
+            sb.append(this.gender.toString());
+            sb.append(" ");
+        }
+
+        if (!this.type.equals(EventType.NA)) {
+            sb.append(this.type.toString());
+            sb.append(" ");
+        }
+
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH-mm-ss");
+                "yyyy-MM-dd hh-mm-ss aa");
         Calendar cal = Calendar.getInstance();
-        return dateFormat.format(cal.getTime()) + " " + this.gender + " "
-                + this.type;
+        sb.append(dateFormat.format(cal.getTime()));
+
+        return sb.toString();
     }
 
     /**

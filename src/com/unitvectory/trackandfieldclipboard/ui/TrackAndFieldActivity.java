@@ -28,16 +28,6 @@ public class TrackAndFieldActivity extends Activity {
     static final int NEW_EVENT_REQUEST = 639;
 
     /**
-     * The file list fragment.
-     */
-    private FileListFragment fileListFragment;
-
-    /**
-     * The dirty flag.
-     */
-    private int dirtyFlag;
-
-    /**
      * Called when the activity is first created.
      * 
      * @param savedInstanceState
@@ -47,21 +37,6 @@ public class TrackAndFieldActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_and_field);
-        this.fileListFragment = (FileListFragment) getFragmentManager()
-                .findFragmentById(R.id.fragment_file_list);
-        this.dirtyFlag = 0;
-    }
-
-    /**
-     * Restore the activity and reload the list of files if necessary.
-     */
-    @Override
-    public void onResume() {
-        super.onPause();
-        if (this.dirtyFlag > 0) {
-            this.fileListFragment.displayFiles();
-            this.dirtyFlag--;
-        }
     }
 
     /**
@@ -129,7 +104,6 @@ public class TrackAndFieldActivity extends Activity {
                 intent.putExtra("event", event);
                 intent.putExtra("filename", event.newFileName());
                 this.startActivity(intent);
-                this.dirtyFlag += 2;
             }
         }
     }

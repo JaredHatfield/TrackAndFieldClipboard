@@ -6,7 +6,8 @@ package com.unitvectory.trackandfieldclipboard.ui;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -75,6 +76,8 @@ public class FileListFragment extends ListFragment {
         if (this.loadingDialog != null && this.loadingDialog.isShowing()) {
             this.loadingDialog.dismiss();
         }
+
+        this.displayFiles();
     }
 
     /**
@@ -83,12 +86,19 @@ public class FileListFragment extends ListFragment {
     public void displayFiles() {
         this.directoryEntries.clear();
         File[] files = getActivity().getFilesDir().listFiles();
+
+        Arrays.sort(files, new Comparator<File>() {
+            @Override
+            public int compare(File f1, File f2) {
+                return Long.valueOf(f2.lastModified()).compareTo(
+                        f1.lastModified());
+            }
+        });
+
         for (File file : files) {
             this.directoryEntries.add(file.getName());
         }
 
-        Collections.sort(this.directoryEntries);
-        Collections.reverse(this.directoryEntries);
         ArrayAdapter<String> directoryList = new ArrayAdapter<String>(
                 getActivity(), R.layout.file_row, this.directoryEntries);
 
