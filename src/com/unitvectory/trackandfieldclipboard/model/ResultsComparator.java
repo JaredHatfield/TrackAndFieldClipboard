@@ -29,6 +29,22 @@ public class ResultsComparator implements Comparator<Participant> {
      */
     @Override
     public int compare(Participant p1, Participant p2) {
+        // Try something simple first.
+        if (p1.marks.size() == 0 && p2.marks.size() == 0) {
+            return 0;
+        } else if (p2.marks.size() == 0) {
+            return 1;
+        } else if (p1.marks.size() == 0) {
+            return -1;
+        }
+
+        int quickResult = Collections.max(p1.marks).compareTo(
+                Collections.max(p2.marks));
+        if (quickResult != 0) {
+            return quickResult;
+        }
+
+        // Resort to breaking ties
         List<Measurement> m1 = this.getMeasurements(p1);
         List<Measurement> m2 = this.getMeasurements(p2);
 
@@ -41,7 +57,7 @@ public class ResultsComparator implements Comparator<Participant> {
                 return -1;
             }
 
-            int result = this.compare(m1, m2);
+            int result = m1.get(0).compareTo(m2.get(0));
             if (result != 0) {
                 return result;
             }
@@ -51,26 +67,6 @@ public class ResultsComparator implements Comparator<Participant> {
         }
 
         return 0;
-    }
-
-    /**
-     * Compares two lists of measurements.
-     * 
-     * @param m1
-     *            The first list.
-     * @param m2
-     *            The second list.
-     * @return a negative integer, zero, or a positive integer as the first
-     *         argument is less than, equal to, or greater than the second.
-     */
-    public int compare(List<Measurement> m1, List<Measurement> m2) {
-        if (m1.get(0).compareTo(m2.get(0)) > 0) {
-            return 1;
-        } else if (m1.get(0).compareTo(m2.get(0)) < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
     }
 
     /**

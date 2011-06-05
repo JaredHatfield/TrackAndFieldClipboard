@@ -7,7 +7,6 @@ package com.unitvectory.trackandfieldclipboard.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
@@ -74,7 +73,7 @@ public class Participant implements Serializable, Comparable<Participant> {
      * The measurements for the athlete.
      */
     @ElementList(name = "marks")
-    protected List<Measurement> marks;
+    protected ArrayList<Measurement> marks;
 
     /**
      * Initializes a new instance of the Participant class.
@@ -241,7 +240,7 @@ public class Participant implements Serializable, Comparable<Participant> {
     /**
      * @return the marks
      */
-    public List<Measurement> getMarks() {
+    public ArrayList<Measurement> getMarks() {
         return marks;
     }
 

@@ -136,6 +136,8 @@ public class Measurement implements Serializable, Comparable<Measurement> {
             this.feet++;
             this.inches -= 12;
         }
+
+        this.fillMeters();
     }
 
     /**
@@ -167,6 +169,8 @@ public class Measurement implements Serializable, Comparable<Measurement> {
             this.feet++;
             this.inches -= 12;
         }
+
+        this.fillMeters();
     }
 
     /**
@@ -235,34 +239,18 @@ public class Measurement implements Serializable, Comparable<Measurement> {
      */
     @Override
     public int compareTo(Measurement m) {
-        double v1 = this.actualDistance();
-        double v2 = m.actualDistance();
-        if (v1 > v2) {
-            return 1;
-        } else if (v1 < v2) {
-            return -1;
-        } else {
-            return 0;
-        }
+        // We are safe comparing meters because feet and inches are always and
+        // automatically converted into meters.
+        return Double.compare(this.meters, m.meters);
     }
 
     /**
-     * Gets the comparable distance in meters regardless how the number is
-     * stored.
-     * 
-     * @return The distance in meters.
+     * Computes and fill in the meters measurement with the provided feet and
+     * inches measurement.
      */
-    private double actualDistance() {
-        if (this.scratch) {
-            // If the distance is a scratch, then return 0.
-            return 0;
-        } else if (this.metric) {
-            // We are doing all of the comparisons in meters.
-            return this.meters;
-        } else {
-            double us = this.feet + (this.inches / 12.0);
-            return us * Measurement.CONVERSION;
-        }
+    private void fillMeters() {
+        double us = this.feet + (this.inches / 12.0);
+        this.meters = us * Measurement.CONVERSION;
     }
 
     /**

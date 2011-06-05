@@ -93,7 +93,7 @@ public class FieldEvent implements Serializable {
      * The list of participants.
      */
     @ElementList(name = "participants")
-    protected List<Participant> participants;
+    protected ArrayList<Participant> participants;
 
     /**
      * Initializes a new instance of the FieldEvent class.
@@ -277,22 +277,19 @@ public class FieldEvent implements Serializable {
     /**
      * @return the participants
      */
-    public List<Participant> getParticipants() {
+    public ArrayList<Participant> getParticipants() {
         return participants;
     }
 
     /**
-     * Calculates the array of athletes that qualifed for finals.
+     * Calculates the array of athletes that qualified for finals.
      * 
      * @return The array of participants.
      */
     public List<Participant> calculateFinals() {
-        List<Participant> athletes = new ArrayList<Participant>();
-
-        for (int i = 0; i < this.participants.size(); i++) {
-            athletes.add(this.participants.get(i));
-        }
-
+        @SuppressWarnings("unchecked")
+        List<Participant> athletes = (List<Participant>) this.participants
+                .clone();
         QualifyingComparator comparator = new QualifyingComparator(
                 this.qualifyingScores);
         Collections.sort(athletes, comparator);
