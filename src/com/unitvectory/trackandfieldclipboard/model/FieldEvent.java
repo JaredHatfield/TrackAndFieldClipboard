@@ -480,7 +480,7 @@ public class FieldEvent implements Serializable {
             return EventType.DISCUS;
         } else if (type.equalsIgnoreCase("shot put")) {
             return EventType.SHOT_PUT;
-        } else if (type.equalsIgnoreCase("javaline")) {
+        } else if (type.equalsIgnoreCase("javelin")) {
             return EventType.JAVALINE;
         } else if (type.equalsIgnoreCase("long jump")) {
             return EventType.LONG_JUMP;
