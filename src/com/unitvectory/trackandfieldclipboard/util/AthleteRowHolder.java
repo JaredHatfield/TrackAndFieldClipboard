@@ -55,7 +55,9 @@ public class AthleteRowHolder {
      * @param textFlightPosition
      *            The flight / position TextView.
      */
-    public AthleteRowHolder(TextView textName, TextView textFlightPosition) {
+    public AthleteRowHolder(TextView textPlace, TextView textName,
+            TextView textFlightPosition) {
+        this.textPlace = textPlace;
         this.textName = textName;
         this.textName.setTag(R.id.id_holder_object, this);
         this.textName.setTag(R.id.id_holder_index, -1);
@@ -68,14 +70,6 @@ public class AthleteRowHolder {
      */
     public TextView getTextName() {
         return textName;
-    }
-
-    /**
-     * @param textName
-     *            the textName to set
-     */
-    public void setTextName(TextView textName) {
-        this.textName = textName;
     }
 
     /**
@@ -105,14 +99,6 @@ public class AthleteRowHolder {
      */
     public TextView getTextPlace() {
         return textPlace;
-    }
-
-    /**
-     * @param textPlace
-     *            the textPlace to set
-     */
-    public void setTextPlace(TextView textPlace) {
-        this.textPlace = textPlace;
     }
 
     /**

@@ -331,6 +331,16 @@ public class DistanceClipboardActivity extends Activity implements
         header.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
                 LayoutParams.WRAP_CONTENT));
 
+        TextView textHeaderPlace = new TextView(this);
+        textHeaderPlace.setText(this.getString(R.string.place));
+        textHeaderPlace.setLayoutParams(new LayoutParams(
+                LayoutParams.WRAP_CONTENT, cellHeight, 1));
+        textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
+        textHeaderPlace.setGravity(Gravity.CENTER);
+        textHeaderPlace.setTextSize(fontSize);
+        textHeaderPlace.setBackgroundResource(R.color.header);
+        header.addView(textHeaderPlace);
+
         TextView textHeaderName = new TextView(this);
         textHeaderName.setText(this.getString(R.string.name));
         textHeaderName.setLayoutParams(new LayoutParams(
@@ -377,16 +387,6 @@ public class DistanceClipboardActivity extends Activity implements
             textHeaderFinal.setBackgroundResource(R.color.header_finals);
             header.addView(textHeaderFinal);
         }
-
-        TextView textHeaderPlace = new TextView(this);
-        textHeaderPlace.setText(this.getString(R.string.place));
-        textHeaderPlace.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight, 1));
-        textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
-        textHeaderPlace.setGravity(Gravity.CENTER);
-        textHeaderPlace.setTextSize(fontSize);
-        textHeaderPlace.setBackgroundResource(R.color.header);
-        header.addView(textHeaderPlace);
 
         this.participants.addView(header, new TableLayout.LayoutParams(
                 LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
@@ -435,6 +435,14 @@ public class DistanceClipboardActivity extends Activity implements
             tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
                     LayoutParams.WRAP_CONTENT));
 
+            TextView textFlightPlace = new TextView(this);
+            textFlightPlace.setLayoutParams(new LayoutParams(
+                    LayoutParams.WRAP_CONTENT, cellHeight, 1));
+            textFlightPlace.setGravity(Gravity.CENTER);
+            textFlightPlace.setTextSize(fontSize);
+            textFlightPlace.setBackgroundResource(R.color.names);
+            tr.addView(textFlightPlace);
+
             TextView textName = new TextView(this);
             textName.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
                     cellHeight, 2));
@@ -453,8 +461,8 @@ public class DistanceClipboardActivity extends Activity implements
             textFlightPosition.setBackgroundResource(R.color.names);
             tr.addView(textFlightPosition);
 
-            AthleteRowHolder holder = new AthleteRowHolder(textName,
-                    textFlightPosition);
+            AthleteRowHolder holder = new AthleteRowHolder(textFlightPlace,
+                    textName, textFlightPosition);
             this.rows.put(i, holder);
 
             for (int j = 0; j < this.event.getQualifyingScores(); j++) {
@@ -484,16 +492,6 @@ public class DistanceClipboardActivity extends Activity implements
             }
 
             holder.displayAthlete(athlete);
-
-            TextView textFlightPlace = new TextView(this);
-            textFlightPlace.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
-            textFlightPlace.setGravity(Gravity.CENTER);
-            textFlightPlace.setTextSize(fontSize);
-            textFlightPlace.setBackgroundResource(R.color.names);
-            tr.addView(textFlightPlace);
-
-            holder.setTextPlace(textFlightPlace);
 
             this.participants.addView(tr, new TableLayout.LayoutParams(
                     LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
