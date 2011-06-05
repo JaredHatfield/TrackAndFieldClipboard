@@ -5,6 +5,8 @@
  -->
  <resources>
     <string name="app_name">Track and Field Clipboard</string>
+    <string name="author_info">Created by Jared Hatfield</string>
+    <string name="about">About</string>
     <string name="new_event">New Event</string>
     <string name="name">Name</string>
     <string name="event_type">Event Type</string>

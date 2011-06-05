@@ -5,11 +5,11 @@
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
@@ -60,26 +60,22 @@ public class TrackAndFieldActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home:
+            // Display the about application dialog
+            this.showAboutDialog();
+            return true;
         case R.id.menu_new_event:
             // Launch the new event activity
             Intent intent = new Intent(this, NewEventActivity.class);
             this.startActivityForResult(intent, NEW_EVENT_REQUEST);
             return true;
+        case R.id.menu_about:
+            // Display the about application dialog
+            this.showAboutDialog();
+            return true;
         default:
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * Handle the import data event.
-     * 
-     * @param v
-     *            The calling view.
-     */
-    public void onImportDataClick(View v) {
-        // Launch the import data activity
-        Intent intent = new Intent(this, HyTekImportActivity.class);
-        this.startActivityForResult(intent, NEW_EVENT_REQUEST);
     }
 
     /**
@@ -106,5 +102,16 @@ public class TrackAndFieldActivity extends Activity {
                 this.startActivity(intent);
             }
         }
+    }
+
+    /**
+     * Display the about dialog.
+     */
+    private void showAboutDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_about);
+        dialog.setTitle(R.string.about);
+        dialog.setCancelable(true);
+        dialog.show();
     }
 }

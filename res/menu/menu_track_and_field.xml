@@ -10,4 +10,9 @@
         android:icon="@android:drawable/ic_input_add"
         android:title="@string/new_event"
         android:showAsAction="always|withText" />
+    <item
+    	android:id="@+id/menu_about"
+    	android:icon="@android:drawable/ic_dialog_info"
+    	android:title="@string/about"
+    	android:showAsAction="withText" />
 </menu>
