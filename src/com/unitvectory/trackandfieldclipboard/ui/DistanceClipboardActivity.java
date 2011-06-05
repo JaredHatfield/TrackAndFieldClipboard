@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ import com.unitvectory.trackandfieldclipboard.util.SaveClipboardTask;
  * 
  */
 public class DistanceClipboardActivity extends Activity implements
-        OnClickListener {
+        OnClickListener, OnLongClickListener {
 
     /**
      * The tag used for logging.
@@ -454,6 +455,7 @@ public class DistanceClipboardActivity extends Activity implements
             textName.setGravity(Gravity.CENTER_VERTICAL);
             textName.setTextSize(fontSize);
             textName.setOnClickListener(this);
+            textName.setOnLongClickListener(this);
             textName.setBackgroundResource(R.color.names);
             tr.addView(textName);
 
@@ -619,6 +621,55 @@ public class DistanceClipboardActivity extends Activity implements
                 });
 
         alert.show();
+    }
+
+    /**
+     * Handles the lock click event that is used to delete a participant.
+     * 
+     * @param view
+     *            The calling view.
+     */
+    @Override
+    public boolean onLongClick(View view) {
+        AthleteRowHolder holder = (AthleteRowHolder) view
+                .getTag(R.id.id_holder_object);
+        if (holder.getParticipant() == null) {
+            // Something bad happened
+        } else if (this.participantDisplay.equals(ParticipantDisplay.ALL)) {
+            final Participant participant = holder.getParticipant();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.delete_confirmation)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.delete,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                        int id) {
+                                    // Delete the participant
+                                    event.getParticipants().remove(participant);
+                                    drawTable();
+                                }
+                            })
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                        int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        } else {
+            // Show some toast saying the participant can not be deleted in this
+            // view.
+            Toast toast = Toast.makeText(this,
+                    R.string.warning_no_delete_participant, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        return true;
     }
 
     /**
