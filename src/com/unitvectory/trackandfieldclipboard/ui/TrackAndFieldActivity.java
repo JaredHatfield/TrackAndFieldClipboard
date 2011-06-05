@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
+import com.unitvectory.trackandfieldclipboard.model.RandomEventGenerator;
 
 /**
  * The main activity for TrackAndFieldClipboard.
@@ -68,6 +69,16 @@ public class TrackAndFieldActivity extends Activity {
             // Launch the new event activity
             Intent intent = new Intent(this, NewEventActivity.class);
             this.startActivityForResult(intent, NEW_EVENT_REQUEST);
+            return true;
+        case R.id.menu_sample_results:
+            // Generate a sample event
+            RandomEventGenerator reg = new RandomEventGenerator();
+            FieldEvent event = reg.getEvent();
+            Intent sampleIntent = new Intent(this,
+                    DistanceClipboardActivity.class);
+            sampleIntent.putExtra("event", event);
+            sampleIntent.putExtra("filename", event.newFileName());
+            this.startActivity(sampleIntent);
             return true;
         case R.id.menu_about:
             // Display the about application dialog

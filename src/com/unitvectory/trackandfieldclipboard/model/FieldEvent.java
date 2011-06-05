@@ -352,7 +352,7 @@ public class FieldEvent implements Serializable {
         }
 
         if (!this.type.equals(EventType.NA)) {
-            sb.append(this.type.toString());
+            sb.append(this.type.toString().replace("_", " "));
             sb.append(" ");
         }
 
@@ -507,31 +507,5 @@ public class FieldEvent implements Serializable {
         }
 
         return EventType.NA;
-    }
-
-    /**
-     * Gets a sample event object.
-     * 
-     * @return The sample event object.
-     */
-    public static FieldEvent example() {
-        FieldEvent event = new FieldEvent("Example", EventType.SHOT_PUT,
-                Gender.MALE, "Today", 3, 3, 10, 2, false);
-
-        Participant p = new Participant("Sam Smith", "432", "10", "High", "31",
-                1, 2);
-        p.getMarks().add(new Measurement(1, 20, 1.25));
-        p.getMarks().add(new Measurement(2, 20, 11));
-        p.getMarks().add(new Measurement(3));
-        p.getMarks().add(new Measurement(4, 120, 11.25));
-        p.getMarks().add(new Measurement(5, 30, 0.25));
-        p.getMarks().add(new Measurement(6));
-        event.getParticipants().add(p);
-
-        event.getParticipants().add(
-                new Participant("John Doe", "123", "10", "High", "30", 1, 1));
-
-        Collections.sort(event.getParticipants());
-        return event;
     }
 }

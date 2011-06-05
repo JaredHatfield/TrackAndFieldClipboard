@@ -7,7 +7,7 @@ package com.unitvectory.trackandfieldclipboard.model;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
 /**
@@ -33,37 +33,37 @@ public class Measurement implements Serializable, Comparable<Measurement> {
     /**
      * The measurement component in feet.
      */
-    @Element(name = "feet")
+    @Attribute(name = "feet")
     protected int feet;
 
     /**
      * The measurement component in inches.
      */
-    @Element(name = "inches")
+    @Attribute(name = "inches")
     protected double inches;
 
     /**
      * The total measurement in meters.
      */
-    @Element(name = "meters")
+    @Attribute(name = "meters")
     protected double meters;
 
     /**
      * A flag indicating the measurement is in metric.
      */
-    @Element(name = "metric")
+    @Attribute(name = "metric")
     protected boolean metric;
 
     /**
      * The attempt by the athlete.
      */
-    @Element(name = "attempt")
+    @Attribute(name = "attempt")
     protected int attempt;
 
     /**
      * The attempt was a scratch.
      */
-    @Element(name = "scratch")
+    @Attribute(name = "scratch")
     protected boolean scratch;
 
     /**

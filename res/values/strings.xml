@@ -70,6 +70,7 @@
     <string name="warning_no_delete_participant">Switch to the All Participants view to delete a participant.</string>
     <string name="loading">Loading. Please wait...</string>
     <string name="email_results">Email Results</string>
+    <string name="sample_results">Sample Results</string>
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>
