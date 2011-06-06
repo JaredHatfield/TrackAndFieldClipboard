@@ -33,7 +33,7 @@ public class FieldEvent implements Serializable {
     /**
      * The lock used for IO.
      */
-    public static final Object[] sDataLock = new Object[0];
+    public static final Object[] WRITELOCK = new Object[0];
 
     /**
      * The event name.
@@ -288,10 +288,10 @@ public class FieldEvent implements Serializable {
      */
     public List<Participant> calculateFinals() {
         @SuppressWarnings("unchecked")
-        List<Participant> athletes = (List<Participant>) this.participants
-                .clone();
-        QualifyingComparator comparator = new QualifyingComparator(
-                this.qualifyingScores);
+        List<Participant> athletes =
+                (List<Participant>) this.participants.clone();
+        QualifyingComparator comparator =
+                new QualifyingComparator(this.qualifyingScores);
         Collections.sort(athletes, comparator);
         Collections.reverse(athletes);
         while (athletes.size() > this.finalParticipants) {
@@ -353,8 +353,8 @@ public class FieldEvent implements Serializable {
             sb.append(" ");
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd hh-mm-ss aa");
+        SimpleDateFormat dateFormat =
+                new SimpleDateFormat("yyyy-MM-dd hh-mm-ss aa");
         Calendar cal = Calendar.getInstance();
         sb.append(dateFormat.format(cal.getTime()));
 
@@ -399,6 +399,8 @@ public class FieldEvent implements Serializable {
 
     /**
      * Creates a string representation of the results.
+     * 
+     * @return The string representation of the results.
      */
     @Override
     public String toString() {
@@ -424,8 +426,8 @@ public class FieldEvent implements Serializable {
             if (best == 0) {
                 measurement = "-";
             } else {
-                measurement = p.getMeasurement(best).translateMeasurement(
-                        "FOUL");
+                measurement =
+                        p.getMeasurement(best).translateMeasurement("FOUL");
             }
 
             String pName = p.getName();

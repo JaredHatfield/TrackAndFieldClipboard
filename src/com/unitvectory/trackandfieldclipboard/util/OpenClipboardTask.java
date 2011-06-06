@@ -73,7 +73,7 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
         try {
             this.filename = args[0];
             FieldEvent event = null;
-            synchronized (FieldEvent.sDataLock) {
+            synchronized (FieldEvent.WRITELOCK) {
                 FileInputStream input = activity.openFileInput(this.filename);
                 Serializer serializer = new Persister();
                 event = serializer.read(FieldEvent.class, input);
@@ -95,16 +95,17 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
     @Override
     protected void onPostExecute(FieldEvent event) {
         if (event == null) {
-            Toast toast = Toast.makeText(activity, R.string.failed_open,
-                    Toast.LENGTH_LONG);
+            Toast toast =
+                    Toast.makeText(activity, R.string.failed_open,
+                            Toast.LENGTH_LONG);
             toast.show();
             try {
                 this.dialog.dismiss();
             } catch (Exception e) {
             }
         } else {
-            Intent intent = new Intent(activity,
-                    DistanceClipboardActivity.class);
+            Intent intent =
+                    new Intent(activity, DistanceClipboardActivity.class);
             intent.putExtra("event", event);
             intent.putExtra("filename", this.filename);
             activity.startActivity(intent);

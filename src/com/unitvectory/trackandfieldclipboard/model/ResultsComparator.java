@@ -38,8 +38,8 @@ public class ResultsComparator implements Comparator<Participant> {
             return -1;
         }
 
-        int quickResult = Collections.max(p1.marks).compareTo(
-                Collections.max(p2.marks));
+        int quickResult =
+                Collections.max(p1.marks).compareTo(Collections.max(p2.marks));
         if (quickResult != 0) {
             return quickResult;
         }

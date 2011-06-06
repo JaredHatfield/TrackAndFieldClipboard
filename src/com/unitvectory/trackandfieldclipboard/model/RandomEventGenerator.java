@@ -65,13 +65,14 @@ public class RandomEventGenerator {
     /**
      * The names of the participants to use.
      */
-    private static final String[] PARTICIPANT_NAMES = new String[] {
-            "Dominick McGlamery", "Victor Bobzien", "Luke Bartley",
-            "Franklyn Kostyla", "Henry Patoine", "Ray Fail", "Tyson Goatley",
-            "Frank Livsey", "Jonah Stonerock", "Donnie McPeck",
-            "Christian Habersham", "Johnny Fieldman", "Charley Poremba",
-            "Glen Schabowski", "Jerald Bihl", "Gavin Luckadoo",
-            "Stephan Deetz", "Weston Prescod", "Antone Prose", "Martin Romano" };
+    private static final String[] PARTICIPANT_NAMES =
+            new String[] { "Dominick McGlamery", "Victor Bobzien",
+                    "Luke Bartley", "Franklyn Kostyla", "Henry Patoine",
+                    "Ray Fail", "Tyson Goatley", "Frank Livsey",
+                    "Jonah Stonerock", "Donnie McPeck", "Christian Habersham",
+                    "Johnny Fieldman", "Charley Poremba", "Glen Schabowski",
+                    "Jerald Bihl", "Gavin Luckadoo", "Stephan Deetz",
+                    "Weston Prescod", "Antone Prose", "Martin Romano" };
 
     /**
      * The minimum distance a participant will have.
@@ -90,9 +91,14 @@ public class RandomEventGenerator {
     private static final int FLIGHT_BUMP = 5;
 
     /**
-     * The probability out of 100 that a participant will foul.
+     * The probability that a participant will foul.
      */
     private static final int PROBABILITY_OF_FOUL = 25;
+
+    /**
+     * The total probability.
+     */
+    private static final int PROBABILITY_TOTAL = 100;
 
     /**
      * The event that was generated.
@@ -106,17 +112,19 @@ public class RandomEventGenerator {
      * of results.
      */
     public RandomEventGenerator() {
-        this.event = new FieldEvent(RandomEventGenerator.NAME,
-                RandomEventGenerator.TYPE, RandomEventGenerator.GENDER,
-                RandomEventGenerator.DATE,
-                RandomEventGenerator.QUALIFYING_MARKS,
-                RandomEventGenerator.FINAL_MARKS,
-                RandomEventGenerator.FINAL_PARTICIPANTS,
-                RandomEventGenerator.NUMBER_OF_FLIGHTS,
-                RandomEventGenerator.METRIC);
+        this.event =
+                new FieldEvent(RandomEventGenerator.NAME,
+                        RandomEventGenerator.TYPE, RandomEventGenerator.GENDER,
+                        RandomEventGenerator.DATE,
+                        RandomEventGenerator.QUALIFYING_MARKS,
+                        RandomEventGenerator.FINAL_MARKS,
+                        RandomEventGenerator.FINAL_PARTICIPANTS,
+                        RandomEventGenerator.NUMBER_OF_FLIGHTS,
+                        RandomEventGenerator.METRIC);
 
-        int perFlight = RandomEventGenerator.PARTICIPANT_NAMES.length
-                / RandomEventGenerator.NUMBER_OF_FLIGHTS;
+        int perFlight =
+                RandomEventGenerator.PARTICIPANT_NAMES.length
+                        / RandomEventGenerator.NUMBER_OF_FLIGHTS;
 
         Map<Participant, Integer> mins = new HashMap<Participant, Integer>();
         Map<Participant, Integer> maxs = new HashMap<Participant, Integer>();
@@ -131,12 +139,14 @@ public class RandomEventGenerator {
             }
 
             Participant p = new Participant(pName, "", flight, position);
-            int min = RandomEventGenerator.generateInRange(
-                    RandomEventGenerator.MIN_DISTANCE,
-                    RandomEventGenerator.MAX_DISTANCE);
-            int max = RandomEventGenerator.generateInRange(
-                    RandomEventGenerator.MIN_DISTANCE,
-                    RandomEventGenerator.MAX_DISTANCE);
+            int min =
+                    RandomEventGenerator.generateInRange(
+                            RandomEventGenerator.MIN_DISTANCE,
+                            RandomEventGenerator.MAX_DISTANCE);
+            int max =
+                    RandomEventGenerator.generateInRange(
+                            RandomEventGenerator.MIN_DISTANCE,
+                            RandomEventGenerator.MAX_DISTANCE);
             if (min < max) {
                 int tmp = max;
                 max = min;
@@ -154,7 +164,9 @@ public class RandomEventGenerator {
                 } else {
                     int feet = RandomEventGenerator.generateInRange(min, max);
                     feet += flight * RandomEventGenerator.FLIGHT_BUMP;
-                    double inches = RandomEventGenerator.generateInRange(0, 12);
+                    double inches =
+                            RandomEventGenerator.generateInRange(0,
+                                    Measurement.INCHES_PER_FOOT);
                     Measurement m = new Measurement(t, feet, inches);
                     p.addMeasurement(m);
                 }
@@ -184,7 +196,9 @@ public class RandomEventGenerator {
                     p.addMeasurement(m);
                 } else {
                     int feet = RandomEventGenerator.generateInRange(min, max);
-                    double inches = RandomEventGenerator.generateInRange(0, 12);
+                    double inches =
+                            RandomEventGenerator.generateInRange(0,
+                                    Measurement.INCHES_PER_FOOT);
                     Measurement m = new Measurement(mark, feet, inches);
                     p.addMeasurement(m);
                 }
@@ -219,7 +233,9 @@ public class RandomEventGenerator {
      * @return True if a foul, otherwise a mark.
      */
     private static boolean randomFoul() {
-        int odds = RandomEventGenerator.generateInRange(0, 100);
+        int odds =
+                RandomEventGenerator.generateInRange(0,
+                        RandomEventGenerator.PROBABILITY_TOTAL);
         return odds < RandomEventGenerator.PROBABILITY_OF_FOUL;
     }
 

@@ -41,11 +41,12 @@ public class SaveClipboardTask extends AsyncTask<FieldEvent, Integer, Integer> {
      * 
      * @param arg
      *            The field event.
+     * @return A result.
      */
     @Override
     protected Integer doInBackground(FieldEvent... arg) {
         try {
-            synchronized (FieldEvent.sDataLock) {
+            synchronized (FieldEvent.WRITELOCK) {
                 FieldEvent event = arg[0];
                 Serializer serializer = new Persister();
                 serializer.write(event, this.output);

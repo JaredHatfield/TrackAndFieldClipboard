@@ -31,6 +31,11 @@ public class Measurement implements Serializable, Comparable<Measurement> {
     private static final double CONVERSION = 0.3048;
 
     /**
+     * The number of inches in a foot.
+     */
+    public static final int INCHES_PER_FOOT = 12;
+
+    /**
      * The measurement component in feet.
      */
     @Attribute(name = "feet")
@@ -132,9 +137,9 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         // Save the mark
         this.feet = feet;
         this.inches = inches;
-        while (this.inches >= 12) {
+        while (this.inches >= Measurement.INCHES_PER_FOOT) {
             this.feet++;
-            this.inches -= 12;
+            this.inches -= Measurement.INCHES_PER_FOOT;
         }
 
         this.fillMeters();
@@ -165,9 +170,9 @@ public class Measurement implements Serializable, Comparable<Measurement> {
         this.meters = 0;
         this.feet = feet;
         this.inches = inches;
-        while (this.inches >= 12) {
+        while (this.inches >= Measurement.INCHES_PER_FOOT) {
             this.feet++;
-            this.inches -= 12;
+            this.inches -= Measurement.INCHES_PER_FOOT;
         }
 
         this.fillMeters();
@@ -230,7 +235,7 @@ public class Measurement implements Serializable, Comparable<Measurement> {
     }
 
     /**
-     * Compares this object with the specified object for order
+     * Compares this object with the specified object for order.
      * 
      * @param m
      *            The Measurement to be compared.
@@ -249,7 +254,7 @@ public class Measurement implements Serializable, Comparable<Measurement> {
      * inches measurement.
      */
     private void fillMeters() {
-        double us = this.feet + (this.inches / 12.0);
+        double us = this.feet + (this.inches / Measurement.INCHES_PER_FOOT);
         this.meters = us * Measurement.CONVERSION;
     }
 

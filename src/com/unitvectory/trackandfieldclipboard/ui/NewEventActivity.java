@@ -98,40 +98,43 @@ public class NewEventActivity extends Activity {
         this.fieldName = (EditText) this.findViewById(R.id.editText_event_name);
 
         // The event type
-        this.fieldType = this.wireUpSpinner(R.id.spinner_event_type,
-                R.array.event_types);
+        this.fieldType =
+                this.wireUpSpinner(R.id.spinner_event_type, R.array.event_types);
 
         // The event gender
-        this.fieldGender = this.wireUpSpinner(R.id.spinner_event_gender,
-                R.array.genders);
+        this.fieldGender =
+                this.wireUpSpinner(R.id.spinner_event_gender, R.array.genders);
 
         // The event date
         this.fieldDate = (EditText) this.findViewById(R.id.editText_event_date);
 
         // The qualifying marks (user saved default)
-        this.fieldQualifying = this.wireUpSpinner(
-                R.id.spinner_event_qualifying_marks, R.array.marks);
+        this.fieldQualifying =
+                this.wireUpSpinner(R.id.spinner_event_qualifying_marks,
+                        R.array.marks);
         this.fieldQualifying.setSelection(settings.getInt("newQualifying", 3));
 
         // The finals marks (user saved default)
-        this.fieldFinals = this.wireUpSpinner(R.id.spinner_event_final_marks,
-                R.array.marks);
+        this.fieldFinals =
+                this.wireUpSpinner(R.id.spinner_event_final_marks,
+                        R.array.marks);
         this.fieldFinals.setSelection(settings.getInt("newFinals", 3));
 
         // The final participants (user saved default)
-        this.fieldFinalParticipants = (EditText) this
-                .findViewById(R.id.editText_event_final_participants);
+        this.fieldFinalParticipants =
+                (EditText) this
+                        .findViewById(R.id.editText_event_final_participants);
         this.fieldFinalParticipants.setText(settings.getString(
                 "newFinalParticipants", "10"));
 
         // The number of flights (user saved default)
-        this.fieldFlights = (EditText) this
-                .findViewById(R.id.editText_event_flights);
+        this.fieldFlights =
+                (EditText) this.findViewById(R.id.editText_event_flights);
         this.fieldFlights.setText(settings.getString("newFlights", "1"));
 
         // The units (user saved default)
-        this.fieldUnits = this.wireUpSpinner(R.id.spinner_event_units,
-                R.array.units);
+        this.fieldUnits =
+                this.wireUpSpinner(R.id.spinner_event_units, R.array.units);
         this.fieldUnits.setSelection(settings.getInt("newUnits", 0));
 
         // Set the default result to be canceled
@@ -143,18 +146,20 @@ public class NewEventActivity extends Activity {
      * 
      * @param item
      *            The menu item clicked.
+     * @return Return false to allow normal menu processing to proceed, true to
+     *         consume it here.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            // App icon in Action Bar clicked; go home
-            Intent intent = new Intent(this, TrackAndFieldActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // App icon in Action Bar clicked; go home
+                Intent intent = new Intent(this, TrackAndFieldActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -166,17 +171,20 @@ public class NewEventActivity extends Activity {
      */
     public void onAddClick(View v) {
         String name = this.fieldName.getText().toString();
-        EventType type = FieldEvent.parseEventType((String) this.fieldType
-                .getSelectedItem());
-        Gender gender = FieldEvent.parseGender((String) this.fieldGender
-                .getSelectedItem());
+        EventType type =
+                FieldEvent.parseEventType((String) this.fieldType
+                        .getSelectedItem());
+        Gender gender =
+                FieldEvent.parseGender((String) this.fieldGender
+                        .getSelectedItem());
         String date = this.fieldDate.getText().toString();
-        int qualifying = Integer.parseInt((String) this.fieldQualifying
-                .getSelectedItem());
-        int finals = Integer.parseInt((String) this.fieldFinals
-                .getSelectedItem());
-        int finalParticipants = this
-                .getIntFromEditText(this.fieldFinalParticipants);
+        int qualifying =
+                Integer.parseInt((String) this.fieldQualifying
+                        .getSelectedItem());
+        int finals =
+                Integer.parseInt((String) this.fieldFinals.getSelectedItem());
+        int finalParticipants =
+                this.getIntFromEditText(this.fieldFinalParticipants);
         int flights = this.getIntFromEditText(this.fieldFlights);
         String units = (String) this.fieldUnits.getSelectedItem();
         boolean metric = true;
@@ -197,8 +205,9 @@ public class NewEventActivity extends Activity {
         editor.commit();
 
         // Return the Event to the activity that called this intent.
-        FieldEvent event = new FieldEvent(name, type, gender, date, qualifying,
-                finals, finalParticipants, flights, metric);
+        FieldEvent event =
+                new FieldEvent(name, type, gender, date, qualifying, finals,
+                        finalParticipants, flights, metric);
         Intent in = new Intent();
         in.putExtra("event", event);
         this.setResult(RESULT_OK, in);
@@ -239,8 +248,9 @@ public class NewEventActivity extends Activity {
      */
     private Spinner wireUpSpinner(int spinnerId, int listId) {
         Spinner spinner = (Spinner) this.findViewById(spinnerId);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, listId, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(this, listId,
+                        android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         return spinner;

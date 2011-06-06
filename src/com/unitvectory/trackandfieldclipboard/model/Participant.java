@@ -287,7 +287,7 @@ public class Participant implements Serializable, Comparable<Participant> {
     }
 
     /**
-     * Compares this object with the specified object for order
+     * Compares this object with the specified object for order.
      * 
      * @param p
      *            The Participant to be compared.

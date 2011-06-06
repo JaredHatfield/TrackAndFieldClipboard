@@ -133,8 +133,8 @@ public class DistanceClipboardActivity extends Activity implements
         setContentView(R.layout.activity_distance_clipboard);
 
         if (this.event == null) {
-            this.event = (FieldEvent) this.getIntent().getSerializableExtra(
-                    "event");
+            this.event =
+                    (FieldEvent) this.getIntent().getSerializableExtra("event");
         }
 
         if (this.filename == null) {
@@ -153,18 +153,19 @@ public class DistanceClipboardActivity extends Activity implements
         }
 
         // Find all of the views for the header
-        TextView textName = (TextView) this
-                .findViewById(R.id.textView_event_name);
-        TextView textDate = (TextView) this
-                .findViewById(R.id.textView_event_date);
-        TextView textType = (TextView) this
-                .findViewById(R.id.textView_event_type);
-        TextView textGender = (TextView) this
-                .findViewById(R.id.textView_event_gender);
-        TextView textParticipants = (TextView) this
-                .findViewById(R.id.textView_event_final_participants);
-        TextView textFlights = (TextView) this
-                .findViewById(R.id.textView_event_flights);
+        TextView textName =
+                (TextView) this.findViewById(R.id.textView_event_name);
+        TextView textDate =
+                (TextView) this.findViewById(R.id.textView_event_date);
+        TextView textType =
+                (TextView) this.findViewById(R.id.textView_event_type);
+        TextView textGender =
+                (TextView) this.findViewById(R.id.textView_event_gender);
+        TextView textParticipants =
+                (TextView) this
+                        .findViewById(R.id.textView_event_final_participants);
+        TextView textFlights =
+                (TextView) this.findViewById(R.id.textView_event_flights);
 
         // Display the header text
         textName.setText(this.event.getEventName());
@@ -186,8 +187,9 @@ public class DistanceClipboardActivity extends Activity implements
 
         flightChoices.add(this.getString(R.string.spinner_flight_finals));
         flightChoices.add(this.getString(R.string.spinner_results));
-        ArrayAdapter<String> mSpinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, flightChoices);
+        ArrayAdapter<String> mSpinnerAdapter =
+                new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, flightChoices);
         mSpinnerAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -196,7 +198,8 @@ public class DistanceClipboardActivity extends Activity implements
         actionBar.setListNavigationCallbacks(mSpinnerAdapter,
                 new ActionBar.OnNavigationListener() {
                     @Override
-                    public boolean onNavigationItemSelected(int arg0, long arg1) {
+                    public boolean
+                            onNavigationItemSelected(int arg0, long arg1) {
                         spinnerFlightSelection = arg0;
                         drawTable();
                         selectAthleteNone();
@@ -208,18 +211,18 @@ public class DistanceClipboardActivity extends Activity implements
         actionBar.setDisplayShowTitleEnabled(false);
 
         // Find all of the text view for the footer
-        this.currentName = (TextView) this
-                .findViewById(R.id.textView_current_name);
-        this.currentAttempt = (TextView) this
-                .findViewById(R.id.textView_current_attempt);
+        this.currentName =
+                (TextView) this.findViewById(R.id.textView_current_name);
+        this.currentAttempt =
+                (TextView) this.findViewById(R.id.textView_current_attempt);
 
         // Find all of the footer view
         this.buttonMark = (Button) this.findViewById(R.id.button_mark);
         this.buttonScratch = (Button) this.findViewById(R.id.button_scratch);
 
         // Locate the participants table
-        this.participants = (TableLayout) this
-                .findViewById(R.id.tableLayout_participants);
+        this.participants =
+                (TableLayout) this.findViewById(R.id.tableLayout_participants);
 
         // Render the table
         this.drawTable();
@@ -232,8 +235,8 @@ public class DistanceClipboardActivity extends Activity implements
     public void onPause() {
         super.onPause();
         try {
-            FileOutputStream output = this.openFileOutput(this.filename,
-                    Context.MODE_PRIVATE);
+            FileOutputStream output =
+                    this.openFileOutput(this.filename, Context.MODE_PRIVATE);
             SaveClipboardTask saveClipboardTask = new SaveClipboardTask(output);
             saveClipboardTask.execute(this.event);
         } catch (Exception e) {
@@ -276,6 +279,7 @@ public class DistanceClipboardActivity extends Activity implements
      * 
      * @param menu
      *            The menu to manipulate.
+     * @return True so the menu is displayed.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -288,30 +292,32 @@ public class DistanceClipboardActivity extends Activity implements
      * 
      * @param item
      *            The menu item clicked.
+     * @return Return false to allow normal menu processing to proceed, true to
+     *         consume it here.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            // App icon in Action Bar clicked; go home
-            Intent intent = new Intent(this, TrackAndFieldActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            return true;
-        case R.id.menu_add_participant:
-            this.addParticipantClick();
-            return true;
-        case R.id.menu_email_results:
-            final Intent emailIntent = new Intent(
-                    android.content.Intent.ACTION_SEND);
-            emailIntent.setType("plain/text");
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-                    this.event.getEventName());
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                    this.event.toString());
-            startActivity(emailIntent);
-        default:
-            return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // App icon in Action Bar clicked; go home
+                Intent intent = new Intent(this, TrackAndFieldActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.menu_add_participant:
+                this.addParticipantClick();
+                return true;
+            case R.id.menu_email_results:
+                final Intent emailIntent =
+                        new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                        this.event.getEventName());
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                        this.event.toString());
+                startActivity(emailIntent);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -325,8 +331,8 @@ public class DistanceClipboardActivity extends Activity implements
         Resources res = getResources();
         float fontSize = res.getDimension(R.dimen.font_size);
         int cellHeight = res.getDimensionPixelSize(R.dimen.table_cell_height);
-        int cellLeftPading = res
-                .getDimensionPixelSize(R.dimen.table_cell_left_padding);
+        int cellLeftPading =
+                res.getDimensionPixelSize(R.dimen.table_cell_left_padding);
 
         // Determine what participants need to be displayed.
         this.participantDisplay = ParticipantDisplay.FLIGHT;
@@ -350,8 +356,9 @@ public class DistanceClipboardActivity extends Activity implements
             this.participantDisplay = ParticipantDisplay.RESULTS;
         } else {
             // Display only those participants in the selected flight
-            String selectedFlight = spinnerVal.substring(this.getString(
-                    R.string.flight).length() + 1);
+            String selectedFlight =
+                    spinnerVal.substring(this.getString(R.string.flight)
+                            .length() + 1);
             int flightInt = Integer.parseInt(selectedFlight);
             for (int i = 0; i < this.event.getParticipants().size(); i++) {
                 Participant p = this.event.getParticipants().get(i);
@@ -498,9 +505,10 @@ public class DistanceClipboardActivity extends Activity implements
             textFlightPosition.setBackgroundResource(R.color.names);
             tr.addView(textFlightPosition);
 
-            AthleteRowHolder holder = new AthleteRowHolder(
-                    this.participantDisplay, textFlightPlace, textName,
-                    textTeam, textFlightPosition);
+            AthleteRowHolder holder =
+                    new AthleteRowHolder(this.participantDisplay,
+                            textFlightPlace, textName, textTeam,
+                            textFlightPosition);
             this.rows.put(i, holder);
 
             for (int j = 0; j < this.event.getQualifyingScores(); j++) {
@@ -542,8 +550,8 @@ public class DistanceClipboardActivity extends Activity implements
      * Updates the places for all of the athletes.
      */
     public void updateAthletePlace() {
-        Iterator<Map.Entry<Integer, AthleteRowHolder>> it = this.rows
-                .entrySet().iterator();
+        Iterator<Map.Entry<Integer, AthleteRowHolder>> it =
+                this.rows.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, AthleteRowHolder> pairs = it.next();
             AthleteRowHolder holder = pairs.getValue();
@@ -559,21 +567,16 @@ public class DistanceClipboardActivity extends Activity implements
      *            The calling view.
      */
     public void onMarkClick(View view) {
-        AthleteRowHolder holder = (AthleteRowHolder) view
-                .getTag(R.id.id_holder_object);
+        AthleteRowHolder holder =
+                (AthleteRowHolder) view.getTag(R.id.id_holder_object);
         Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
-        if (holder.getParticipant() == null) {
-            // Something bad happened
-        } else if (attempt > 0) {
+        if (attempt > 0) {
             if (this.event.isMetric()) {
                 this.displayMetricInput(holder, attempt);
             } else {
                 this.displayUsInput(holder, attempt);
             }
-        } else {
-            // Invalid selection
         }
-
     }
 
     /**
@@ -583,12 +586,10 @@ public class DistanceClipboardActivity extends Activity implements
      *            The calling view.
      */
     public void onScratchClick(View view) {
-        AthleteRowHolder holder = (AthleteRowHolder) view
-                .getTag(R.id.id_holder_object);
+        AthleteRowHolder holder =
+                (AthleteRowHolder) view.getTag(R.id.id_holder_object);
         Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
-        if (holder.getParticipant() == null) {
-            // Something bad happened
-        } else if (attempt > 0) {
+        if (attempt > 0) {
             // Display confirmation box if the value is currently set
             if (holder.getParticipant().getMeasurement(attempt.intValue()) == null) {
                 holder.mark(attempt.intValue());
@@ -596,8 +597,6 @@ public class DistanceClipboardActivity extends Activity implements
             } else {
                 this.displayScratchConfirmation(holder, attempt);
             }
-        } else {
-            // Invalid selection
         }
     }
 
@@ -608,24 +607,26 @@ public class DistanceClipboardActivity extends Activity implements
     public void addParticipantClick() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.add_participant);
-        View v = this.getLayoutInflater().inflate(R.layout.dialog_add_user,
-                null);
-        final EditText inputName = (EditText) v
-                .findViewById(R.id.editText_participant_name);
-        final EditText inputTeam = (EditText) v
-                .findViewById(R.id.editText_participant_team);
-        final EditText inputFlight = (EditText) v
-                .findViewById(R.id.editText_participant_flight);
+        View v =
+                this.getLayoutInflater()
+                        .inflate(R.layout.dialog_add_user, null);
+        final EditText inputName =
+                (EditText) v.findViewById(R.id.editText_participant_name);
+        final EditText inputTeam =
+                (EditText) v.findViewById(R.id.editText_participant_team);
+        final EditText inputFlight =
+                (EditText) v.findViewById(R.id.editText_participant_flight);
         int flight = this.event.nextParticipantFlight();
         inputFlight.setText(flight + "");
-        final EditText inputPosition = (EditText) v
-                .findViewById(R.id.editText_participant_position);
+        final EditText inputPosition =
+                (EditText) v.findViewById(R.id.editText_participant_position);
         inputPosition.setText(this.event.nextParticipantPosition(flight) + "");
         alert.setView(v);
         alert.setPositiveButton(R.string.add,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
                         String team = inputTeam.getText().toString();
                         String flight = inputFlight.getText().toString();
@@ -650,7 +651,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
                 });
@@ -663,14 +665,13 @@ public class DistanceClipboardActivity extends Activity implements
      * 
      * @param view
      *            The calling view.
+     * @return True if the callback consumed the long click, false otherwise.
      */
     @Override
     public boolean onLongClick(View view) {
-        AthleteRowHolder holder = (AthleteRowHolder) view
-                .getTag(R.id.id_holder_object);
-        if (holder.getParticipant() == null) {
-            // Something bad happened
-        } else if (this.participantDisplay.equals(ParticipantDisplay.ALL)) {
+        AthleteRowHolder holder =
+                (AthleteRowHolder) view.getTag(R.id.id_holder_object);
+        if (this.participantDisplay.equals(ParticipantDisplay.ALL)) {
             final Participant participant = holder.getParticipant();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.delete_confirmation)
@@ -699,8 +700,10 @@ public class DistanceClipboardActivity extends Activity implements
         } else {
             // Show some toast saying the participant can not be deleted in this
             // view.
-            Toast toast = Toast.makeText(this,
-                    R.string.warning_no_delete_participant, Toast.LENGTH_SHORT);
+            Toast toast =
+                    Toast.makeText(this,
+                            R.string.warning_no_delete_participant,
+                            Toast.LENGTH_SHORT);
             toast.show();
         }
 
@@ -717,8 +720,8 @@ public class DistanceClipboardActivity extends Activity implements
      */
     @Override
     public void onClick(View view) {
-        AthleteRowHolder holder = (AthleteRowHolder) view
-                .getTag(R.id.id_holder_object);
+        AthleteRowHolder holder =
+                (AthleteRowHolder) view.getTag(R.id.id_holder_object);
         Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
         if (holder.getParticipant() == null) {
             // Something bad happened
@@ -727,28 +730,32 @@ public class DistanceClipboardActivity extends Activity implements
             // Change the mark that is selected
             if (this.participantDisplay.equals(ParticipantDisplay.RESULTS)) {
                 // Display a message saying the mark can not be edited
-                Toast toast = Toast.makeText(this,
-                        R.string.warning_no_edit_results, Toast.LENGTH_SHORT);
+                Toast toast =
+                        Toast.makeText(this, R.string.warning_no_edit_results,
+                                Toast.LENGTH_SHORT);
                 toast.show();
             } else if (this.participantDisplay
                     .equals(ParticipantDisplay.FLIGHT)
                     && attempt > this.event.getQualifyingScores()) {
                 // Display a message saying the mark can not be edited
-                Toast toast = Toast.makeText(this,
-                        R.string.warning_no_edit_finals, Toast.LENGTH_SHORT);
+                Toast toast =
+                        Toast.makeText(this, R.string.warning_no_edit_finals,
+                                Toast.LENGTH_SHORT);
                 toast.show();
             } else if (this.participantDisplay
                     .equals(ParticipantDisplay.FINALS)
                     && attempt <= this.event.getQualifyingScores()) {
                 // Display a message saying the mark can not be edited
-                Toast toast = Toast.makeText(this,
-                        R.string.warning_no_edit_flight, Toast.LENGTH_SHORT);
+                Toast toast =
+                        Toast.makeText(this, R.string.warning_no_edit_flight,
+                                Toast.LENGTH_SHORT);
                 toast.show();
             } else {
                 // The mark can be edited.
                 if (this.lastClicked != null) {
-                    AthleteRowHolder oldHolder = (AthleteRowHolder) this.lastClicked
-                            .getTag(R.id.id_holder_object);
+                    AthleteRowHolder oldHolder =
+                            (AthleteRowHolder) this.lastClicked
+                                    .getTag(R.id.id_holder_object);
                     oldHolder.displayAthlete(oldHolder.getParticipant());
                 }
 
@@ -763,8 +770,9 @@ public class DistanceClipboardActivity extends Activity implements
                 this.displayEditParticipant(holder);
             } else {
                 // Display a message saying the participant can not be edited
-                Toast toast = Toast
-                        .makeText(this, R.string.warning_no_edit_particiant,
+                Toast toast =
+                        Toast.makeText(this,
+                                R.string.warning_no_edit_particiant,
                                 Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -869,8 +877,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setMessage(athleteName + " " + this.getString(R.string.attempt)
                 + " #" + attempt);
         View v = this.getLayoutInflater().inflate(R.layout.dialog_metric, null);
-        final EditText input = (EditText) v
-                .findViewById(R.id.editText_distance_meters);
+        final EditText input =
+                (EditText) v.findViewById(R.id.editText_distance_meters);
         Measurement m = athlete.getMeasurement(attempt);
         if (m != null && !m.isScratch()) {
             input.setText(m.getMeters() + "");
@@ -881,7 +889,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setPositiveButton(R.string.mark,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         String value = input.getText().toString();
                         if (value.length() == 0) {
                             value = "0";
@@ -896,7 +905,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
                 });
@@ -912,7 +922,8 @@ public class DistanceClipboardActivity extends Activity implements
      * @param attempt
      *            The attempt index.
      */
-    private void displayUsInput(final AthleteRowHolder holder, final int attempt) {
+    private void
+            displayUsInput(final AthleteRowHolder holder, final int attempt) {
         Participant athlete = holder.getParticipant();
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -927,10 +938,10 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setMessage(athleteName + " " + this.getString(R.string.attempt)
                 + " #" + attempt);
         View v = this.getLayoutInflater().inflate(R.layout.dialog_us, null);
-        final EditText inputFeet = (EditText) v
-                .findViewById(R.id.editText_distance_feet);
-        final EditText inputInches = (EditText) v
-                .findViewById(R.id.editText_distance_inches);
+        final EditText inputFeet =
+                (EditText) v.findViewById(R.id.editText_distance_feet);
+        final EditText inputInches =
+                (EditText) v.findViewById(R.id.editText_distance_inches);
         Measurement m = athlete.getMeasurement(attempt);
         if (m != null && !m.isScratch()) {
             inputFeet.setText(m.getFeet() + "");
@@ -942,7 +953,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setPositiveButton(R.string.mark,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         String feet = inputFeet.getText().toString();
                         if (feet.length() == 0) {
                             feet = "0";
@@ -963,7 +975,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
                 });
@@ -982,26 +995,28 @@ public class DistanceClipboardActivity extends Activity implements
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.edit_participant);
-        View v = this.getLayoutInflater().inflate(R.layout.dialog_add_user,
-                null);
-        final EditText inputName = (EditText) v
-                .findViewById(R.id.editText_participant_name);
+        View v =
+                this.getLayoutInflater()
+                        .inflate(R.layout.dialog_add_user, null);
+        final EditText inputName =
+                (EditText) v.findViewById(R.id.editText_participant_name);
         inputName.setText(athlete.getName());
-        final EditText inputTeam = (EditText) v
-                .findViewById(R.id.editText_participant_team);
+        final EditText inputTeam =
+                (EditText) v.findViewById(R.id.editText_participant_team);
         inputTeam.setText(athlete.getSchool());
-        final EditText inputFlight = (EditText) v
-                .findViewById(R.id.editText_participant_flight);
+        final EditText inputFlight =
+                (EditText) v.findViewById(R.id.editText_participant_flight);
         inputFlight.setText(athlete.getFlight() + "");
-        final EditText inputPosition = (EditText) v
-                .findViewById(R.id.editText_participant_position);
+        final EditText inputPosition =
+                (EditText) v.findViewById(R.id.editText_participant_position);
         inputPosition.setText(athlete.getPosition() + "");
 
         alert.setView(v);
         alert.setPositiveButton(R.string.save,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
                         String team = inputTeam.getText().toString();
                         String flight = inputFlight.getText().toString();
@@ -1019,9 +1034,9 @@ public class DistanceClipboardActivity extends Activity implements
                         int positionInt = Integer.parseInt(position);
 
                         // Update the participant
-                        boolean partialUpdate = (flightInt == athlete
-                                .getFlight() && positionInt == athlete
-                                .getPosition());
+                        boolean partialUpdate =
+                                (flightInt == athlete.getFlight() && positionInt == athlete
+                                        .getPosition());
                         athlete.setName(name);
                         athlete.setSchool(team);
                         athlete.setFlight(Integer.parseInt(flight));
@@ -1039,7 +1054,8 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void
+                            onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
                 });

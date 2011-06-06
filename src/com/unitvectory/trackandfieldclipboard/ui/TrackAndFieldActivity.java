@@ -45,6 +45,8 @@ public class TrackAndFieldActivity extends Activity {
      * 
      * @param menu
      *            The menu to manipulate.
+     * @return You must return true for the menu to be displayed; if you return
+     *         false it will not be shown.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,35 +59,37 @@ public class TrackAndFieldActivity extends Activity {
      * 
      * @param item
      *            The menu item clicked.
+     * @return Return false to allow normal menu processing to proceed, true to
+     *         consume it here.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            // Display the about application dialog
-            this.showAboutDialog();
-            return true;
-        case R.id.menu_new_event:
-            // Launch the new event activity
-            Intent intent = new Intent(this, NewEventActivity.class);
-            this.startActivityForResult(intent, NEW_EVENT_REQUEST);
-            return true;
-        case R.id.menu_sample_results:
-            // Generate a sample event
-            RandomEventGenerator reg = new RandomEventGenerator();
-            FieldEvent event = reg.getEvent();
-            Intent sampleIntent = new Intent(this,
-                    DistanceClipboardActivity.class);
-            sampleIntent.putExtra("event", event);
-            sampleIntent.putExtra("filename", event.newFileName());
-            this.startActivity(sampleIntent);
-            return true;
-        case R.id.menu_about:
-            // Display the about application dialog
-            this.showAboutDialog();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // Display the about application dialog
+                this.showAboutDialog();
+                return true;
+            case R.id.menu_new_event:
+                // Launch the new event activity
+                Intent intent = new Intent(this, NewEventActivity.class);
+                this.startActivityForResult(intent, NEW_EVENT_REQUEST);
+                return true;
+            case R.id.menu_sample_results:
+                // Generate a sample event
+                RandomEventGenerator reg = new RandomEventGenerator();
+                FieldEvent event = reg.getEvent();
+                Intent sampleIntent =
+                        new Intent(this, DistanceClipboardActivity.class);
+                sampleIntent.putExtra("event", event);
+                sampleIntent.putExtra("filename", event.newFileName());
+                this.startActivity(sampleIntent);
+                return true;
+            case R.id.menu_about:
+                // Display the about application dialog
+                this.showAboutDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -100,14 +104,15 @@ public class TrackAndFieldActivity extends Activity {
      *            The results.
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void
+            onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO: Delete test code
         if (requestCode == NEW_EVENT_REQUEST) {
             if (resultCode == RESULT_OK) {
-                FieldEvent event = (FieldEvent) data.getExtras()
-                        .getSerializable("event");
-                Intent intent = new Intent(this,
-                        DistanceClipboardActivity.class);
+                FieldEvent event =
+                        (FieldEvent) data.getExtras().getSerializable("event");
+                Intent intent =
+                        new Intent(this, DistanceClipboardActivity.class);
                 intent.putExtra("event", event);
                 intent.putExtra("filename", event.newFileName());
                 this.startActivity(intent);

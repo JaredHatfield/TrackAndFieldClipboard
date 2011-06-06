@@ -51,8 +51,9 @@ public class FileListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
 
-        this.loadingDialog = ProgressDialog.show(this.getActivity(), "",
-                this.getString(R.string.loading), true);
+        this.loadingDialog =
+                ProgressDialog.show(this.getActivity(), "",
+                        this.getString(R.string.loading), true);
         this.loadingDialog.dismiss();
 
         ListView lv = getListView();
@@ -99,8 +100,9 @@ public class FileListFragment extends ListFragment {
             this.directoryEntries.add(file.getName());
         }
 
-        ArrayAdapter<String> directoryList = new ArrayAdapter<String>(
-                getActivity(), R.layout.file_row, this.directoryEntries);
+        ArrayAdapter<String> directoryList =
+                new ArrayAdapter<String>(getActivity(), R.layout.file_row,
+                        this.directoryEntries);
 
         this.setListAdapter(directoryList);
     }
@@ -120,8 +122,8 @@ public class FileListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         String filename = this.directoryEntries.get(position);
-        OpenClipboardTask openClipboardTask = new OpenClipboardTask(
-                this.getActivity(), this.loadingDialog);
+        OpenClipboardTask openClipboardTask =
+                new OpenClipboardTask(this.getActivity(), this.loadingDialog);
         openClipboardTask.execute(filename);
         this.loadingDialog.show();
     }

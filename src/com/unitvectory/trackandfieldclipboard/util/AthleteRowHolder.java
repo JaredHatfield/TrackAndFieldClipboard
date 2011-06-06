@@ -160,8 +160,9 @@ public class AthleteRowHolder {
             if (best == 0) {
                 this.textFlightPosition.setText("-");
             } else {
-                String m = this.getMeasurement(best, this.textFlightPosition
-                        .getContext().getString(R.string.scratch));
+                String m =
+                        this.getMeasurement(best, this.textFlightPosition
+                                .getContext().getString(R.string.scratch));
                 this.textFlightPosition.setText(m);
             }
         } else {
@@ -170,14 +171,15 @@ public class AthleteRowHolder {
         }
 
         int best = this.participant.bestMark();
-        Iterator<Map.Entry<Integer, TextView>> it = this.marks.entrySet()
-                .iterator();
+        Iterator<Map.Entry<Integer, TextView>> it =
+                this.marks.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, TextView> pairs = it.next();
             int attemptIndex = pairs.getKey().intValue();
             TextView view = pairs.getValue();
-            String m = this.getMeasurement(attemptIndex, view.getContext()
-                    .getString(R.string.scratch));
+            String m =
+                    this.getMeasurement(attemptIndex, view.getContext()
+                            .getString(R.string.scratch));
             view.setText(m);
 
             if (best == attemptIndex) {
@@ -257,6 +259,7 @@ public class AthleteRowHolder {
      * Updates the place for the row.
      * 
      * @param place
+     *            The athletes place.
      */
     public void updatePlace(int place) {
         String str = place + "";
