@@ -271,6 +271,8 @@ public class AthleteRowHolder {
      * 
      * @param attempt
      *            The attempt index.
+     * @param foul
+     *            The string representation of a foul.
      * @return The string representation of a measurement.
      */
     public String getMeasurement(int attempt, String foul) {

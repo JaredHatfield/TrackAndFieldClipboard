@@ -53,6 +53,8 @@ public class OpenClipboardTask extends AsyncTask<String, Integer, FieldEvent> {
      * 
      * @param activity
      *            The activity.
+     * @param dialog
+     *            The progress dialog.
      */
     public OpenClipboardTask(Activity activity, ProgressDialog dialog) {
         this.activity = activity;
