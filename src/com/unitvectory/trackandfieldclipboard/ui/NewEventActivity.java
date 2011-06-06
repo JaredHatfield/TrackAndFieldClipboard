@@ -5,6 +5,7 @@
 package com.unitvectory.trackandfieldclipboard.ui;
 
 import android.app.Activity;
+import android.app.backup.BackupManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.unitvectory.trackandfieldclipboard.R;
 import com.unitvectory.trackandfieldclipboard.model.EventType;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.Gender;
+import com.unitvectory.trackandfieldclipboard.util.TrackAndFieldPreferences;
 
 /**
  * The activity used to create a new event.
@@ -26,11 +28,6 @@ import com.unitvectory.trackandfieldclipboard.model.Gender;
  * 
  */
 public class NewEventActivity extends Activity {
-
-    /**
-     * The name of the shared preferences file.
-     */
-    public static final String PREFS_NAME = "TrackAndFieldClipboardPrefs";
 
     /**
      * The event name.
@@ -92,7 +89,8 @@ public class NewEventActivity extends Activity {
         this.getActionBar().setTitle(R.string.new_event);
 
         // Get the shared preferences for the application
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings =
+                getSharedPreferences(TrackAndFieldPreferences.PREFS_NAME, 0);
 
         // The event name
         this.fieldName = (EditText) this.findViewById(R.id.editText_event_name);
@@ -112,30 +110,34 @@ public class NewEventActivity extends Activity {
         this.fieldQualifying =
                 this.wireUpSpinner(R.id.spinner_event_qualifying_marks,
                         R.array.marks);
-        this.fieldQualifying.setSelection(settings.getInt("newQualifying", 3));
+        this.fieldQualifying.setSelection(settings.getInt(
+                TrackAndFieldPreferences.NEW_QUALIFYING, 3));
 
         // The finals marks (user saved default)
         this.fieldFinals =
                 this.wireUpSpinner(R.id.spinner_event_final_marks,
                         R.array.marks);
-        this.fieldFinals.setSelection(settings.getInt("newFinals", 3));
+        this.fieldFinals.setSelection(settings.getInt(
+                TrackAndFieldPreferences.NEW_FINALS, 3));
 
         // The final participants (user saved default)
         this.fieldFinalParticipants =
                 (EditText) this
                         .findViewById(R.id.editText_event_final_participants);
         this.fieldFinalParticipants.setText(settings.getString(
-                "newFinalParticipants", "10"));
+                TrackAndFieldPreferences.NEW_FINAL_PARTICIPANTS, "10"));
 
         // The number of flights (user saved default)
         this.fieldFlights =
                 (EditText) this.findViewById(R.id.editText_event_flights);
-        this.fieldFlights.setText(settings.getString("newFlights", "1"));
+        this.fieldFlights.setText(settings.getString(
+                TrackAndFieldPreferences.NEW_FLIGHTS, "1"));
 
         // The units (user saved default)
         this.fieldUnits =
                 this.wireUpSpinner(R.id.spinner_event_units, R.array.units);
-        this.fieldUnits.setSelection(settings.getInt("newUnits", 0));
+        this.fieldUnits.setSelection(settings.getInt(
+                TrackAndFieldPreferences.NEW_UNITS, 0));
 
         // Set the default result to be canceled
         this.setResult(RESULT_CANCELED);
@@ -194,15 +196,23 @@ public class NewEventActivity extends Activity {
 
         // Save all of the new values in the shared preferences so they will be
         // the same the next time the user creates an event
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings =
+                getSharedPreferences(TrackAndFieldPreferences.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("newQualifying",
+        editor.putInt(TrackAndFieldPreferences.NEW_QUALIFYING,
                 this.fieldQualifying.getSelectedItemPosition());
-        editor.putInt("newFinals", this.fieldFinals.getSelectedItemPosition());
-        editor.putString("newFinalParticipants", finalParticipants + "");
-        editor.putString("newFlights", flights + "");
-        editor.putInt("newUnits", this.fieldUnits.getSelectedItemPosition());
+        editor.putInt(TrackAndFieldPreferences.NEW_FINALS,
+                this.fieldFinals.getSelectedItemPosition());
+        editor.putString(TrackAndFieldPreferences.NEW_FINAL_PARTICIPANTS,
+                finalParticipants + "");
+        editor.putString(TrackAndFieldPreferences.NEW_FLIGHTS, flights + "");
+        editor.putInt(TrackAndFieldPreferences.NEW_UNITS,
+                this.fieldUnits.getSelectedItemPosition());
         editor.commit();
+
+        // Notify the system that the application needs to be backed up
+        BackupManager backupManager = new BackupManager(this);
+        backupManager.dataChanged();
 
         // Return the Event to the activity that called this intent.
         FieldEvent event =

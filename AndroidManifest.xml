@@ -23,7 +23,8 @@
     <application
     	android:icon="@drawable/icon" 
     	android:label="@string/app_name" 
-    	android:theme="@android:style/Theme.Holo.Light">
+    	android:theme="@android:style/Theme.Holo.Light"
+    	android:backupAgent=".util.TrackBackupAgent">
         <activity android:name=".ui.TrackAndFieldActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,5 +37,9 @@
 			android:name=".ui.DistanceClipboardActivity" 
 			android:label="@string/app_name"
 			android:windowSoftInputMode="adjustPan" />
+			<!-- Set up the backup service -->
+			<meta-data
+				android:name="com.google.android.backup.api_key"
+				android:value="AEdPqrEAAAAIb9bPpr0NFywLlS_Ti8XCsRSm_nNPZ8i49ceEDA" />
     </application>
 </manifest>
