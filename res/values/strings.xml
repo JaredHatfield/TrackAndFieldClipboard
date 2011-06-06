@@ -3,7 +3,7 @@
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
  -->
- <resources>
+<resources>
     <string name="about">About</string>
     <string name="add">Add</string>
     <string name="add_participant">Add Participant</string>
