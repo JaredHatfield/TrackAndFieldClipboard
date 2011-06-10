@@ -339,7 +339,7 @@ public class FieldEvent implements Serializable {
         StringBuilder sb = new StringBuilder();
 
         if (this.eventName != null && this.eventName.length() > 0) {
-            sb.append(this.eventName.replaceAll("\\W+", ""));
+            sb.append(this.eventName.replaceAll("\\[^A-Za-z0-9 ]+", ""));
             sb.append(" ");
         }
 

@@ -16,6 +16,11 @@
     	android:title="@string/sample_results"
     	android:showAsAction="withText" />
     <item
+        android:id="@+id/menu_import_hy_tek"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/hytek_import"
+        android:showAsAction="withText" />
+    <item
     	android:id="@+id/menu_about"
     	android:icon="@android:drawable/ic_dialog_info"
     	android:title="@string/about"

@@ -6,12 +6,14 @@ package com.unitvectory.trackandfieldclipboard.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.unitvectory.trackandfieldclipboard.R;
+import com.unitvectory.trackandfieldclipboard.hytek.ParseHyTekFileTask;
 import com.unitvectory.trackandfieldclipboard.model.FieldEvent;
 import com.unitvectory.trackandfieldclipboard.model.RandomEventGenerator;
 
@@ -26,7 +28,17 @@ public class TrackAndFieldActivity extends Activity {
     /**
      * The constant used for handling a request for a new event.
      */
-    static final int NEW_EVENT_REQUEST = 639;
+    private static final int NEW_EVENT_REQUEST = 639;
+
+    /**
+     * The constant used for handling a request to import a HY-TEK file.
+     */
+    private static final int PICKFILE_RESULT_CODE = 4173;
+
+    /**
+     * The fragment list.
+     */
+    private FileListFragment fragmentList;
 
     /**
      * Called when the activity is first created.
@@ -38,6 +50,9 @@ public class TrackAndFieldActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_and_field);
+        this.fragmentList =
+                (FileListFragment) getFragmentManager().findFragmentById(
+                        R.id.fragment_file_list);
     }
 
     /**
@@ -84,6 +99,9 @@ public class TrackAndFieldActivity extends Activity {
                 sampleIntent.putExtra("filename", event.newFileName());
                 this.startActivity(sampleIntent);
                 return true;
+            case R.id.menu_import_hy_tek:
+                this.importHyTek();
+                return true;
             case R.id.menu_about:
                 // Display the about application dialog
                 this.showAboutDialog();
@@ -106,8 +124,8 @@ public class TrackAndFieldActivity extends Activity {
     @Override
     protected void
             onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO: Delete test code
         if (requestCode == NEW_EVENT_REQUEST) {
+            // Displays the activity for the new exercise
             if (resultCode == RESULT_OK) {
                 FieldEvent event =
                         (FieldEvent) data.getExtras().getSerializable("event");
@@ -116,6 +134,22 @@ public class TrackAndFieldActivity extends Activity {
                 intent.putExtra("event", event);
                 intent.putExtra("filename", event.newFileName());
                 this.startActivity(intent);
+            }
+        } else if (requestCode == PICKFILE_RESULT_CODE) {
+            // Try and parse the HY-TEK results file
+            if (resultCode == RESULT_OK) {
+                String filepath = data.getData().getPath();
+                ProgressDialog progressDialog;
+                progressDialog = new ProgressDialog(this);
+                progressDialog
+                        .setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.setMessage(this.getString(R.string.loading));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                ParseHyTekFileTask parseTask =
+                        new ParseHyTekFileTask(this.getFilesDir(),
+                                this.fragmentList, progressDialog);
+                parseTask.execute(filepath);
             }
         }
     }
@@ -129,5 +163,14 @@ public class TrackAndFieldActivity extends Activity {
         dialog.setTitle(R.string.about);
         dialog.setCancelable(true);
         dialog.show();
+    }
+
+    /**
+     * Launches the get content intent.
+     */
+    private void importHyTek() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("file/txt");
+        startActivityForResult(intent, PICKFILE_RESULT_CODE);
     }
 }
