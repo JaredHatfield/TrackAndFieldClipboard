@@ -5,6 +5,8 @@
 package com.unitvectory.trackandfieldclipboard.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,8 +131,11 @@ public class RandomEventGenerator {
         Map<Participant, Integer> mins = new HashMap<Participant, Integer>();
         Map<Participant, Integer> maxs = new HashMap<Participant, Integer>();
 
-        for (int i = 0; i < RandomEventGenerator.PARTICIPANT_NAMES.length; i++) {
-            String pName = RandomEventGenerator.PARTICIPANT_NAMES[i];
+        List<String> names =
+                Arrays.asList(RandomEventGenerator.PARTICIPANT_NAMES);
+        Collections.shuffle(names);
+        for (int i = 0; i < names.size(); i++) {
+            String pName = names.get(i);
             int position = i + 1;
             int flight = 1;
             while (position > perFlight) {
