@@ -122,6 +122,8 @@ public class HyTekParser {
             return EventType.LONG_JUMP;
         } else if (line.contains("Triple Jump")) {
             return EventType.TRIPLE_JUMP;
+        } else if (line.contains("Hammer Throw")) {
+            return EventType.HAMMER_THROW;
         } else {
             return EventType.NA;
         }

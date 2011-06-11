@@ -23,9 +23,9 @@ public enum EventType {
     DISCUS,
 
     /**
-     * Shot put.
+     * Hammer throw.
      */
-    SHOT_PUT,
+    HAMMER_THROW,
 
     /**
      * Javaline.
@@ -36,6 +36,11 @@ public enum EventType {
      * Long jump.
      */
     LONG_JUMP,
+
+    /**
+     * Shot put.
+     */
+    SHOT_PUT,
 
     /**
      * Triple jump.

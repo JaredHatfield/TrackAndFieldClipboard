@@ -75,6 +75,7 @@
     <string-array name="event_types">
         <item>Choose Event</item>
         <item>Discus</item>
+        <item>Hammer Throw</item>
         <item>Javelin</item>
         <item>Long Jump</item>
         <item>Shot Put</item>

@@ -503,6 +503,8 @@ public class FieldEvent implements Serializable {
             return EventType.LONG_JUMP;
         } else if (type.equalsIgnoreCase("triple jump")) {
             return EventType.TRIPLE_JUMP;
+        } else if (type.equalsIgnoreCase("hammer throw")) {
+            return EventType.HAMMER_THROW;
         }
 
         return EventType.NA;
