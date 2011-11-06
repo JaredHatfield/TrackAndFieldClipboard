@@ -12,7 +12,7 @@
         android:showAsAction="always|withText" />
     <item
     	android:id="@+id/menu_email_results"
-    	android:icon="@android:drawable/ic_dialog_email"
+    	android:icon="@android:drawable/sym_action_email"
     	android:title="@string/email_results"
-    	android:showAsAction="withText" />
+    	android:showAsAction="always|withText" />
 </menu>
