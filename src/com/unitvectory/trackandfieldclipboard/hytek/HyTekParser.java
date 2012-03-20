@@ -38,6 +38,10 @@ public class HyTekParser {
     public HyTekParser(String[] lines) {
         this.events = new ArrayList<FieldEvent>();
         int start = 0;
+        int p1 = -1;
+        int p2 = -2;
+        int p3 = -3;
+
         while (start > -1) {
             start = findStart(lines, start);
 
@@ -75,6 +79,15 @@ public class HyTekParser {
                     this.events.add(event);
                 }
             }
+
+            // Prevent infinite loops in malformed documents
+            if (p3 == p2 && p2 == p1 && p1 == start) {
+                break;
+            }
+
+            p3 = p2;
+            p2 = p1;
+            p1 = start;
         }
     }
 
