@@ -4,6 +4,8 @@
  */
 package com.unitvectory.trackandfieldclipboard.ui;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -33,7 +35,7 @@ public class TrackAndFieldActivity extends Activity {
     /**
      * The constant used for handling a request to import a HY-TEK file.
      */
-    private static final int PICKFILE_RESULT_CODE = 4173;
+    private static final int ACTIVITY_CHOOSE_FILE = 4173;
 
     /**
      * The fragment list.
@@ -135,21 +137,25 @@ public class TrackAndFieldActivity extends Activity {
                 intent.putExtra("filename", event.newFileName());
                 this.startActivity(intent);
             }
-        } else if (requestCode == PICKFILE_RESULT_CODE) {
+        } else if (requestCode == ACTIVITY_CHOOSE_FILE) {
             // Try and parse the HY-TEK results file
             if (resultCode == RESULT_OK) {
-                String filepath = data.getData().getPath();
-                ProgressDialog progressDialog;
-                progressDialog = new ProgressDialog(this);
-                progressDialog
-                        .setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progressDialog.setMessage(this.getString(R.string.loading));
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-                ParseHyTekFileTask parseTask =
-                        new ParseHyTekFileTask(this.getFilesDir(),
-                                this.fragmentList, progressDialog);
-                parseTask.execute(filepath);
+                if (data.hasExtra(FilePickerActivity.EXTRA_FILE_PATH)) {
+                    // Get the file path
+                    String filePath =
+                            data.getStringExtra(FilePickerActivity.EXTRA_FILE_PATH);
+                    ProgressDialog progressDialog;
+                    progressDialog = new ProgressDialog(this);
+                    progressDialog
+                            .setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progressDialog.setMessage(this.getString(R.string.loading));
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    ParseHyTekFileTask parseTask =
+                            new ParseHyTekFileTask(this.getFilesDir(),
+                                    this.fragmentList, progressDialog);
+                    parseTask.execute(filePath);
+                }
             }
         }
     }
@@ -169,8 +175,25 @@ public class TrackAndFieldActivity extends Activity {
      * Launches the get content intent.
      */
     private void importHyTek() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("file/txt");
-        startActivityForResult(intent, PICKFILE_RESULT_CODE);
+        // Create a new Intent for the file picker activity
+        Intent fileintent = new Intent(this, FilePickerActivity.class);
+
+        // Set the initial directory to be the sdcard
+        // fileintent.putExtra(FilePickerActivity.EXTRA_FILE_PATH,
+        // Environment.getExternalStorageDirectory());
+
+        // Show hidden files
+        // fileintent.putExtra(FilePickerActivity.EXTRA_SHOW_HIDDEN_FILES,
+        // true);
+
+        // Only make .xml files visible
+        ArrayList<String> extensions = new ArrayList<String>();
+        extensions.add(".txt");
+        fileintent.putExtra(FilePickerActivity.EXTRA_ACCEPTED_FILE_EXTENSIONS,
+                extensions);
+
+        // Start the activity
+        startActivityForResult(fileintent, ACTIVITY_CHOOSE_FILE);
+
     }
 }

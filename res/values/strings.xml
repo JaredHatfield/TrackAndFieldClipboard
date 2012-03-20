@@ -26,6 +26,9 @@
     <string name="event_type">Event Type</string>
     <string name="failed_open">Failed to open file.</string>
     <string name="feet">Feet</string>
+    <string name="filepicker_empty">No files or directories</string>
+	<string name="filepicker_filename">filename</string>
+	<string name="filepicker_select">Select File</string>
     <string name="final_participants">Final Participants</string>
     <string name="finals_marks">Final Marks</string>
     <string name="flight">Flight</string>
