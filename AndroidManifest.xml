@@ -9,7 +9,7 @@
     android:versionCode="3"
     android:versionName="1.2">
     <uses-sdk 
-    	android:targetSdkVersion="11" 
+    	android:targetSdkVersion="16" 
     	android:minSdkVersion="11" />
    	<!-- This application only supports tablets with large screens. -->
     <supports-screens 
