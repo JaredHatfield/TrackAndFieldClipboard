@@ -5,6 +5,8 @@
 -->
 <resources>
 
+    <string name="_flights">#Flights</string>
+    <string name="_participants">#Participants</string>
     <string name="about">About</string>
     <string name="add">Add</string>
     <string name="add_participant">Add Participant</string>
@@ -23,8 +25,11 @@
     <string name="email_results">Email Results</string>
     <string name="error_hytek">HY-TEK file not parsed successfully.</string>
     <string name="event_date">Event Date</string>
+    <string name="event_date_here">Event Date Here</string>
     <string name="event_name">Event Name</string>
+    <string name="event_name_here">Event Name Here</string>
     <string name="event_type">Event Type</string>
+    <string name="event_type_here">Event Type Here</string>
     <string name="failed_open">Failed to open file.</string>
     <string name="feet">Feet</string>
     <string name="filepicker_empty">No files or directories</string>
@@ -36,6 +41,7 @@
     <string name="flight_position">F/P</string>
     <string name="flights">Number of Flights</string>
     <string name="gender">Gender</string>
+    <string name="gender_here">Gender Here</string>
     <string name="hint_add">Once you create an event, these options can not be changed.</string>
     <string name="hint_date">When the event is being contested.</string>
     <string name="hint_event_name">The name of the event.</string>
@@ -50,7 +56,7 @@
     <string name="hytek_import">Import HY-TEK Data</string>
     <string name="import_data">Import Data</string>
     <string name="inches">Inches</string>
-    <string name="loading">Loading. Please wait...</string>
+    <string name="loading">Loading. Please wait…</string>
     <string name="mark">Mark</string>
     <string name="meters">Meters</string>
     <string name="name">Name</string>
