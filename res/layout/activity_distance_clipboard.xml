@@ -1,181 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
-    android:orientation="vertical">
-    <TableLayout 
-        android:layout_width="fill_parent" 
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/table_padding">
-        <TableRow 
-            android:layout_width="fill_parent" 
-            android:layout_height="wrap_content">
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:text="@string/name" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
+        android:padding="@dimen/table_padding" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/name"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Event Name Here"
                 android:textSize="@dimen/font_size" />
-            <TextView 
-                android:text="Event Name Here" 
-                android:id="@+id/textView_event_name" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/event_type"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Event Type Here"
                 android:textSize="@dimen/font_size" />
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:text="@string/event_type" />
-            <TextView 
-                android:text="Event Type Here" 
-                android:id="@+id/textView_event_type" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
-                android:textSize="@dimen/font_size" />
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:text="@string/flights" />
-            <TextView 
-                android:text="#Flights" 
-                android:id="@+id/textView_event_flights" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/flights"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_flights"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#Flights"
                 android:textSize="@dimen/font_size" />
         </TableRow>
-        <TableRow 
-        	android:layout_width="fill_parent" 
-        	android:layout_height="wrap_content">
-        	<TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:text="@string/date" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/date"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Event Date Here"
                 android:textSize="@dimen/font_size" />
-            <TextView 
-                android:text="Event Date Here" 
-                android:id="@+id/textView_event_date" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/gender"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_gender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gender Here"
                 android:textSize="@dimen/font_size" />
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:text="@string/gender" />
-            <TextView 
-                android:text="Gender Here" 
-                android:id="@+id/textView_event_gender" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
-                android:textSize="@dimen/font_size" />
-            <TextView 
-                android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:layout_height="wrap_content" 
-                android:layout_width="wrap_content" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:text="@string/final_participants" />
-            <TextView 
-                android:text="#Participants" 
-                android:id="@+id/textView_event_final_participants" 
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:layout_weight="1" 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/final_participants"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_event_final_participants"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#Participants"
                 android:textSize="@dimen/font_size" />
         </TableRow>
     </TableLayout>
+
     <ScrollView
-    	android:layout_height="fill_parent"
-    	android:layout_width="match_parent"
-    	android:layout_weight="1">
-	    <TableLayout 
-	        android:id="@+id/tableLayout_participants" 
-	        android:layout_width="match_parent" 
-	        android:layout_height="wrap_content"
-	        android:padding="@dimen/table_padding">
-	    </TableLayout>
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+
+        <TableLayout
+            android:id="@+id/tableLayout_participants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/table_padding" >
+        </TableLayout>
     </ScrollView>
+
     <TableLayout
-    	android:layout_height="wrap_content"
-    	android:layout_width="fill_parent"
-    	android:background="@color/footer"
-    	android:padding="@dimen/table_padding">
-        <TableRow 
-        	android:layout_width="wrap_content" 
-        	android:layout_height="wrap_content">
-            <TextView 
-            	android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:layout_width="wrap_content" 
-                android:layout_height="wrap_content" 
-                android:text="@string/name"/>
-            <TextView 
-            	android:id="@+id/textView_current_name" 
-            	android:textSize="@dimen/font_size" 
-            	android:layout_weight="1"
-            	android:layout_width="wrap_content" 
-            	android:layout_height="wrap_content" />
-            <Button 
-            	android:id="@+id/button_mark" 
-            	android:layout_width="@dimen/button_width" 
-            	android:layout_height="wrap_content" 
-            	android:text="@string/mark"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/footer"
+        android:padding="@dimen/table_padding" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/name"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_current_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/font_size" />
+
+            <Button
+                android:id="@+id/button_mark"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
                 android:enabled="false"
-                android:onClick="onMarkClick" />
+                android:onClick="onMarkClick"
+                android:text="@string/mark" />
         </TableRow>
-        <TableRow 
-        	android:layout_width="wrap_content" 
-        	android:layout_height="wrap_content">
-            <TextView 
-            	android:textStyle="bold" 
-                android:paddingRight="@dimen/label_right_padding" 
-                android:gravity="right" 
-                android:textSize="@dimen/font_size" 
-                android:layout_width="wrap_content" 
-                android:layout_height="wrap_content" 
-                android:text="@string/attempt" />
-            <TextView 
-            	android:id="@+id/textView_current_attempt" 
-            	android:textSize="@dimen/font_size" 
-            	android:layout_weight="1"
-            	android:layout_width="wrap_content" 
-            	android:layout_height="wrap_content" />
-            <Button 
-            	android:id="@+id/button_scratch" 
-            	android:layout_width="@dimen/button_width" 
-            	android:layout_height="wrap_content" 
-            	android:text="@string/scratch"
-            	android:enabled="false"
-            	android:onClick="onScratchClick" />
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/label_right_padding"
+                android:text="@string/attempt"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_current_attempt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/font_size" />
+
+            <Button
+                android:id="@+id/button_scratch"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:onClick="onScratchClick"
+                android:text="@string/scratch" />
         </TableRow>
-   	</TableLayout>
+    </TableLayout>
+
 </LinearLayout>

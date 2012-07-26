@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
+-->
 <resources>
+
     <dimen name="font_size">20sp</dimen>
+
 </resources>

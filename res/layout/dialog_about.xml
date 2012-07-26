@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content"
-	android:padding="@dimen/list_padding"
-	android:layout_gravity="center">
-    <TextView 
-    	android:layout_width="wrap_content" 
-    	android:text="@string/app_name" 
-    	android:textSize="@dimen/font_size_list"
-    	android:layout_height="wrap_content" />
-    <TextView 
-    	android:layout_width="wrap_content" 
-    	android:text="@string/author_info" 
-    	android:layout_height="wrap_content" />
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/list_padding" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/font_size_list" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/author_info" />
+
 </LinearLayout>

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
-<menu
-	xmlns:android="http://schemas.android.com/apk/res/android">
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item
-    	android:id="@+id/menu_add_participant"
+        android:id="@+id/menu_add_participant"
         android:icon="@android:drawable/ic_input_add"
-        android:title="@string/add_participant"
-        android:showAsAction="always|withText" />
+        android:showAsAction="always|withText"
+        android:title="@string/add_participant"/>
     <item
-    	android:id="@+id/menu_email_results"
-    	android:icon="@android:drawable/sym_action_email"
-    	android:title="@string/email_results"
-    	android:showAsAction="always|withText" />
+        android:id="@+id/menu_email_results"
+        android:icon="@android:drawable/sym_action_email"
+        android:showAsAction="always|withText"
+        android:title="@string/email_results"/>
+
 </menu>

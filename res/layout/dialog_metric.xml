@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
-<RelativeLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content">
-    <TextView 
-    	android:layout_height="wrap_content" 
-    	android:layout_width="wrap_content" 
-    	android:layout_alignParentLeft="true" 
-    	android:id="@+id/textView_label_meters" 
-    	android:text="@string/meters"
-    	android:textSize="@dimen/font_size"
-    	android:paddingRight="@dimen/form_label_right_padding" />
-    <EditText 
-    	android:layout_width="fill_parent" 
-    	android:id="@+id/editText_distance_meters" 
-    	android:layout_toRightOf="@+id/textView_label_meters" 
-    	android:layout_alignBaseline="@+id/textView_label_meters"
-    	android:layout_height="wrap_content" 
-    	android:inputType="numberDecimal" />
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/textView_label_meters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="@dimen/form_label_right_padding"
+        android:text="@string/meters"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/editText_distance_meters"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_label_meters"
+        android:layout_toRightOf="@+id/textView_label_meters"
+        android:inputType="numberDecimal" />
+
 </RelativeLayout>

@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
     Track and Field Clipboard
     Copyright 2011 Jared Hatfield.  All rights reserved.
- -->
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unitvectory.trackandfieldclipboard"
     android:versionCode="3"
-    android:versionName="1.2">
-    <uses-sdk 
-    	android:targetSdkVersion="16" 
-    	android:minSdkVersion="11" />
-   	<!-- This application only supports tablets with large screens. -->
-    <supports-screens 
-    	android:smallScreens="false"
-        android:normalScreens="false" 
+    android:versionName="1.2" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="16" />
+    <!-- This application only supports tablets with large screens. -->
+    <supports-screens
         android:largeScreens="false"
+        android:normalScreens="false"
+        android:smallScreens="false"
         android:xlargeScreens="true" />
     <!-- We definitely want to run on devices that have touch -->
-    <uses-configuration android:reqTouchScreen="finger"/>
+    <uses-configuration android:reqTouchScreen="finger" />
     <!-- Define the application -->
     <application
-    	android:icon="@drawable/icon" 
-    	android:label="@string/app_name" 
-    	android:theme="@android:style/Theme.Holo.Light"
-    	android:backupAgent=".util.TrackBackupAgent">
-        <activity android:name=".ui.TrackAndFieldActivity" android:label="@string/app_name">
+        android:backupAgent=".util.TrackBackupAgent"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light" >
+        <activity
+            android:name=".ui.TrackAndFieldActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.NewEventActivity" android:label="@string/app_name" />
-        <activity android:name=".ui.HyTekImportActivity" android:label="@string/app_name" />
-        <activity 
+        <activity
+            android:name=".ui.NewEventActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.HyTekImportActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name=".ui.FilePickerActivity"
-        	android:label="@string/filepicker_select"/>
-		<activity 
-			android:name=".ui.DistanceClipboardActivity" 
-			android:label="@string/app_name"
-			android:windowSoftInputMode="adjustPan" />
-			<!-- Set up the backup service -->
-			<meta-data
-				android:name="com.google.android.backup.api_key"
-				android:value="AEdPqrEAAAAIb9bPpr0NFywLlS_Ti8XCsRSm_nNPZ8i49ceEDA" />
+            android:label="@string/filepicker_select" />
+        <activity
+            android:name=".ui.DistanceClipboardActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- Set up the backup service -->
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIb9bPpr0NFywLlS_Ti8XCsRSm_nNPZ8i49ceEDA" />
     </application>
+
 </manifest>
