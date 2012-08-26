@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -328,7 +329,7 @@ public class DistanceClipboardActivity extends Activity implements
         this.participants.removeAllViews();
         this.rows = new HashMap<Integer, AthleteRowHolder>();
         Resources res = getResources();
-        float fontSize = res.getDimension(R.dimen.font_size);
+        float fontSize = res.getDimensionPixelSize(R.dimen.font_size);
         int cellHeight = res.getDimensionPixelSize(R.dimen.table_cell_height);
         int cellLeftPading =
                 res.getDimensionPixelSize(R.dimen.table_cell_left_padding);
@@ -380,7 +381,7 @@ public class DistanceClipboardActivity extends Activity implements
                 LayoutParams.WRAP_CONTENT, cellHeight, 1));
         textHeaderPlace.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderPlace.setGravity(Gravity.CENTER);
-        textHeaderPlace.setTextSize(fontSize);
+        textHeaderPlace.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
         textHeaderPlace.setBackgroundResource(R.color.header);
         header.addView(textHeaderPlace);
 
@@ -391,7 +392,7 @@ public class DistanceClipboardActivity extends Activity implements
         textHeaderName.setPadding(cellLeftPading, 0, 0, 0);
         textHeaderName.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderName.setGravity(Gravity.CENTER_VERTICAL);
-        textHeaderName.setTextSize(fontSize);
+        textHeaderName.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
         textHeaderName.setBackgroundResource(R.color.header);
         header.addView(textHeaderName);
 
@@ -402,7 +403,7 @@ public class DistanceClipboardActivity extends Activity implements
         textHeaderTeam.setPadding(cellLeftPading, 0, 0, 0);
         textHeaderTeam.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderTeam.setGravity(Gravity.CENTER_VERTICAL);
-        textHeaderTeam.setTextSize(fontSize);
+        textHeaderTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
         textHeaderTeam.setBackgroundResource(R.color.header);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             textHeaderTeam.setVisibility(View.GONE);
@@ -422,7 +423,7 @@ public class DistanceClipboardActivity extends Activity implements
                 LayoutParams.MATCH_PARENT, cellHeight, 1));
         textHeaderPosition.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderPosition.setGravity(Gravity.CENTER);
-        textHeaderPosition.setTextSize(fontSize);
+        textHeaderPosition.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
         textHeaderPosition.setBackgroundResource(R.color.header);
         header.addView(textHeaderPosition);
 
@@ -434,7 +435,7 @@ public class DistanceClipboardActivity extends Activity implements
                     LayoutParams.MATCH_PARENT, cellHeight, 1));
             textHeaderQualify.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderQualify.setGravity(Gravity.CENTER);
-            textHeaderQualify.setTextSize(fontSize);
+            textHeaderQualify.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textHeaderQualify.setBackgroundResource(R.color.header_qualifying);
             header.addView(textHeaderQualify);
         }
@@ -447,7 +448,7 @@ public class DistanceClipboardActivity extends Activity implements
                     LayoutParams.MATCH_PARENT, cellHeight, 1));
             textHeaderFinal.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderFinal.setGravity(Gravity.CENTER);
-            textHeaderFinal.setTextSize(fontSize);
+            textHeaderFinal.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textHeaderFinal.setBackgroundResource(R.color.header_finals);
             header.addView(textHeaderFinal);
         }
@@ -467,7 +468,7 @@ public class DistanceClipboardActivity extends Activity implements
             textFlightPlace.setLayoutParams(new LayoutParams(
                     LayoutParams.WRAP_CONTENT, cellHeight, 1));
             textFlightPlace.setGravity(Gravity.CENTER);
-            textFlightPlace.setTextSize(fontSize);
+            textFlightPlace.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textFlightPlace.setBackgroundResource(R.color.names);
             tr.addView(textFlightPlace);
 
@@ -476,7 +477,7 @@ public class DistanceClipboardActivity extends Activity implements
                     cellHeight, 2));
             textName.setPadding(cellLeftPading, 0, 0, 0);
             textName.setGravity(Gravity.CENTER_VERTICAL);
-            textName.setTextSize(fontSize);
+            textName.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textName.setOnClickListener(this);
             textName.setOnLongClickListener(this);
             textName.setBackgroundResource(R.color.names);
@@ -487,7 +488,7 @@ public class DistanceClipboardActivity extends Activity implements
                     cellHeight));
             textTeam.setPadding(cellLeftPading, 0, 0, 0);
             textTeam.setGravity(Gravity.CENTER_VERTICAL);
-            textTeam.setTextSize(fontSize);
+            textTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textTeam.setBackgroundResource(R.color.names);
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 textTeam.setVisibility(View.GONE);
@@ -500,7 +501,7 @@ public class DistanceClipboardActivity extends Activity implements
             textFlightPosition.setLayoutParams(new LayoutParams(
                     LayoutParams.MATCH_PARENT, cellHeight, 1));
             textFlightPosition.setGravity(Gravity.CENTER);
-            textFlightPosition.setTextSize(fontSize);
+            textFlightPosition.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textFlightPosition.setBackgroundResource(R.color.names);
             tr.addView(textFlightPosition);
 
@@ -516,7 +517,7 @@ public class DistanceClipboardActivity extends Activity implements
                 textQualify.setLayoutParams(new LayoutParams(
                         LayoutParams.MATCH_PARENT, cellHeight, 1));
                 textQualify.setGravity(Gravity.CENTER);
-                textQualify.setTextSize(fontSize);
+                textQualify.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
                 textQualify.setOnClickListener(this);
 
                 tr.addView(textQualify);
@@ -529,7 +530,7 @@ public class DistanceClipboardActivity extends Activity implements
                 textFinal.setLayoutParams(new LayoutParams(
                         LayoutParams.MATCH_PARENT, cellHeight, 1));
                 textFinal.setGravity(Gravity.CENTER);
-                textFinal.setTextSize(fontSize);
+                textFinal.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
                 textFinal.setOnClickListener(this);
 
                 tr.addView(textFinal);
