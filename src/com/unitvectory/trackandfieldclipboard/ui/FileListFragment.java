@@ -58,7 +58,6 @@ public class FileListFragment extends ListFragment {
 
         ListView lv = getListView();
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos,
                     long id) {
                 return onLongListItemClick(v, pos, id);
@@ -89,7 +88,6 @@ public class FileListFragment extends ListFragment {
         File[] files = getActivity().getFilesDir().listFiles();
 
         Arrays.sort(files, new Comparator<File>() {
-            @Override
             public int compare(File f1, File f2) {
                 return Long.valueOf(f2.lastModified()).compareTo(
                         f1.lastModified());
@@ -146,7 +144,6 @@ public class FileListFragment extends ListFragment {
                 .setCancelable(true)
                 .setPositiveButton(R.string.delete,
                         new DialogInterface.OnClickListener() {
-                            @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 // Delete the file
                                 getActivity().deleteFile(filename);
@@ -155,7 +152,6 @@ public class FileListFragment extends ListFragment {
                         })
                 .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
-                            @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }

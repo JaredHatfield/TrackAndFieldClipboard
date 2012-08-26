@@ -404,7 +404,7 @@ public class FieldEvent implements Serializable {
      */
     @Override
     public String toString() {
-        // TODO: Display the results
+        // Display the results
         Collections.sort(this.participants, new ResultsComparator());
         Collections.reverse(this.participants);
 

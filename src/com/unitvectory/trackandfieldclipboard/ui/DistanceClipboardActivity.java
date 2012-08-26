@@ -197,7 +197,6 @@ public class DistanceClipboardActivity extends Activity implements
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         actionBar.setListNavigationCallbacks(mSpinnerAdapter,
                 new ActionBar.OnNavigationListener() {
-                    @Override
                     public boolean
                             onNavigationItemSelected(int arg0, long arg1) {
                         spinnerFlightSelection = arg0;
@@ -372,7 +371,7 @@ public class DistanceClipboardActivity extends Activity implements
 
         // Add the header row
         TableRow header = new TableRow(this);
-        header.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+        header.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT));
 
         TextView textHeaderPlace = new TextView(this);
@@ -388,7 +387,7 @@ public class DistanceClipboardActivity extends Activity implements
         TextView textHeaderName = new TextView(this);
         textHeaderName.setText(R.string.name);
         textHeaderName.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight, 2));
+                LayoutParams.MATCH_PARENT, cellHeight, 2));
         textHeaderName.setPadding(cellLeftPading, 0, 0, 0);
         textHeaderName.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderName.setGravity(Gravity.CENTER_VERTICAL);
@@ -399,7 +398,7 @@ public class DistanceClipboardActivity extends Activity implements
         TextView textHeaderTeam = new TextView(this);
         textHeaderTeam.setText(R.string.team);
         textHeaderTeam.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight));
+                LayoutParams.MATCH_PARENT, cellHeight));
         textHeaderTeam.setPadding(cellLeftPading, 0, 0, 0);
         textHeaderTeam.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderTeam.setGravity(Gravity.CENTER_VERTICAL);
@@ -420,7 +419,7 @@ public class DistanceClipboardActivity extends Activity implements
         }
 
         textHeaderPosition.setLayoutParams(new LayoutParams(
-                LayoutParams.FILL_PARENT, cellHeight, 1));
+                LayoutParams.MATCH_PARENT, cellHeight, 1));
         textHeaderPosition.setTypeface(Typeface.DEFAULT_BOLD);
         textHeaderPosition.setGravity(Gravity.CENTER);
         textHeaderPosition.setTextSize(fontSize);
@@ -432,7 +431,7 @@ public class DistanceClipboardActivity extends Activity implements
             TextView textHeaderQualify = new TextView(this);
             textHeaderQualify.setText("#" + num);
             textHeaderQualify.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
+                    LayoutParams.MATCH_PARENT, cellHeight, 1));
             textHeaderQualify.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderQualify.setGravity(Gravity.CENTER);
             textHeaderQualify.setTextSize(fontSize);
@@ -445,7 +444,7 @@ public class DistanceClipboardActivity extends Activity implements
             TextView textHeaderFinal = new TextView(this);
             textHeaderFinal.setText("#" + num);
             textHeaderFinal.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
+                    LayoutParams.MATCH_PARENT, cellHeight, 1));
             textHeaderFinal.setTypeface(Typeface.DEFAULT_BOLD);
             textHeaderFinal.setGravity(Gravity.CENTER);
             textHeaderFinal.setTextSize(fontSize);
@@ -454,14 +453,14 @@ public class DistanceClipboardActivity extends Activity implements
         }
 
         this.participants.addView(header, new TableLayout.LayoutParams(
-                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         // Add all of the participants
         for (int i = 0; i < athletes.size(); i++) {
             Participant athlete = athletes.get(i);
 
             TableRow tr = new TableRow(this);
-            tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+            tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT));
 
             TextView textFlightPlace = new TextView(this);
@@ -473,7 +472,7 @@ public class DistanceClipboardActivity extends Activity implements
             tr.addView(textFlightPlace);
 
             TextView textName = new TextView(this);
-            textName.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+            textName.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     cellHeight, 2));
             textName.setPadding(cellLeftPading, 0, 0, 0);
             textName.setGravity(Gravity.CENTER_VERTICAL);
@@ -484,7 +483,7 @@ public class DistanceClipboardActivity extends Activity implements
             tr.addView(textName);
 
             TextView textTeam = new TextView(this);
-            textTeam.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+            textTeam.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     cellHeight));
             textTeam.setPadding(cellLeftPading, 0, 0, 0);
             textTeam.setGravity(Gravity.CENTER_VERTICAL);
@@ -499,7 +498,7 @@ public class DistanceClipboardActivity extends Activity implements
 
             TextView textFlightPosition = new TextView(this);
             textFlightPosition.setLayoutParams(new LayoutParams(
-                    LayoutParams.FILL_PARENT, cellHeight, 1));
+                    LayoutParams.MATCH_PARENT, cellHeight, 1));
             textFlightPosition.setGravity(Gravity.CENTER);
             textFlightPosition.setTextSize(fontSize);
             textFlightPosition.setBackgroundResource(R.color.names);
@@ -515,7 +514,7 @@ public class DistanceClipboardActivity extends Activity implements
                 int num = j + 1;
                 TextView textQualify = new TextView(this);
                 textQualify.setLayoutParams(new LayoutParams(
-                        LayoutParams.FILL_PARENT, cellHeight, 1));
+                        LayoutParams.MATCH_PARENT, cellHeight, 1));
                 textQualify.setGravity(Gravity.CENTER);
                 textQualify.setTextSize(fontSize);
                 textQualify.setOnClickListener(this);
@@ -528,7 +527,7 @@ public class DistanceClipboardActivity extends Activity implements
                 int num = j + 1 + this.event.getQualifyingScores();
                 TextView textFinal = new TextView(this);
                 textFinal.setLayoutParams(new LayoutParams(
-                        LayoutParams.FILL_PARENT, cellHeight, 1));
+                        LayoutParams.MATCH_PARENT, cellHeight, 1));
                 textFinal.setGravity(Gravity.CENTER);
                 textFinal.setTextSize(fontSize);
                 textFinal.setOnClickListener(this);
@@ -540,7 +539,7 @@ public class DistanceClipboardActivity extends Activity implements
             holder.displayAthlete(athlete);
 
             this.participants.addView(tr, new TableLayout.LayoutParams(
-                    LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         }
 
         this.updateAthletePlace();
@@ -624,7 +623,6 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setView(v);
         alert.setPositiveButton(R.string.add,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
@@ -650,7 +648,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
@@ -667,7 +664,6 @@ public class DistanceClipboardActivity extends Activity implements
      *            The calling view.
      * @return True if the callback consumed the long click, false otherwise.
      */
-    @Override
     public boolean onLongClick(View view) {
         AthleteRowHolder holder =
                 (AthleteRowHolder) view.getTag(R.id.id_holder_object);
@@ -678,7 +674,6 @@ public class DistanceClipboardActivity extends Activity implements
                     .setCancelable(true)
                     .setPositiveButton(R.string.delete,
                             new DialogInterface.OnClickListener() {
-                                @Override
                                 public void onClick(DialogInterface dialog,
                                         int id) {
                                     // Delete the participant
@@ -688,7 +683,6 @@ public class DistanceClipboardActivity extends Activity implements
                             })
                     .setNegativeButton(R.string.cancel,
                             new DialogInterface.OnClickListener() {
-                                @Override
                                 public void onClick(DialogInterface dialog,
                                         int id) {
                                     dialog.cancel();
@@ -718,7 +712,6 @@ public class DistanceClipboardActivity extends Activity implements
      * @param view
      *            The calling view.
      */
-    @Override
     public void onClick(View view) {
         AthleteRowHolder holder =
                 (AthleteRowHolder) view.getTag(R.id.id_holder_object);
@@ -832,7 +825,6 @@ public class DistanceClipboardActivity extends Activity implements
                 .setCancelable(true)
                 .setPositiveButton(R.string.scratch,
                         new DialogInterface.OnClickListener() {
-                            @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 // Do it!
                                 holder.mark(attempt);
@@ -843,7 +835,6 @@ public class DistanceClipboardActivity extends Activity implements
                         })
                 .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
-                            @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
@@ -888,7 +879,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setPositiveButton(R.string.mark,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         String value = input.getText().toString();
@@ -904,7 +894,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
@@ -952,7 +941,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setPositiveButton(R.string.mark,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         String feet = inputFeet.getText().toString();
@@ -974,7 +962,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
@@ -1014,7 +1001,6 @@ public class DistanceClipboardActivity extends Activity implements
         alert.setView(v);
         alert.setPositiveButton(R.string.save,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         String name = inputName.getText().toString();
@@ -1053,7 +1039,6 @@ public class DistanceClipboardActivity extends Activity implements
 
         alert.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
-                    @Override
                     public void
                             onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.

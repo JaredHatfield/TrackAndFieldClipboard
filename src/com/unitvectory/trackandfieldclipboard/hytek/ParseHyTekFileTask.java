@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,10 +75,10 @@ public class ParseHyTekFileTask extends AsyncTask<String, Integer, Integer> {
     protected Integer doInBackground(String... arg) {
         String filename = arg[0];
         List<String> lines = new ArrayList<String>();
-
+        BufferedReader br = null;
         try {
             File file = new File(filename);
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            br = new BufferedReader(new FileReader(file));
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -85,6 +86,13 @@ public class ParseHyTekFileTask extends AsyncTask<String, Integer, Integer> {
             }
         } catch (Exception e) {
             return -1;
+        } finally {
+        	if(br != null){
+        		try {
+					br.close();
+				} catch (IOException e) {
+				}
+        	}
         }
 
         try {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Anders Kal¿r
+ * Copyright 2011 Anders Kalï¿½r
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -227,7 +227,6 @@ public class FilePickerActivity extends ListActivity {
     }
 
     private class FileComparator implements Comparator<File> {
-        @Override
         public int compare(File f1, File f2) {
             if (f1 == f2) {
                 return 0;
@@ -253,7 +252,6 @@ public class FilePickerActivity extends ListActivity {
             mExtensions = extensions;
         }
 
-        @Override
         public boolean accept(File dir, String filename) {
             if (new File(dir, filename).isDirectory()) {
                 // Accept all directory names
