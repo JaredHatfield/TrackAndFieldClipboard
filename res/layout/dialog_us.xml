@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView_label_feet"
         android:layout_toRightOf="@+id/textView_label_feet"
-        android:layout_weight="1"
         android:inputType="number|numberDecimal"
         android:minWidth="@dimen/form_input_min_width" />
 
@@ -44,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView_label_inches"
         android:layout_toRightOf="@+id/textView_label_inches"
-        android:layout_weight="1"
         android:inputType="numberDecimal"
         android:minWidth="@dimen/form_input_min_width"
         android:paddingBottom="@dimen/form_label_right_padding" />

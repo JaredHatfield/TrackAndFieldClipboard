@@ -473,8 +473,8 @@ public class DistanceClipboardActivity extends Activity implements
             tr.addView(textFlightPlace);
 
             TextView textName = new TextView(this);
-            textName.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    cellHeight, 2));
+            textName.setLayoutParams(new LayoutParams(
+                    LayoutParams.MATCH_PARENT, cellHeight, 2));
             textName.setPadding(cellLeftPading, 0, 0, 0);
             textName.setGravity(Gravity.CENTER_VERTICAL);
             textName.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
@@ -484,8 +484,8 @@ public class DistanceClipboardActivity extends Activity implements
             tr.addView(textName);
 
             TextView textTeam = new TextView(this);
-            textTeam.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    cellHeight));
+            textTeam.setLayoutParams(new LayoutParams(
+                    LayoutParams.MATCH_PARENT, cellHeight));
             textTeam.setPadding(cellLeftPading, 0, 0, 0);
             textTeam.setGravity(Gravity.CENTER_VERTICAL);
             textTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
@@ -501,7 +501,8 @@ public class DistanceClipboardActivity extends Activity implements
             textFlightPosition.setLayoutParams(new LayoutParams(
                     LayoutParams.MATCH_PARENT, cellHeight, 1));
             textFlightPosition.setGravity(Gravity.CENTER);
-            textFlightPosition.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
+            textFlightPosition
+                    .setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             textFlightPosition.setBackgroundResource(R.color.names);
             tr.addView(textFlightPosition);
 

@@ -10,7 +10,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
     <!-- This application only supports tablets with large screens. -->
     <supports-screens
         android:largeScreens="false"
@@ -21,6 +21,7 @@
     <uses-configuration android:reqTouchScreen="finger" />
     <!-- Define the application -->
     <application
+        android:allowBackup="true"
         android:backupAgent=".util.TrackBackupAgent"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -36,9 +37,6 @@
         </activity>
         <activity
             android:name=".ui.NewEventActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.HyTekImportActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".ui.FilePickerActivity"

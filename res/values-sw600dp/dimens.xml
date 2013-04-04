@@ -6,6 +6,6 @@
 <resources>
 
     <dimen name="font_size_list">20dp</dimen>
-    <dimen name="font_size">10dp</dimen>
+    <dimen name="font_size">14dp</dimen>
 
 </resources>
