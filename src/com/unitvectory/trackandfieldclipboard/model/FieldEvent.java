@@ -427,7 +427,8 @@ public class FieldEvent implements Serializable {
                 measurement = "-";
             } else {
                 measurement =
-                        p.getMeasurement(best).translateMeasurement("FOUL");
+                        p.getMeasurement(best).translateMeasurement("FOUL",
+                                false);
             }
 
             String pName = p.getName();
@@ -456,7 +457,7 @@ public class FieldEvent implements Serializable {
                 if (m == null) {
                     sb.append("NONE");
                 } else {
-                    sb.append(m.translateMeasurement("FOUL"));
+                    sb.append(m.translateMeasurement("FOUL", false));
                 }
 
                 sb.append("  ");

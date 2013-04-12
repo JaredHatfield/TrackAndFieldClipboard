@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import android.view.Gravity;
 import android.widget.TextView;
 
 import com.unitvectory.trackandfieldclipboard.R;
@@ -58,6 +59,16 @@ public class AthleteRowHolder {
     private Map<Integer, TextView> marks;
 
     /**
+     * The scratched string.
+     */
+    private String scratched;
+
+    /**
+     * The condensed flag.
+     */
+    private boolean condensed;
+
+    /**
      * Initializes a new instance of the AthleteRowHolder class.
      * 
      * @param participantDisplay
@@ -82,6 +93,17 @@ public class AthleteRowHolder {
         this.textName.setTag(R.id.id_holder_index, -1);
         this.textFlightPosition = textFlightPosition;
         this.marks = new HashMap<Integer, TextView>();
+        this.scratched =
+                this.textFlightPosition.getContext()
+                        .getString(R.string.scratch);
+        String isCondensed =
+                this.textFlightPosition.getContext().getString(
+                        R.string.condensed);
+        if (isCondensed.equals("true")) {
+            this.condensed = true;
+        } else {
+            this.condensed = false;
+        }
     }
 
     /**
@@ -132,6 +154,10 @@ public class AthleteRowHolder {
         this.marks.put(attempt, view);
         view.setTag(R.id.id_holder_object, this);
         view.setTag(R.id.id_holder_index, attempt);
+        if (this.condensed) {
+            view.setGravity(Gravity.LEFT);
+            view.setPadding(5, 0, 5, 0);
+        }
     }
 
     /**
@@ -161,8 +187,8 @@ public class AthleteRowHolder {
                 this.textFlightPosition.setText("-");
             } else {
                 String m =
-                        this.getMeasurement(best, this.textFlightPosition
-                                .getContext().getString(R.string.scratch));
+                        this.getMeasurement(best, this.scratched,
+                                this.condensed);
                 this.textFlightPosition.setText(m);
             }
         } else {
@@ -178,8 +204,8 @@ public class AthleteRowHolder {
             int attemptIndex = pairs.getKey().intValue();
             TextView view = pairs.getValue();
             String m =
-                    this.getMeasurement(attemptIndex, view.getContext()
-                            .getString(R.string.scratch));
+                    this.getMeasurement(attemptIndex, this.scratched,
+                            this.condensed);
             view.setText(m);
 
             if (best == attemptIndex) {
@@ -276,14 +302,16 @@ public class AthleteRowHolder {
      *            The attempt index.
      * @param foul
      *            The string representation of a foul.
+     * @param condensed
+     *            The condensed flag.
      * @return The string representation of a measurement.
      */
-    public String getMeasurement(int attempt, String foul) {
+    public String getMeasurement(int attempt, String foul, boolean condensed) {
         Measurement m = this.participant.getMeasurement(attempt);
         if (m == null) {
             return "-";
         } else {
-            return m.translateMeasurement(foul);
+            return m.translateMeasurement(foul, condensed);
         }
     }
 }

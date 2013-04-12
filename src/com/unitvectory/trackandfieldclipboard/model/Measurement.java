@@ -262,9 +262,11 @@ public class Measurement implements Serializable, Comparable<Measurement> {
      * 
      * @param foul
      *            The string to return when the measurement is a foul.
+     * @param condensed
+     *            The condensed flag.
      * @return The string representation.
      */
-    public String translateMeasurement(String foul) {
+    public String translateMeasurement(String foul, boolean condensed) {
         if (this.isScratch()) {
             return foul;
         } else if (this.isMetric()) {
@@ -275,7 +277,12 @@ public class Measurement implements Serializable, Comparable<Measurement> {
             df.setMinimumFractionDigits(2);
             df.setMaximumFractionDigits(2);
             df.setMaximumFractionDigits(2);
-            return this.getFeet() + "-" + df.format(this.getInches());
+            if (condensed) {
+                return this.getFeet() + "'\n" + df.format(this.getInches())
+                        + "\"";
+            } else {
+                return this.getFeet() + "-" + df.format(this.getInches());
+            }
         }
     }
 }
