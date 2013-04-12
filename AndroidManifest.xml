@@ -13,8 +13,9 @@
         android:targetSdkVersion="17" />
     <!-- This application only supports tablets with large screens. -->
     <supports-screens
-        android:largeScreens="false"
+        android:largeScreens="true"
         android:normalScreens="false"
+        android:requiresSmallestWidthDp="600"
         android:smallScreens="false"
         android:xlargeScreens="true" />
     <!-- We definitely want to run on devices that have touch -->
