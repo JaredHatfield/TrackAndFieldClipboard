@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TrackAndFieldClipboard.iml" filepath="$PROJECT_DIR$/TrackAndFieldClipboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trackandfieldclipboard/trackandfieldclipboard.iml" filepath="$PROJECT_DIR$/trackandfieldclipboard/trackandfieldclipboard.iml" />
+    </modules>
+  </component>
+</project>
+
