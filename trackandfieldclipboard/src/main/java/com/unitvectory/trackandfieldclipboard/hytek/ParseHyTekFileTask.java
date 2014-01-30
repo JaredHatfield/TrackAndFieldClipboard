@@ -134,8 +134,8 @@ public class ParseHyTekFileTask extends AsyncTask<String, Integer, Integer> {
     @Override
     protected void onProgressUpdate(Integer... progress) {
         try {
-            this.dialog.setMax(progress[0].intValue());
-            this.dialog.setProgress(progress[1].intValue());
+            this.dialog.setMax(progress[0]);
+            this.dialog.setProgress(progress[1]);
         } catch (Exception e) {
 
         }
@@ -149,7 +149,7 @@ public class ParseHyTekFileTask extends AsyncTask<String, Integer, Integer> {
      */
     @Override
     protected void onPostExecute(Integer result) {
-        if (result != null && result.intValue() == 1) {
+        if (result != null && result == 1) {
             // Update the list of files if the result was successful
             try {
                 this.listFragment.displayFiles();

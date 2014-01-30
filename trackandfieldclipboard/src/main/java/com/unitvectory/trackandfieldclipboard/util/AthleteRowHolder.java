@@ -201,7 +201,7 @@ public class AthleteRowHolder {
                 this.marks.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, TextView> pairs = it.next();
-            int attemptIndex = pairs.getKey().intValue();
+            int attemptIndex = pairs.getKey();
             TextView view = pairs.getValue();
             String m =
                     this.getMeasurement(attemptIndex, this.scratched,

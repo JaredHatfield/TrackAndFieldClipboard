@@ -592,8 +592,8 @@ public class DistanceClipboardActivity extends Activity implements
         Integer attempt = (Integer) view.getTag(R.id.id_holder_index);
         if (attempt > 0) {
             // Display confirmation box if the value is currently set
-            if (holder.getParticipant().getMeasurement(attempt.intValue()) == null) {
-                holder.mark(attempt.intValue());
+            if (holder.getParticipant().getMeasurement(attempt) == null) {
+                holder.mark(attempt);
                 lastClicked.setBackgroundResource(R.color.selected);
             } else {
                 this.displayScratchConfirmation(holder, attempt);
@@ -757,7 +757,7 @@ public class DistanceClipboardActivity extends Activity implements
                 view.setBackgroundResource(R.color.selected);
                 this.lastClicked = view;
 
-                this.selectAthleteBox(holder, attempt.intValue());
+                this.selectAthleteBox(holder, attempt);
             }
         } else {
             // Launch the dialog to edit a participant.
