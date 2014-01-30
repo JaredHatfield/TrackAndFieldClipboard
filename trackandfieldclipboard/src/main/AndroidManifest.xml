@@ -4,13 +4,8 @@
     Copyright 2011 Jared Hatfield.  All rights reserved.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.unitvectory.trackandfieldclipboard"
-    android:versionCode="5"
-    android:versionName="1.4" >
+    package="com.unitvectory.trackandfieldclipboard" >
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="17" />
     <!-- This application only supports tablets with large screens. -->
     <supports-screens
         android:largeScreens="true"
